@@ -1,3 +1,5 @@
+import LinkButton from "./LinkButton";
+
 export default function Header(){
     return (<header>
                 <section>
@@ -8,7 +10,7 @@ export default function Header(){
                                 <a>Kategori</a>
                             </li>
                             <li>
-                                <a>Logg inn</a>
+                                <LinkButton/>
                             </li>
                         </ul>
                     </nav>

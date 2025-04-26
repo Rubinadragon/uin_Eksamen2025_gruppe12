@@ -31,6 +31,6 @@ Følgende dependencies blir installert:
 - React router
 
 ### Installere Sanity
-1. Åpne terminal og naviger til mappen uinak3g12backend.
+1. Åpne terminal og naviger til mappen exambackend.
 2. Skriv `npm install`.
 3. Skriv `npm run dev` for å starte Sanity lokalserver.

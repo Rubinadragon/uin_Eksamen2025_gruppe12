@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchSelectedFestivals } from "../fetchers/fetchTicketmaster";
 
 export default function Home(){
 
     const [selectedFestivals, setSelectedFestivals] = useState([]);
 
-    const apiKey = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
-
-    const getSelectedFestivals = async () => {
-        await fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=${apiKey}&id=K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf&locale=*`)
-        .then((response) => response.json())
-        .then((data) => setSelectedFestivals(data._embedded.attractions));
-    };
-
     useEffect(() => {
+        const getSelectedFestivals = async () => {
+            try {
+                const response = await fetchSelectedFestivals();
+                setSelectedFestivals(response);
+            }
+            catch(error) {
+                console.error("Cannot fetch festivals!:", error)
+            }
+        };
         getSelectedFestivals();
     }, 
     []);

@@ -4,9 +4,9 @@ export default function Dashboard(){
     <h2>Logg inn</h2>
     <section>
         <form>
-            <label for="usernameInput">Brukernavn</label>
+            <label htmlFor="usernameInput">Brukernavn</label>
             <input type="text" id="usernameInput"></input>
-            <label for="passwordInput">Passord</label>
+            <label htmlFor="passwordInput">Passord</label>
             <input type="text" id="passwordInput"></input>
             <button>Logg inn</button>
         </form>

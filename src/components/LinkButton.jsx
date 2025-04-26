@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function LinkButton(){
-    return <Link to="#">Logg inn</Link>
+    return <NavLink to="dashboard">Logg inn</NavLink>
 }

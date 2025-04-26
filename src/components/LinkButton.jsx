@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function LinkButton(){
-    return <a>Link-knapp</a>
+    return <Link to="#">Logg inn</Link>
 }

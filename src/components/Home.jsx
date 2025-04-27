@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { fetchSelectedFestivals } from "../fetchers/fetchTicketmaster";
+import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
 
 export default function Home(){
 
     const [selectedFestivals, setSelectedFestivals] = useState([]);
 
     useEffect(() => {
-        const getSelectedFestivals = async () => {
-            try {
-                const response = await fetchSelectedFestivals();
-                setSelectedFestivals(response);
-            }
-            catch(error) {
-                console.error("Cannot fetch festivals!:", error)
-            }
-        };
-        getSelectedFestivals();
+        getSelectedFestivals("K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf");
     }, 
     []);
+
+    const getSelectedFestivals = async (festivalIds) => {
+        try {
+            const response = await fetchAttractionsById(festivalIds);
+            setSelectedFestivals(response);
+        }
+        catch(error) {
+            console.error("Cannot fetch festivals!:", error)
+        }
+    };
 
     return (     
         <>

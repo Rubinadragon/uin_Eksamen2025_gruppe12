@@ -12,3 +12,12 @@ export const fetchAttractionsById = async (attracionsId) => {
     return apiresponse;
 }
 
+
+export const fetchAttractionById = async (attracionId) => {
+    let apiresponse = null;
+    await fetch(`${BASE_URL}/${API_VERSION}/attractions/${attracionId}?apikey=${API_KEY}&locale=*`)
+    .then((response) => response.json())
+    .then((data) => apiresponse = data);
+    return apiresponse;
+}
+

@@ -1,3 +1,36 @@
-export default function CategoryPage(){
-    return <h1>Category Page</h1>
+import { useParams }   from "react-router-dom";
+import { useState, useEffect } from "react";
+import { fetchEventsByCategory } from "../fetchers/fetchTicketmaster";
+
+export default function CategoryPage() {
+  const { slug }      = useParams();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    fetchEventsByCategory(slug)
+      .then(data => active && setEvents(data))
+      .finally(() => active && setLoading(false));
+    return () => { active = false };
+  }, [slug]);
+
+  return (
+    <section>
+      <h1>{slug.charAt(0).toUpperCase() + slug.slice(1)}</h1>
+
+      {loading && <p>Laster inn …</p>}
+      {!loading && !events.length && <p>Ingen arrangementer funnet.</p>}
+
+      <div className="eventList">
+        {events.map(evt => (
+          <div key={evt.id}>
+            <h3>{evt.name}</h3>
+            <p>{evt.dates?.start?.localDate}</p>
+            <p>{evt._embedded?.venues?.[0]?.name}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }

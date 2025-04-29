@@ -8,8 +8,14 @@ export default function Header(){
                     <nav>
                         <ul>
                             <li>
-                                <NavLink to={`category/:slug`}>Kategori</NavLink>
+                            <NavLink to="/category/musikk">Musikk</NavLink>
                             </li>
+                            <li>
+                            <NavLink to="/category/sport">Sport</NavLink>
+                            </li>
+                            <li>
+                            <NavLink to="/category/teater">Teater</NavLink>
+                            </li>                            
                             <li>
                                 <LinkButton/>
                             </li>

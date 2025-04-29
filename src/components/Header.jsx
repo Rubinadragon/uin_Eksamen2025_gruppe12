@@ -13,12 +13,11 @@ export default function Header({selectedClasses, setSelectedClasses}){
                     <Link to="/" className="logo">Billettlyst</Link>
                     <nav>
                         <ul>
-                            {/*setSelectedClasses.map?((class) => (<li key={class.id}>
-
-                            </li>))*/}
-                            <li>
-                                <NavLink to={`category/:slug`}>Kategori</NavLink>
-                            </li>
+                            {selectedClasses?.map((classification) => (
+                                <li key={classification.segment.id}>
+                                <NavLink to={`category/${classification.segment.id.toLowerCase()}`}>{classification.segment.name}
+                                </NavLink>
+                                </li>))}
                             <li>
                                 <LinkButton/>
                             </li>

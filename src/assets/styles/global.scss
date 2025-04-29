@@ -1,0 +1,23 @@
+
+$PalePink: #D9B4D3;
+$Magenta: #A76FBF;
+$PaleYellow: #f3f0e8;
+$Burgundy: #773a57;
+$DarkBurgundy: #331624;
+$Yellow: #F2E7C4;
+$Orange: #ba823c;
+
+@mixin flex-display($direction, $wrap: wrap, $primary-axis: flex-start, $secondary-axis: flex-start, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $primary-axis;
+    align-items: $secondary-axis;
+    gap: $gap;
+}
+
+@mixin content-width ($left: $pad-left, $right: $pad-right, $max-width: $page-width) {
+    padding-left: $left;
+    padding-right: $right;
+    max-width: $max-width;
+}

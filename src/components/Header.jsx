@@ -15,7 +15,7 @@ export default function Header({selectedClasses, setSelectedClasses}){
                         <ul>
                             {selectedClasses?.map((classification) => (
                                 <li key={classification.segment.id}>
-                                <NavLink to={`category/${classification.segment.id.toLowerCase()}`}>{classification.segment.name}
+                                <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
                                 </NavLink>
                                 </li>))}
                             <li>

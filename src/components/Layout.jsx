@@ -1,9 +1,9 @@
 import Header from "./Header";
 
-export default function Layout({children}){
+export default function Layout({children, selectedClasses, setSelectedClasses}){
     return (
         <>
-            <Header/>
+            <Header selectedClasses={selectedClasses} setSelectedClasses={setSelectedClasses}/>
             <main>
                 {children}
             </main>

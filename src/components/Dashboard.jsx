@@ -1,7 +1,7 @@
 export default function Dashboard(){
     return (
     <>
-    <h2>Logg inn</h2>
+    <h1>Logg inn</h1>
     <section id="dashboardLoggedOut" className="dashboard">
         <form>
             <label htmlFor="usernameInput">Brukernavn</label>

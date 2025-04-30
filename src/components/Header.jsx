@@ -17,13 +17,7 @@ export default function Header({selectedClasses, setSelectedClasses}){
                                 <li key={classification.segment.id}>
                                 <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
                                 </NavLink>
-                                </li>))}
-                            <li>
-                            <NavLink to="/category/sport">Sport</NavLink>
-                            </li>
-                            <li>
-                            <NavLink to="/category/teater">Teater</NavLink>
-                            </li>                            
+                                </li>))}                                                        
                             <li>
                                 <LinkButton/>
                             </li>

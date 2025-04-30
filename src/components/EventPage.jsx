@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAttractionById } from "../fetchers/fetchTicketmaster";
+import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 
 

@@ -22,9 +22,6 @@ function App() {
     getSelectedClasses()
   },[])
 
-  console.log(selectedClasses)
-
-  console.log(setSelectedClasses)
   return (
     <>
      <Layout selectedClasses={selectedClasses} setSelectedClasses={setSelectedClasses}>

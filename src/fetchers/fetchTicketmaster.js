@@ -14,7 +14,7 @@ export const fetchAttractionsById = async (attractionsId) => {
 
   // fetched single attraction by id
   // param: string id
-  export const fetchAttractionById = async (attracionId) => {
+  export const fetchSingleAttractionById = async (attracionId) => {
     let apiresponse = null;
     await fetch(`${BASE_URL}/${API_VERSION}/attractions/${attracionId}?apikey=${API_KEY}&locale=*`)
     .then((response) => response.json())

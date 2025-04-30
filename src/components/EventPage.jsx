@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchAttractionById } from "../fetchers/fetchTicketmaster";
+import { fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 
 
@@ -7,7 +7,7 @@ export default function EventPage() {
 
     let { id } = useParams();
 
-    const [attractionId, setAttractionId] = useState({});
+    const [attraction, setAttraction] = useState({});
 
     useEffect(() => {
         getAttractionById(id);
@@ -16,8 +16,8 @@ export default function EventPage() {
 
     const getAttractionById = async (value) => {
         try {
-            const response = await fetchAttractionsById(value);
-            setAttractionId(response);
+            const response = await fetchSingleAttractionById(value);
+            setAttraction(response);
         }
         catch(error) {
             console.error("Cannot fetch requested attraction!:", error)
@@ -25,6 +25,6 @@ export default function EventPage() {
     };
 
     return (
-        <h1>{attractionId.name}</h1>
+        <h1>{attraction.name}</h1>
     ) 
 }

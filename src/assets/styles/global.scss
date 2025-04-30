@@ -1,11 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
+//Farger
 $PalePink: #D9B4D3;
 $Magenta: #A76FBF;
 $PaleYellow: #f3f0e8;
-$Burgundy: #773a57;
+$Burgundy: #65314a;
 $DarkBurgundy: #331624;
 $Yellow: #F2E7C4;
 $Orange: #ba823c;
+
+//Font
+$Exo2: "Exo 2", sans-serif;
+$Bold: 700;
+$Regular: 400;
+$Light: 300;
+//Legge inn variabler til fontstørrelser også?
+
 
 @mixin flex-display($direction, $wrap: wrap, $primary-axis: flex-start, $secondary-axis: flex-start, $gap: 0) {
     display: flex;

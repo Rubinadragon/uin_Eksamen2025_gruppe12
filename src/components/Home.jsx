@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
+import EventCard from "./EventCard";
 
 export default function Home(){
 
@@ -26,16 +27,11 @@ export default function Home(){
             <h1>De beste opplevelsene nær deg</h1>
             <section className="eventCards">
                 <h2>Utvalgte festivaler</h2>
-                {
-                    selectedFestivals?.map((festival, id) => (
-                        <Link to={`event/${festival.id}`} key={`selectedFestival_${id}`}>
-                            <article>
-                                <h3>{festival.name}</h3>
-                                <span>Les mer</span>
-                            </article>
-                        </Link>
-                    ))
-                }
+            {
+                selectedFestivals?.map((festival, id) => (
+                <EventCard key={`festival_${id}`} event={festival} linkToDetails={true} />
+            ))}
+
             </section>
         </>
     )   

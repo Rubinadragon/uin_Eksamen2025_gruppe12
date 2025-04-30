@@ -16,15 +16,13 @@ export default function EventPage() {
 
     const getAttractionById = async (value) => {
         try {
-            const response = await fetchAttractionById(value);
+            const response = await fetchAttractionsById(value);
             setAttractionId(response);
         }
         catch(error) {
             console.error("Cannot fetch requested attraction!:", error)
         }
     };
-
-
 
     return (
         <h1>{attractionId.name}</h1>

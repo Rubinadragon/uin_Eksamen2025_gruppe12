@@ -19,7 +19,7 @@ export default function Header({selectedClasses, setSelectedClasses}){
                                 <li key={classification.segment.id} className="classLink">
                                 <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
                                 </NavLink>
-                                </li>))}
+                                </li>))}                                                        
                             <li>
                                 <LinkButton/>
                             </li>

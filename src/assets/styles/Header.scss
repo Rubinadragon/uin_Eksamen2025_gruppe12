@@ -1,1 +1,40 @@
 @use "global";
+
+header {
+    width: 100%;
+    margin: 0 auto;
+    font-family: global.$Exo2;
+    background-color: global.$DarkMagenta;
+}
+
+.logo{
+    font-weight: global.$Bold;
+    font-size: 2.5rem;
+}
+
+.headerSection{
+    @include global.content-width(2rem, 2rem, 1380px);
+    @include global.flex-display(row, nowrap, space-between, center);
+    
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    ul{
+        display: flex;
+    }
+    li{
+        list-style: none;
+        
+    }
+    a{
+        text-decoration: none;
+        color: global.$Yellow;
+        padding: 1rem;
+    }
+    .classLink, .linkButton{
+        font-size: 1.5rem;
+    }
+    .linkButton{
+        background-color: global.$PalePink;
+        color: global.$Burgundy;
+    }
+}

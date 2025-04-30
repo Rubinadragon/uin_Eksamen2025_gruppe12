@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import "./assets/styles/styles.scss"
 import Layout from "./components/Layout"
 import Dashboard from "./components/Dashboard"
 import { Route, Routes } from 'react-router-dom'
@@ -10,6 +11,8 @@ function App() {
   const [selectedClasses, setSelectedClasses] = useState([])
 
   const apiKey = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+  const classification = "KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na&locale"
+  const locale = "no"
 
   const getSelectedClasses = async () => {
     await fetch(`https://app.ticketmaster.com/discovery/v2/classifications?apikey=${apiKey}&id=KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na&locale=no`)

@@ -3,19 +3,28 @@
 //Farger
 $PalePink: #D9B4D3;
 $Magenta: #A76FBF;
+$DarkMagenta: #7c4992;
 $PaleYellow: #f3f0e8;
 $Burgundy: #65314a;
 $DarkBurgundy: #331624;
 $Yellow: #F2E7C4;
 $Orange: #ba823c;
+$White: #ffffff;
+$Black: #000000;
 
 //Font
 $Exo2: "Exo 2", sans-serif;
 $Bold: 700;
 $Regular: 400;
 $Light: 300;
-//Legge inn variabler til fontstørrelser også?
+$text-m: 1.2rem;
 
+// Global sizing
+$page-width: 1380px;
+$pad-left: 2rem;
+$pad-right: 2rem;
+$pad-top: 3rem;
+$pad-bottom: 3rem;
 
 @mixin flex-display($direction, $wrap: wrap, $primary-axis: flex-start, $secondary-axis: flex-start, $gap: 0) {
     display: flex;

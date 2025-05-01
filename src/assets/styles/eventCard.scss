@@ -1,0 +1,26 @@
+@use "global";
+
+.eventCards{
+    h2{
+        min-width: 100%;
+    }
+    display: flex;
+    gap: 1rem;
+}
+
+.eventLink{
+    background-color: global.$Magenta;
+    color: global.$DarkBurgundy;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 10px;
+    h3{
+        padding: 0 0 1rem;
+    }
+    span{
+        background-color: global.$Yellow;
+        margin: 1rem;
+        padding: 0.5rem;
+        border-radius: 20px;
+    }
+}

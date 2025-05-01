@@ -1,0 +1,11 @@
+@use "global";
+
+h1{
+    font-size: 3rem;
+    min-width: 100%;
+}
+
+section{
+    display: flex;
+  flex-wrap: wrap;
+}

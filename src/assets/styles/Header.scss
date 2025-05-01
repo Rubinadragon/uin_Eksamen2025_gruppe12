@@ -40,6 +40,7 @@ header {
     }
 }
 
+//Mobil
 @media only screen and (max-width: 808px){
     .headerSection{
         flex-direction: column;
@@ -56,4 +57,21 @@ header {
             margin-bottom: 1rem;
         }
     }
+}
+
+//PC
+@media only screen and (min-width: 809px){
+    .headerSection{
+        .classLink{
+        a.active{
+            background-color: global.$Yellow;
+            color: global.$DarkBurgundy;
+            border-radius: 50px;
+        }
+    }
+    .linkButton{
+            margin: 1rem;
+        }
+    }
+    
 }

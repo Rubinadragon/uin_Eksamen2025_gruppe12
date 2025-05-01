@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
+import "../assets/styles/eventPage.scss"
 
 
 export default function EventPage() {

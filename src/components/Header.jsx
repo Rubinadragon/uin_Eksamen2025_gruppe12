@@ -17,12 +17,13 @@ export default function Header({selectedClasses, setSelectedClasses}){
                         <ul>
                             {selectedClasses?.map((classification) => (
                                 <li key={classification.segment.id} className="classLink">
-                                <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
+                                <NavLink to={`category/${classification.segment.name.toLowerCase()}`}>{classification.segment.name}
                                 </NavLink>
                                 </li>))}                                                        
                             <li>
                                 <LinkButton/>
                             </li>
+                            
                         </ul>
                     </nav>
                 </section>

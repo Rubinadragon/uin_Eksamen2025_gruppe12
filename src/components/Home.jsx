@@ -33,6 +33,21 @@ export default function Home(){
             ))}
 
             </section>
+            <section> 
+                <h2>Hva skjer i verdens storbyer?</h2>
+                <ul>
+                    <li>Oslo</li>
+                    <li>Stockholm</li>
+                    <li>Berlin</li>
+                    <li>London</li>
+                </ul>
+                <h3>Hva skjer i <span>denne byen</span></h3>
+                <article>
+                    <h3>Navn på arrangmentet</h3>
+                    <img/>
+                    <p>Dato for arrangmentet</p>
+                </article>
+            </section>
         </>
     )   
 }

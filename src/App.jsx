@@ -15,7 +15,7 @@ function App() {
   const locale = "no"
 
   const getSelectedClasses = async () => {
-    await fetch(`https://app.ticketmaster.com/discovery/v2/classifications?apikey=${apiKey}&id=KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na&locale=no`)
+    await fetch(`https://app.ticketmaster.com/discovery/v2/classifications?apikey=${apiKey}&id=KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na&locale=*`)
     .then((response) => response.json())
     .then((data) => setSelectedClasses(data._embedded.classifications))
     

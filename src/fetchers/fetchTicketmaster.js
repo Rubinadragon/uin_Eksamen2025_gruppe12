@@ -41,3 +41,11 @@ export const fetchAttractionsById = async (attractionsId) => {
 //Skeikampfestivalen: KZFzniwnSyZfZ7v7nJ
 //Tons of Rock: KZFzniwnSyZfZ7v7nJ
 //"KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ"
+const segmentID = "KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ"
+
+export const fetchArtistsBySegment = async() =>{
+  let apiresponse = null
+  await fetch(`${BASE_URL}/${API_VERSION}attractions?apikey=${API_KEY}=*&segmentId=${segmentID}`)
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+}

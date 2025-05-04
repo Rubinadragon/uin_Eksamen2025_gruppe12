@@ -2,6 +2,7 @@ import { useParams }   from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchEventsByCategory, fetchSuggestions } from "../fetchers/fetchTicketmaster";
 import "../assets/styles/categoryPage.scss";
+import {countries} from "../assets/js/countryCodes";
 
 export default function CategoryPage({ selectedClasses }) {
     const { slug } = useParams();
@@ -67,12 +68,12 @@ export default function CategoryPage({ selectedClasses }) {
         <section>
           <h2>Filter</h2>
           <form onSubmit={handleSubmit}>
-            <select name="countries" id="filterCountries">
-              <option value="">Select</option>
-              <option value="no">Norge</option>
-              <option value="se">Sverige</option>
-              <option value="de">Danmark</option>
-              <option value="fi">Finland</option>
+            <select name="countries" id="filterCountries" defaultValue="no">
+            {
+              countries.map((country) => (
+                <option key={`select_${country.code}`}value={country.code}>{country.name}</option>
+              ))
+            }
             </select>
             <button type="submit">Filtrer søk</button>
           </form>

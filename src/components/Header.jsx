@@ -3,7 +3,7 @@ import "../assets/styles/header.scss"
 
 import LinkButton from "./LinkButton";
 
-export default function Header({selectedClasses, setSelectedClasses}){
+export default function Header({selectedClasses, setSelectedClass}){
     //Get classification details
     //segment, _embedded,
     //Musikk: KZFzniwnSyZfZ7v7nJ
@@ -17,7 +17,7 @@ export default function Header({selectedClasses, setSelectedClasses}){
                         <ul>
                             {selectedClasses?.map((classification) => (
                                 <li key={classification.segment.id} className="classLink">
-                                <NavLink to={`category/${classification.segment.name.toLowerCase()}`}>{classification.segment.name}
+                                <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
                                 </NavLink>
                                 </li>))}                                                        
                             <li>

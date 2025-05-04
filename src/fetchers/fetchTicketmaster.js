@@ -34,3 +34,10 @@ export const fetchAttractionsById = async (attractionsId) => {
       return [];
     }
   };
+
+//SegmentID:
+//Findings: KZFzniwnSyZfZ7v7nJ
+//Neon: KZFzniwnSyZfZ7v7nJ
+//Skeikampfestivalen: KZFzniwnSyZfZ7v7nJ
+//Tons of Rock: KZFzniwnSyZfZ7v7nJ
+//"KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nJ"

@@ -1,15 +1,31 @@
+import { useState } from "react";
+
 export default function Dashboard(){
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLogin = (x) => {
+        x.preventDefault();
+        setIsLoggedIn(true);
+    };
+
     return (
-    <>
-    <h2>Logg inn</h2>
-    <section>
-        <form>
-            <label htmlFor="usernameInput">Brukernavn</label>
-            <input type="text" id="usernameInput"></input>
-            <label htmlFor="passwordInput">Passord</label>
-            <input type="text" id="passwordInput"></input>
-            <button>Logg inn</button>
-        </form>
-    </section>
-    </>)
+        <section>
+            {isLoggedIn ? (
+                <h2>Min side</h2>
+            ) : (
+                <>
+                <h2>Logg inn</h2>
+                <form onSubmit = {handleLogin}>
+                    <label htmlFor="usernameInput">Brukernavn</label>
+                    <input type="text" id="usernameInput" />
+                    <label htmlFor="passwordInput">Passord</label>
+                    <input type="text" id="passwordInput" />
+                    <button>Logg inn</button>
+                </form>
+                </>
+            ) }
+        </section>
+    );
+    
 }

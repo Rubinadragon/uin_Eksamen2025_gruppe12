@@ -1,6 +1,7 @@
 import { useParams }   from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchEventsByCategory } from "../fetchers/fetchTicketmaster";
+import EventCard from "./EventCard";
 
 export default function CategoryPage({ selectedClasses }) {
     const { slug } = useParams(); 
@@ -24,15 +25,11 @@ export default function CategoryPage({ selectedClasses }) {
         {loading && <p>Laster inn …</p>}
         {!loading && !events.length && <p>Ingen arrangementer funnet.</p>}
   
-        <div className="eventList">
+        <section className="eventList">
           {events.map(evt => (
-            <div key={evt.id}>
-              <h3>{evt.name}</h3>
-              <p>{evt.dates?.start?.localDate}</p>
-              <p>{evt._embedded?.venues?.[0]?.name}</p>
-            </div>
+            <EventCard key={evt.id} event={evt} linkToDetails={false} />
           ))}
-        </div>
+        </section>
       </section>
     );
   }

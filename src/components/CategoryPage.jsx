@@ -8,10 +8,7 @@ export default function CategoryPage({ selectedClasses }) {
 
     const [categorySuggestions, setCategorySuggestions] = useState([]);
     const [attractions, setAttractions] = useState([]);
-
     const [loading, setLoading] = useState(true);
-  
-    //const categoryName = selectedClasses.find(cls => cls.segment.id === slug)?.segment.name;
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -62,11 +59,11 @@ export default function CategoryPage({ selectedClasses }) {
       getSuggestionsByCategory(slug);
     }, [slug]);
     
-    //console.log(categorySuggestions)
-    //console.log(selectedClasses)
+    const categoryName = selectedClasses.find(cls => cls.segment.id === slug)?.segment.name;
+
     return (
       <>
-        <h1>Category: {slug}</h1>
+        <h1>Kategori: {categoryName}</h1>
         <section>
           <h2>Filter</h2>
           <form onSubmit={handleSubmit}>

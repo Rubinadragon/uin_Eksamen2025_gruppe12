@@ -3,7 +3,7 @@ import "../assets/styles/header.scss"
 
 import LinkButton from "./LinkButton";
 
-export default function Header({selectedClasses, setSelectedClasses}){
+export default function Header({selectedClasses, setSelectedClass}){
     //Get classification details
     //segment, _embedded,
     //Musikk: KZFzniwnSyZfZ7v7nJ

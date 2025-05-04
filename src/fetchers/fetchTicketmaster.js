@@ -37,7 +37,7 @@ export const fetchAttractionsById = async (attractionsId) => {
 
   export const fetchSuggestions = async (segmentId) => {
     let apiresponse = null;
-    await fetch(`${BASE_URL}/${API_VERSION}/suggest?apikey=${API_KEY}&&locale=*&segmentId${segmentId}`)
+    await fetch(`${BASE_URL}/${API_VERSION}/suggest?apikey=${API_KEY}&locale=*&segmentId=${segmentId}`)
     .then((response) => response.json())
     .then((data) => apiresponse = data._embedded)
     

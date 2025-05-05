@@ -43,3 +43,10 @@ export const fetchAttractionsById = async (attractionsId) => {
     
     return apiresponse;
   }
+
+  export const fetchSingleFestivalByID = async (promoterID) => {
+    let apiresponse = null
+    await fetch(`${BASE_URL}/${API_VERSION}events?apikey=${API_KEY}&locale=*&promoterId=${promoterID}`)
+    .then((response) => response.json())
+  .then((data) => apiresponse = data._embedded)
+  }

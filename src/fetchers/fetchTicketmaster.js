@@ -35,7 +35,9 @@ export const fetchAttractionsById = async (attractionsId) => {
     }
   };
 
-  export const fetchSuggestionsFilter = async (catFilter) => {
+  // Fetches attractions, events and venues from suggest endpoint
+  // param: string of parameters such as segmentId, countryCode, geoPoint, keyword
+  export const fetchSuggestions = async (catFilter) => {
     let apiresponse = null;
     await fetch(`${BASE_URL}/${API_VERSION}/suggest?apikey=${API_KEY}&locale=*${catFilter}`)
     .then((response) => response.json())

@@ -1,6 +1,6 @@
 import { useParams }   from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchSuggestionsFilter } from "../fetchers/fetchTicketmaster";
+import { fetchSuggestions } from "../fetchers/fetchTicketmaster";
 import "../assets/styles/categoryPage.scss";
 import {countries} from "../assets/js/countryCodes";
 import { cities } from "../assets/js/citiesLocation";
@@ -29,7 +29,7 @@ export default function CategoryPage({ selectedClasses }) {
       
       console.log(buildFilter)
       try {
-        const data = await fetchSuggestionsFilter(buildFilter);
+        const data = await fetchSuggestions(buildFilter);
         setCategorySuggestions(data);
         setLoadingResults(false);
       }

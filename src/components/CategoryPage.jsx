@@ -1,6 +1,6 @@
 import { useParams }   from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchSuggestions } from "../fetchers/fetchTicketmasterCategories";
+import { fetchSuggestionsFilter } from "../fetchers/fetchTicketmaster";
 import "../assets/styles/categoryPage.scss";
 import {countries} from "../assets/js/countryCodes";
 import { cities } from "../assets/js/citiesLocation";
@@ -12,25 +12,24 @@ export default function CategoryPage({ selectedClasses }) {
     const [loadingResults, setLoadingResults] = useState(true);
     const [filterCountry, setFilterCountry] = useState("");
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setLoadingResults(true)
-      await getSuggestionsFilter(e.target.filterCountries.value, slug)
-    }
+    useEffect(() => {
+      getSuggestionsFilter(slug);
+    }, [slug]);
 
-    const getSuggestionsFilter = async(countryCode, segmentId) => {
-      let apidata = null;
-      await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&locale=*&countryCode=${countryCode}&segmentId=${segmentId}`)
-      .then((response) => response.json())
-      .then((data) => (apidata = data._embedded))
-
-      setCategorySuggestions(apidata)
-      setLoadingResults(false)
-    }
-
-    const getSuggestionsByCategory = async(keyword) => {
+    const getSuggestionsFilter = async(segmentId, e = {}) => {
+      let buildFilter = "";
+      if(segmentId.length)
+        buildFilter += "&segmentId=" + segmentId;
+      if("target" in e && e.target.filterCountries.value.length)
+        buildFilter += "&countryCode=" + e.target.filterCountries.value;
+      if("target" in e && e.target.filterCities.value.length)
+        buildFilter += "&geoPoint=" + e.target.filterCities.value;
+      if("target" in e && e.target.filterDates.value.length)
+        buildFilter += "&localStartEndDateTime=" + e.target.filterDates.value + "T00:00:00";
+      
+      console.log(buildFilter)
       try {
-        const data = await fetchSuggestions(keyword);
+        const data = await fetchSuggestionsFilter(buildFilter);
         setCategorySuggestions(data);
         setLoadingResults(false);
       }
@@ -43,17 +42,14 @@ export default function CategoryPage({ selectedClasses }) {
       setFilterCountry(value)
     }
 
-    useEffect(() => {
-      let active = true;
-      /*fetchEventsByCategory(slug)
-        .then(data => active && setEvents(data))
-        .finally(() => active && setLoading(false));
-      return () => { active = false }; */
-      getSuggestionsByCategory(slug);
-    }, [slug]);
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLoadingResults(true)
+      
+      await getSuggestionsFilter(slug, e)
+    }
     
     const categoryName = selectedClasses.find(cls => cls.segment.id === slug)?.segment.name;
-    console.log(filterCountry)
     
     return (
       <>
@@ -61,15 +57,17 @@ export default function CategoryPage({ selectedClasses }) {
         <section>
           <h2>Filter</h2>
           <form onSubmit={handleSubmit}>
-            <select name="countries" id="filterCountries" defaultValue="no" onChange={(e)=> handleChange(e.target.value)}>
+            <input type="date" id="filterDates" name="dates" />
+            <select name="countries" id="filterCountries" onChange={(e)=> handleChange(e.target.value)}>
+              <option value="">Velg land</option>
             {
               countries.map((country) => (
                 <option key={`select_${country.code}`}value={country.code}>{country.name}</option>
               ))
             }
             </select>
-            <select name="cities" id="filterCities" defaultValue="alle byer...">
-              <option value="any">velg by..</option>
+            <select name="cities" id="filterCities">
+              <option value="">velg by</option>
               {
                 cities.filter((city) => city.code === filterCountry).map((city) =>(
                   <option key={`city_${city.name}`} value={city.lat + "," + city.long}>{city.name}</option>

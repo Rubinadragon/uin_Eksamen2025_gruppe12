@@ -1,14 +1,16 @@
 import { useParams }   from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchEventsByCategory, fetchSuggestions } from "../fetchers/fetchTicketmaster";
+import { fetchSuggestions } from "../fetchers/fetchTicketmasterCategories";
 import "../assets/styles/categoryPage.scss";
 import {countries} from "../assets/js/countryCodes";
+import { cities } from "../assets/js/citiesLocation";
 
 export default function CategoryPage({ selectedClasses }) {
     const { slug } = useParams();
 
     const [categorySuggestions, setCategorySuggestions] = useState([]);
     const [loadingResults, setLoadingResults] = useState(true);
+    const [filterCountry, setFilterCountry] = useState("");
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -37,6 +39,10 @@ export default function CategoryPage({ selectedClasses }) {
       }
     }
 
+    const handleChange = (value) => {
+      setFilterCountry(value)
+    }
+
     useEffect(() => {
       let active = true;
       /*fetchEventsByCategory(slug)
@@ -47,7 +53,7 @@ export default function CategoryPage({ selectedClasses }) {
     }, [slug]);
     
     const categoryName = selectedClasses.find(cls => cls.segment.id === slug)?.segment.name;
-
+    console.log(filterCountry)
     
     return (
       <>
@@ -55,12 +61,20 @@ export default function CategoryPage({ selectedClasses }) {
         <section>
           <h2>Filter</h2>
           <form onSubmit={handleSubmit}>
-            <select name="countries" id="filterCountries" defaultValue="no">
+            <select name="countries" id="filterCountries" defaultValue="no" onChange={(e)=> handleChange(e.target.value)}>
             {
               countries.map((country) => (
                 <option key={`select_${country.code}`}value={country.code}>{country.name}</option>
               ))
             }
+            </select>
+            <select name="cities" id="filterCities" defaultValue="alle byer...">
+              <option value="any">velg by..</option>
+              {
+                cities.filter((city) => city.code === filterCountry).map((city) =>(
+                  <option key={`city_${city.name}`} value={city.lat + "," + city.long}>{city.name}</option>
+                ))
+              }
             </select>
             <button type="submit">Filtrer søk</button>
           </form>

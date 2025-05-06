@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
+import EventCard from "./EventCard";
 
 export default function EventPage() {
     let { id } = useParams();
@@ -41,7 +42,6 @@ export default function EventPage() {
     //console.log(attraction)
     return (
         <section className="eventPageInfo">
-            <img src={"images" in attraction ? attraction.images.find((img) => img.ratio === "16_9" && (img.width < 800 && img.width > 300)).url : "test.jpg"}/>
             <h1>{attraction.name}</h1>
             <article>
                 <p>Sjanger: {eventSearch?.events?.[1].classifications?.reduce((acc, obj) =>{
@@ -53,8 +53,9 @@ export default function EventPage() {
                     {/*eventSearch?.events?.[1].classifications?.map((genre) => <span key={genre.genre.id}>{genre.genre.name}</span>)*/}</p>
                 <h2>Festivalpass</h2>
                 <ul>
-                    {/*eventSearch?.map(() =>)*/}
+                    {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
                 </ul>
+                <h2>Artister</h2>
             </article>
         </section>
     ) 

@@ -56,7 +56,9 @@ export default function EventPage() {
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
                 </ul>
                 <h2>Artister</h2>
-
+                {eventSearch?.events?.map((events, index) => 
+                    {events[index]?.map(
+                        (artist) => <li key={artist._embedded.id}>test</li>)})}
             </article>
         </section>
     ) 

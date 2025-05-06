@@ -25,10 +25,6 @@ function App() {
     getSelectedClasses()
   },[])
 
-  useEffect(()=>{
-    console.log()
-  },[])
-
   return (
     <>
      <Layout selectedClasses={selectedClasses} setSelectedClasses={setSelectedClasses}>

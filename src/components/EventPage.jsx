@@ -1,43 +1,61 @@
 import { useEffect, useState } from "react";
-import { fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
-import { fetchSingleFestivalByID } from "../fetchers/fetchTicketmaster";
+import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
-import EventCard from "./EventCard";
-
 
 export default function EventPage() {
     let { id } = useParams();
-    const promoterIDList = ["9189","13717","15301","14435"]
 
     const [attraction, setAttraction] = useState({});
-    const [festivalInfo, setFestivalInfo] = useState([])
+    const [eventSearch, setEventSearch] = useState([])
 
-    useEffect(() => {
-        getAttractionById(id);
-    }, 
-    []);
+    useEffect(()=>{
+        getEventSearchByAttractionId(id)
+        getAttractionById(id)
+    },[])
 
     const getAttractionById = async (value) => {
         try {
             const response = await fetchSingleAttractionById(value);
             setAttraction(response);
-
         }
         catch(error) {
             console.error("Cannot fetch requested attraction!:", error)
         }
-        
     };
-    console.log(attraction)
+
+    const getEventSearchByAttractionId = async (value) =>
+    {
+        try {
+            const response = await fetchEventSearchInfo(value)
+            setEventSearch(response)
+            //console.log(response)
+        }
+        catch(error){
+            console.error("Cannot fetch requested event search!:", error)
+        }
+    }
+
+    console.log(eventSearch?.events?.[1].classifications)
+    //console.log(eventSearch)
+    //console.log(attraction)
     return (
         <section className="eventPageInfo">
-            <h1>{attraction.name}</h1>
             <img src={"images" in attraction ? attraction.images.find((img) => img.ratio === "16_9" && (img.width < 800 && img.width > 300)).url : "test.jpg"}/>
+            <h1>{attraction.name}</h1>
             <article>
-                <p>Sjanger: {}</p>
+                <p>Sjanger: {eventSearch?.events?.[1].classifications?.reduce((acc, obj) =>{
+                                if(!acc.some(o => o.genre?.id === obj.genre?.id || o.genre?.name != "Undefined" /*|| typeof o.genre?.name != typeof undefined*/)){
+                                    acc.push(obj)
+                                } return acc}, 
+                                []).map((genre) => 
+                                <span key={genre?.genre?.id}>{genre?.genre?.name}</span>)}
+                    {/*eventSearch?.events?.[1].classifications?.map((genre) => <span key={genre.genre.id}>{genre.genre.name}</span>)*/}</p>
+                <h2>Festivalpass</h2>
+                <ul>
+                    {/*eventSearch?.map(() =>)*/}
+                </ul>
             </article>
         </section>
-        
     ) 
 }

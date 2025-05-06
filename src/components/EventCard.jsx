@@ -16,7 +16,6 @@ export default function EventCard({ event, linkToDetails = true }) {
     </article>
   );
 
-  console.log(name)
   return linkToDetails ? (
     <Link to={`/event/${id}`} className="eventLink">
       {content}

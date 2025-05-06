@@ -44,9 +44,13 @@ export const fetchAttractionsById = async (attractionsId) => {
     return apiresponse;
   }
 
-  export const fetchSingleFestivalByID = async (promoterID) => {
+  export const fetchEventSearchInfo = async (attracionId) => {
     let apiresponse = null
-    await fetch(`${BASE_URL}/${API_VERSION}events?apikey=${API_KEY}&locale=*&promoterId=${promoterID}`)
+    await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*`)
     .then((response) => response.json())
-  .then((data) => apiresponse = data._embedded)
+    .then((data) => apiresponse = data._embedded)
+
+    return apiresponse
   }
+//${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*
+//https://app.ticketmaster.com/discovery/v2/events?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&attractionId=K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf&locale=*

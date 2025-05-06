@@ -37,7 +37,7 @@ export default function EventPage() {
         }
     }
 
-    console.log(eventSearch?.events?.[1].classifications)
+    console.log(eventSearch?.events?.[2]._embedded)
     //console.log(eventSearch)
     //console.log(attraction)
     return (
@@ -56,6 +56,7 @@ export default function EventPage() {
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
                 </ul>
                 <h2>Artister</h2>
+
             </article>
         </section>
     ) 

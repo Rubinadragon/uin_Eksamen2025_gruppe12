@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../assets/styles/eventCard.scss"
 
-export default function EventCard({ attraction , event, linkToDetails = true }) {
+export default function EventCard({ event, linkToDetails = true }) {
   const name = event.name;
   const date = event.dates?.start?.localDate;
   const venue = event._embedded?.venues?.[0]?.name;

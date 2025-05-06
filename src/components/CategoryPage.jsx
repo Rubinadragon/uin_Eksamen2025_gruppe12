@@ -1,70 +1,41 @@
 import { useParams }   from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchEventsByCategory, fetchSuggestions } from "../fetchers/fetchTicketmaster";
+import { fetchSuggestions } from "../fetchers/fetchTicketmaster";
+import Filter from "./Filter";
 import "../assets/styles/categoryPage.scss";
-import {countries} from "../assets/js/countryCodes";
 
 export default function CategoryPage({ selectedClasses }) {
     const { slug } = useParams();
 
     const [categorySuggestions, setCategorySuggestions] = useState([]);
     const [loadingResults, setLoadingResults] = useState(true);
+    const [filterQuery, setFilterQuery] = useState([]);
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setLoadingResults(true)
-      await getSuggestionsFilter(e.target.filterCountries.value, slug)
-    }
+    useEffect(() => {
+      getSuggestions(slug, filterQuery);
+    }, [slug, filterQuery]);
 
-    const getSuggestionsFilter = async(countryCode, segmentId) => {
-      let apidata = null;
-      await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&locale=*&countryCode=${countryCode}&segmentId=${segmentId}`)
-      .then((response) => response.json())
-      .then((data) => (apidata = data._embedded))
-
-      setCategorySuggestions(apidata)
-      setLoadingResults(false)
-    }
-
-    const getSuggestionsByCategory = async(keyword) => {
+    const getSuggestions = async(segmentId, e) => {
+      let query = `&segmentId=${segmentId}${e}`;
+      
       try {
-        const data = await fetchSuggestions(keyword);
-        setCategorySuggestions(data);
+        const data = await fetchSuggestions(query);
+
+        data ? setCategorySuggestions(data) : setCategorySuggestions({})
         setLoadingResults(false);
       }
       catch(error) {
         console.log(error);
       }
     }
-
-    useEffect(() => {
-      let active = true;
-      /*fetchEventsByCategory(slug)
-        .then(data => active && setEvents(data))
-        .finally(() => active && setLoading(false));
-      return () => { active = false }; */
-      getSuggestionsByCategory(slug);
-    }, [slug]);
     
-    const categoryName = selectedClasses.find(cls => cls.segment.id === slug)?.segment.name;
+    const currentCategory = selectedClasses.find(cls => cls.segment.id === slug)?.segment;
 
-    
     return (
       <>
-        <h1>Kategori: {categoryName}</h1>
-        <section>
-          <h2>Filter</h2>
-          <form onSubmit={handleSubmit}>
-            <select name="countries" id="filterCountries" defaultValue="no">
-            {
-              countries.map((country) => (
-                <option key={`select_${country.code}`}value={country.code}>{country.name}</option>
-              ))
-            }
-            </select>
-            <button type="submit">Filtrer søk</button>
-          </form>
-        </section>
+        <h1>Kategori: {currentCategory?.name}</h1>
+
+        <Filter setLoadingResults={setLoadingResults} setFilterQuery={setFilterQuery}/>
 
         <section>
           <h2>Attractions</h2>
@@ -120,17 +91,6 @@ export default function CategoryPage({ selectedClasses }) {
               <p>Ingen lokasjoner funnet</p>
           }
         </section>
-  
-        {/*<div className="eventList">
-          {events.map(evt => (
-            <div key={evt.id}>
-              <h3>{evt.name}</h3>
-              <p>{evt.dates?.start?.localDate}</p>
-              <p>{evt._embedded?.venues?.[0]?.name}</p>
-            </div>
-          ))}
-        </div>
-        */}
         </>
     );
   }

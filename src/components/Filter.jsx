@@ -37,25 +37,25 @@ export default function Filter({setLoadingResults, setFilterQuery}) {
         <article className="filterLayout">
             <form onSubmit={handleSubmit}>
               <label htmlFor="filterDates">
-                <span>Velg dato</span>
+                <span>Dato</span>
                 <input type="date" id="filterDates" name="dates" />
               </label>
               
               <label htmlFor="filterCountries">
-                <span>Velg land</span>
+                <span>Land</span>
                 <select name="countries" id="filterCountries" onChange={(e)=> handleChange(e.target.value)}>
-                    <option value="">Velg land</option>
+                  <option value="" disabled selected hidden>Norge</option>
                 {
                     countries.map((country) => (
                     <option key={`select_${country.code}`}value={country.code}>{country.name}</option>
                     ))
                 }
                 </select>
-              </label>
+                </label>
               <label htmlFor="filterCities">
-                <span>Velg by</span>
+                <span>By</span>
                 <select name="cities" id="filterCities">
-                    <option value="">velg by</option>
+                  <option value="" disabled selected hidden>Ingen by valgt</option>
                     {
                     cities.filter((city) => city.code === filterCountry).map((city) =>(
                         <option key={`city_${city.name}`} value={city.lat + "," + city.long}>{city.name}</option>
@@ -67,7 +67,10 @@ export default function Filter({setLoadingResults, setFilterQuery}) {
             </form>
 
             <form onSubmit={handleSubmit}>
-                <input type="text" id="filterSearch" name="search" />
+                <label htmlFor="filterSearch">
+                  <span>Søk på arrangement</span>
+                  <input type="text" id="filterSearch" name="search" />
+                </label>
                 <button type="submit">Søk</button>
             </form>
         </article>

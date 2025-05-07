@@ -1,7 +1,7 @@
 @use "global";
 
 .filterLayout {
-    @include global.flex-display(row, nowrap, space-between, center);
+    @include global.flex-display(row, wrap, space-between, center, 2rem);
 
     background-color: global.$White;
     padding-top: 1rem;
@@ -9,7 +9,7 @@
     border-radius: 8px;
 
     form {
-        @include global.flex-display(row, nowrap, flex-start, flex-end, 0.6rem);
+        @include global.flex-display(row, wrap, flex-start, flex-end, 0.8rem);
     }
 
     label {
@@ -19,33 +19,24 @@
 
     input[type], select {
         font-size: 1.1rem;
-        padding: .3rem;
+        padding: .5rem .5rem;
         border-color: #afafaf;
+        border-radius: 3px;
+        outline: none;
+    }
+
+    input[type="date"] {
+       
     }
 
     button {
         font-size: 1.2rem;
-        font-weight: 500;
+        font-weight: 600;
         background-color: global.$Yellow;
         border-radius: 50px;
         color: global.$DarkBurgundy;
         border: none;
-        padding: 0.8rem 1.2rem 0.8rem 1.2rem;
+        padding: 0.8rem 1.5rem;
         cursor: pointer;
-    }
-}
-
-.categorySection {
-    @include global.content-width();
-    @include global.flex-display(row, wrap);
-    
-    article {
-        flex-basis: 30%;
-    }
-
-    gap: 1rem;
-
-    h2 {
-        width: 100%;
     }
 }

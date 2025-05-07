@@ -3,6 +3,7 @@ import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fet
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
 import EventCard from "./EventCard";
+import ArtistCard from "./ArtistCard";
 
 export default function EventPage() {
     let { id } = useParams();
@@ -37,31 +38,48 @@ export default function EventPage() {
         }
     }
 
+    //const mapEvent = eventSearch?.events?.map()
+    
     //console.log(eventSearch?.events?.[2]._embedded)
-    console.log(eventSearch)
+    //console.log(eventSearch)
     //console.log(eventSearch?.events)
     //console.log(attraction)
     return (
         <section className="eventPageInfo">
             <h1>{attraction.name}</h1>
             <article>
-                <p>Sjanger: {eventSearch?.events?.[1].classifications?.reduce((acc, obj) =>{
-                                if(!acc.some(o => o.genre?.id === obj.genre?.id || o.genre?.name != "Undefined" /*|| typeof o.genre?.name != typeof undefined*/)){
-                                    acc.push(obj)
-                                } return acc}, 
-                                []).map((genre) => 
-                                <span key={genre?.genre?.id}>{genre?.genre?.name}</span>)}
-                    {/*eventSearch?.events?.[1].classifications?.map((genre) => <span key={genre.genre.id}>{genre.genre.name}</span>)*/}</p>
+                <p>Sjanger:
+                    {eventSearch?.events?.map((events) => (events?.classifications?.reduce(
+                        (acc,obj) => {
+                            //console.log(events?.classifications?.genre)
+                            if(!acc.some
+                                (o => o?.events?.classifications?.genre?.id === obj?.events?.classifications?.genre?.id 
+                                    || o?.events?.classifications?.genre?.name != "Undefined"))
+                            {
+                                console.log(obj?.events)
+                                acc.push(obj)
+                                //console.log(obj?.events?.class)
+                                //console.log("acc:", acc)
+                            } return acc},
+                            [])
+                            .map((genre) => 
+                                <span id={genre?.genre?.id}>
+                                    {genre?.genre?.name}
+                                </span>)))}</p>
                 <h2>Festivalpass</h2>
                 <ul>
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
                 </ul>
                 <h2>Artister</h2>
                 <ul>
-                    {eventSearch?.events?.map((events, index) => 
-                    {events[index]?.map(
-                        (artist) => <li key={artist._embedded.id}>test</li>)})}
-                    {eventSearch?.events?.map((events) => (events?._embedded?.attractions?.map((artist) => <li key={artist.id}>{artist.name}</li>)))}
+                    {eventSearch?.events?.map((events) => 
+                        (events?._embedded?.attractions?.map(
+                            (artist) => 
+                            <li key={artist.id}>
+                                <ArtistCard img={artist?.images} artistName={artist?.name}/>
+                            </li>)
+                        )
+                    )}
                 </ul>
                 
             </article>
@@ -69,3 +87,4 @@ export default function EventPage() {
     ) 
 }//https://stackoverflow.com/questions/71689875/how-to-map-a-nested-array-of-objects-one-child-array-item-at-a-time-in-react
 //https://stackoverflow.com/questions/51841507/mapping-object-keys-in-react-and-returning-child-properties/51842076
+//https://stackoverflow.com/questions/63693070/javascript-mapping-and-filtering-on-nested-arrays

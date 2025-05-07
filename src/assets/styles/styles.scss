@@ -14,6 +14,8 @@ html {
 body {
     width: 100%;
     margin: 0 auto;
+    min-width: 320px;
+    min-height: 100vh;
     font-family: global.$Exo2;
     background-color: global.$White;
 }
@@ -29,7 +31,7 @@ p {
 
 section {
     margin: 0 auto;
-    @include global.content-width();
+    //@include global.content-width();
 }
 button{
     font-family: global.$Exo2;

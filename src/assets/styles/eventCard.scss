@@ -1,11 +1,12 @@
 @use "global";
 
 .eventCards{
-    h2{
-        min-width: 100%;
-    }
-    display: flex;
+    @include global.content-width();
+    @include global.flex-display(row, wrap);
     gap: 1rem;
+    h2 {
+        width: 100%;
+    }
 }
 
 .eventLink{

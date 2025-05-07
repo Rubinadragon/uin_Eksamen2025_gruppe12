@@ -37,8 +37,9 @@ export default function EventPage() {
         }
     }
 
-    console.log(eventSearch?.events?.[2]._embedded)
-    //console.log(eventSearch)
+    //console.log(eventSearch?.events?.[2]._embedded)
+    console.log(eventSearch)
+    //console.log(eventSearch?.events)
     //console.log(attraction)
     return (
         <section className="eventPageInfo">
@@ -56,10 +57,15 @@ export default function EventPage() {
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
                 </ul>
                 <h2>Artister</h2>
-                {eventSearch?.events?.map((events, index) => 
+                <ul>
+                    {eventSearch?.events?.map((events, index) => 
                     {events[index]?.map(
                         (artist) => <li key={artist._embedded.id}>test</li>)})}
+                    {eventSearch?.events?.map((events) => (events?._embedded?.attractions?.map((artist) => <li key={artist.id}>{artist.name}</li>)))}
+                </ul>
+                
             </article>
         </section>
     ) 
-}
+}//https://stackoverflow.com/questions/71689875/how-to-map-a-nested-array-of-objects-one-child-array-item-at-a-time-in-react
+//https://stackoverflow.com/questions/51841507/mapping-object-keys-in-react-and-returning-child-properties/51842076

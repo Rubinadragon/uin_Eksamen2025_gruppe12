@@ -53,10 +53,12 @@ function London() {
             <li><button onClick={London}>London</button></li>
         </ul>
 
-        <h3>Hva skjer i {city_name}</h3>
+       
         {city?.map(cit => 
+            <>
+                <h3>Hva skjer i {test?.[0].city.name}</h3>
                   <article key={cit.id}>
-                  <h3>{cit.name}</h3>
+                  <h4>{cit.name}</h4>
                   <img src={
                     cit.images.find((img) => img.ratio === "16_9" && (img.width < 800 && img.width > 300)).url}
                     alt={cit.name}/>
@@ -64,6 +66,7 @@ function London() {
                   <p>{test?.[0].city.name}</p>
                   <p>{cit.dates.start.localDate}</p>
               </article>
+            </>
         )}
     </>
     )

@@ -62,22 +62,16 @@ export default function EventPage() {
                         return acc
                     }, []
                     ).map((events) => <span key={events?.genre?.id}>{events?.genre?.name}</span>)}
-                    {/*eventSearch?.events?.map((events) => (events?.classifications?.reduce((acc,obj) => {
-                            console.log(events?.classifications?.genre)
-                            if(!acc.some
-                                (o => o?.events?.classifications?.genre?.id === obj?.events?.classifications?.genre?.id 
-                                    || o?.events?.classifications?.genre?.name != "Undefined"))
-                            {
-                                console.log(obj?.events)
+
+                    {/*Metoden under skal gi alle sjangere fra alle objekter, men får ikke filtrert ut den heller*/}
+                    {/*mapEvent?.map((festival) => 
+                        festival?.classifications?.reduce((acc, obj) => {
+                            if(!acc.some(o => o?.genre?.id === obj?.genre?.id) || !acc.some(o => o?.genre?.name === "Undefined")){
                                 acc.push(obj)
-                                console.log(obj?.events?.class)
-                                console.log("acc:", acc)
-                            } return acc},
-                            [])
-                            .map((genre) => 
-                                <span id={genre?.genre?.id}>
-                                    {genre?.genre?.name}
-                                </span>)))*/}</p>
+                            }
+                            return acc
+                    }, [])
+                    .map((genre) => <span key={genre?.genre.id}>{genre?.genre?.name}</span>))*/}</p>
                 <h2>Festivalpass</h2>
                 <ul>
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}

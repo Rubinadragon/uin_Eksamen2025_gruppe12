@@ -14,15 +14,10 @@ const fetchTenEventsByCity = async()=> {
   .catch((error) => console.error("An error accord during a fetch of citys", error))
 }
 
-//Map testing 
-console.log("Array:",city)
-
- const test = city?.map(testy => testy?._embedded.venues)
- console.log("test",test)
 
 
- const test2 = test?.map(test2 => test2?.locale)
- //console.log("test2", test2)
+ const test = city?.map(testy => testy?._embedded.venues[0])
+
 
 useEffect(()=> {
     fetchTenEventsByCity()
@@ -48,7 +43,7 @@ function London() {
     fetchTenEventsByCity()
     console.log("city:",city_name)
 }
-
+   
     return(
     <>
         <ul>
@@ -62,8 +57,9 @@ function London() {
         {city?.map(cit => 
                   <article key={cit.id}>
                   <h3>{cit.name}</h3>
-                  <img/>
-                  <p></p>
+                  <img src={cit.images.url}/>
+                  <p>{test?.[0].country.name}</p>
+                  <p>{test?.[0].city.name}</p>
                   <p>{cit.dates.start.localDate}</p>
               </article>
         )}

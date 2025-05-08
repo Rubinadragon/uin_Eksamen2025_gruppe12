@@ -57,7 +57,9 @@ function London() {
         {city?.map(cit => 
                   <article key={cit.id}>
                   <h3>{cit.name}</h3>
-                  <img src={cit.images.url}/>
+                  <img src={
+                    cit.images.find((img) => img.ratio === "16_9" && (img.width < 800 && img.width > 300)).url}
+                    alt={cit.name}/>
                   <p>{test?.[0].country.name}</p>
                   <p>{test?.[0].city.name}</p>
                   <p>{cit.dates.start.localDate}</p>

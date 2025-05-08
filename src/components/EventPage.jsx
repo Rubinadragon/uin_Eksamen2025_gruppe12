@@ -52,6 +52,7 @@ export default function EventPage() {
             <h1>{attraction.name}</h1>
             <article>
                 <p>Sjanger:
+                    {/*Filtrer ikke ut Undefined og får heller ikke med seg alle sjangere*/}
                     {mapEvent?.[1].classifications?.reduce((acc, current) => {
                         let undefinedName = acc.find(item => {return item?.genre?.name === "Undefined"})
                         let exists = acc.find( item => {return item?.genre?.id === current?.genre?.id
@@ -78,14 +79,7 @@ export default function EventPage() {
                 </ul>
                 <h2>Artister</h2>
                 <ul>
-                    {/*eventSearch?.events?.map((events) => 
-                        (events?._embedded?.attractions?.map(
-                            (artist) => 
-                            <li key={artist.id}>
-                                <ArtistCard img={artist?.images} artistName={artist?.name}/>
-                            </li>)
-                        )
-                    )*/}
+                {/*Filterer ikke ut festivalnavn slik jeg ønsker*/}
                     {mapEvent?.map((events) => 
                         (events?._embedded?.attractions?.reduce(
                             (acc, obj) => {

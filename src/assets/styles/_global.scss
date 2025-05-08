@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+//Farger
+$PalePink: #D9B4D3;
+$Magenta: #c381e0;
+$DarkMagenta: #7c4992;
+$Burgundy: #65314a;
+$DarkBurgundy: #331624;
+$PaleYellow: #f3f0e8;
+$Yellow: #eed686;
+$Orange: #95560a;
+$White: #ffffff;
+$Black: #000000;
+
+//Font
+$Exo2: "Exo 2", sans-serif;
+$Bold: 700;
+$Regular: 400;
+$Light: 300;
+$text-m: 1.2rem;
+
+// Global sizing
+$page-width: 1380px;
+$pad-left: 2rem;
+$pad-right: 2rem;
+$pad-top: 3rem;
+$pad-bottom: 3rem;
+
+@mixin flex-display($direction, $wrap: wrap, $primary-axis: flex-start, $secondary-axis: flex-start, $gap: 0) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $primary-axis;
+    align-items: $secondary-axis;
+    gap: $gap;
+}
+
+@mixin content-width ($left: $pad-left, $right: $pad-right, $max-width: $page-width) {
+    padding-left: $left;
+    padding-right: $right;
+    max-width: $max-width;
+}

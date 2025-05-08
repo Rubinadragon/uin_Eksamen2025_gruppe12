@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../assets/styles/eventCard.scss"
 
 export default function EventCard({ event, linkToDetails = true }) {
   const name = event.name;

@@ -1,0 +1,36 @@
+@use "global";
+
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+    font-family: global.$Exo2;
+    background-color: global.$White;
+}
+
+h1, h2, p {
+    color: global.$DarkBurgundy;
+}
+
+p {
+    line-height: 1.5;
+    font-size: global.$text-m;
+}
+
+section {
+    margin: 0 auto;
+    @include global.content-width();
+}
+button{
+    font-family: global.$Exo2;
+}

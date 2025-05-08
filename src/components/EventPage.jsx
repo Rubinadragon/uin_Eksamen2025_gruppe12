@@ -37,9 +37,12 @@ export default function EventPage() {
             console.error("Cannot fetch requested event search!:", error)
         }
     }
+    //const test = city?.map(testy => testy?._embedded.venues)console.log("test",test)
 
-    //const mapEvent = eventSearch?.events?.map()
-    
+
+    const mapEvent = eventSearch?.events?.map((singleEvent) => singleEvent)
+    //console.log(mapEvent)
+    //console.log(mapEvent)
     //console.log(eventSearch?.events?.[2]._embedded)
     //console.log(eventSearch)
     //console.log(eventSearch?.events)
@@ -49,23 +52,32 @@ export default function EventPage() {
             <h1>{attraction.name}</h1>
             <article>
                 <p>Sjanger:
-                    {eventSearch?.events?.map((events) => (events?.classifications?.reduce(
-                        (acc,obj) => {
-                            //console.log(events?.classifications?.genre)
+                    {mapEvent?.[1].classifications?.reduce((acc, current) => {
+                        let undefinedName = acc.find(item => {return item?.genre?.name === "Undefined"})
+                        let exists = acc.find( item => {return item?.genre?.id === current?.genre?.id
+                        })
+                        if(!exists || !undefinedName){
+                            acc = acc.concat(current)
+                        }
+                        return acc
+                    }, []
+                    ).map((events) => <span key={events?.genre?.id}>{events?.genre?.name}</span>)}
+                    {/*eventSearch?.events?.map((events) => (events?.classifications?.reduce((acc,obj) => {
+                            console.log(events?.classifications?.genre)
                             if(!acc.some
                                 (o => o?.events?.classifications?.genre?.id === obj?.events?.classifications?.genre?.id 
                                     || o?.events?.classifications?.genre?.name != "Undefined"))
                             {
                                 console.log(obj?.events)
                                 acc.push(obj)
-                                //console.log(obj?.events?.class)
-                                //console.log("acc:", acc)
+                                console.log(obj?.events?.class)
+                                console.log("acc:", acc)
                             } return acc},
                             [])
                             .map((genre) => 
                                 <span id={genre?.genre?.id}>
                                     {genre?.genre?.name}
-                                </span>)))}</p>
+                                </span>)))*/}</p>
                 <h2>Festivalpass</h2>
                 <ul>
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
@@ -85,6 +97,4 @@ export default function EventPage() {
             </article>
         </section>
     ) 
-}//https://stackoverflow.com/questions/71689875/how-to-map-a-nested-array-of-objects-one-child-array-item-at-a-time-in-react
-//https://stackoverflow.com/questions/51841507/mapping-object-keys-in-react-and-returning-child-properties/51842076
-//https://stackoverflow.com/questions/63693070/javascript-mapping-and-filtering-on-nested-arrays
+}//https://stackoverflow.com/questions/74442594/how-to-remove-data-with-same-id-in-an-array-of-object-using-javascript

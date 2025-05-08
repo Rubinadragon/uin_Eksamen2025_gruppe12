@@ -93,7 +93,16 @@ export default function EventPage() {
                         )
                     )*/}
                     {mapEvent?.map((events) => 
-                        (events?._embedded?.attractions?.map
+                        (events?._embedded?.attractions?.reduce(
+                            (acc, obj) => {
+                                if(!acc.some(o => o?.id === obj?.id) || !acc.some(o => o?.name === attraction?.name)){
+                                    acc.push(obj)
+                                    //console.log(attraction?.name)
+                                    //console.log(obj?.name)
+                                }
+                                //console.log(obj)
+                            return acc}, 
+                            []).map
                             ((artist) => 
                             <li key={artist?.id}>
                                 <ArtistCard artistName={artist?.name} artistImg={artist?.images}/>

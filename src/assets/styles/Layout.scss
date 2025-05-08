@@ -2,10 +2,14 @@
 
 h1{
     font-size: 3rem;
-    min-width: 100%;
 }
 
-section{
+#frontHeader {
+  @include global.content-width();
+  margin: 0 auto;
+}
+
+/*section{
     display: flex;
   flex-wrap: wrap;
-}
+} */

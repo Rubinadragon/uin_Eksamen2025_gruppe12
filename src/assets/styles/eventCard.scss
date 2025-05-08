@@ -1,26 +1,75 @@
 @use "global";
 
 .eventCards{
-    h2{
-        min-width: 100%;
+    @include global.content-width();
+    @include global.flex-display(row, wrap);
+    
+    h2 {
+        width: 100%;
     }
-    display: flex;
-    gap: 1rem;
 }
 
-.eventLink{
-    background-color: global.$Magenta;
+.eventCard{
+    position: relative;
     color: global.$DarkBurgundy;
+    background-color: global.$Magenta;
     text-decoration: none;
-    padding: 1rem;
-    border-radius: 10px;
-    h3{
-        padding: 0 0 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        max-height: 250px;
+        object-fit: cover;
     }
-    span{
+}
+
+.favouriteButton {
+    @include global.flex-display(row, nowrap, center, center);
+    border: none;
+    border-radius: 50%;
+    position: absolute;
+    top: 4%;
+    right: 4%;
+    z-index: 10;
+    background-color: global.$White;
+    cursor: pointer;
+    padding: 0.8rem;
+
+    img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.evenCardInner {
+    @include global.flex-display(column, wrap, space-between, flex-start);
+    gap: 0.8rem;
+    padding: 1.3rem;
+    line-height: 1;
+
+    h3{
+        margin-top: -10px;
+        font-size: 1.5rem;
+    }
+    
+    .eventBtn{
         background-color: global.$Yellow;
-        margin: 1rem;
-        padding: 0.5rem;
-        border-radius: 20px;
+        font-size: 1.2rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 30px;
+        font-weight: 600;
+    }
+}
+
+.eventDetail {
+    img {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 0.5rem;
+    }
+    
+    .bold {
+        font-weight: 600;
     }
 }

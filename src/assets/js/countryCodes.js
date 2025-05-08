@@ -27,7 +27,6 @@ export const countries = [
   { code: "HR", name: "Kroatia" },
   { code: "CY", name: "Kypros" },
   { code: "CZ", name: "Tsjekkia" },
-  { code: "DO", name: "Den dominikanske republikk" },
   { code: "EC", name: "Ecuador" },
   { code: "EE", name: "Estland" },
   { code: "FO", name: "Færøyene" },
@@ -57,7 +56,6 @@ export const countries = [
   { code: "ME", name: "Montenegro" },
   { code: "MA", name: "Marokko" },
   { code: "NL", name: "Nederland" },
-  { code: "AN", name: "De nederlandske Antiller" },
   { code: "NZ", name: "New Zealand" },
   { code: "ND", name: "Nord-Irland" },
   { code: "PE", name: "Peru" },
@@ -79,7 +77,7 @@ export const countries = [
   { code: "TT", name: "Trinidad og Tobago" },
   { code: "TR", name: "Tyrkia" },
   { code: "UA", name: "Ukraina" },
-  { code: "AE", name: "De forente arabiske emirater" },
+  { code: "AE", name: "Arabiske emirater" },
   { code: "UY", name: "Uruguay" },
   { code: "VE", name: "Venezuela" }
 ];

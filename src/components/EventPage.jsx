@@ -84,16 +84,17 @@ export default function EventPage() {
                 </ul>
                 <h2>Artister</h2>
                 <ul>
-                    {eventSearch?.events?.map((events) => 
+                    {/*eventSearch?.events?.map((events) => 
                         (events?._embedded?.attractions?.map(
                             (artist) => 
                             <li key={artist.id}>
                                 <ArtistCard img={artist?.images} artistName={artist?.name}/>
                             </li>)
                         )
-                    )}
+                    )*/}
+                    {mapEvent?.map((events) => (events?.embedded?.attractions?.map((artist) => console.log(artist))))}
+                    {mapEvent?.map((events) => console.log(events?._embedded?.attractions))}
                 </ul>
-                
             </article>
         </section>
     ) 

@@ -10,16 +10,21 @@ export default function Dashboard(){
     };
 
     return (
-    <>
-    <h1>Logg inn</h1>
-    <section id="dashboardLoggedOut" className="dashboard">
-        <form>
-            <label htmlFor="usernameInput">Brukernavn</label>
-            <input type="text" id="usernameInput"></input>
-            <label htmlFor="passwordInput">Passord</label>
-            <input type="text" id="passwordInput"></input>
-            <button>Logg inn</button>
-        </form>
+        <section>
+        {isLoggedIn ? (
+            <h2>Min side</h2>
+        ) : (
+            <>
+            <h2>Logg inn</h2>
+            <form onSubmit = {handleLogin}>
+                <label htmlFor="usernameInput">Brukernavn</label>
+                <input type="text" id="usernameInput" />
+                <label htmlFor="passwordInput">Passord</label>
+                <input type="text" id="passwordInput" />
+                <button>Logg inn</button>
+            </form>
+            </>
+        ) }
     </section>
-    </>)
+);
 }

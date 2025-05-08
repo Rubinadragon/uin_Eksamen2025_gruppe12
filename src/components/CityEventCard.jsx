@@ -17,31 +17,35 @@ const fetchTenEventsByCity = async()=> {
 //Map testing 
 console.log("Array:",city)
 
- const test = city?.map(testy => testy._embedded)
+ const test = city?.map(testy => testy?._embedded.venues)
  console.log("test",test)
 
 
- const test2 = test?.map(test2 => test2.locale)
- console.log("test2", test2)
+ const test2 = test?.map(test2 => test2?.locale)
+ //console.log("test2", test2)
 
 useEffect(()=> {
     fetchTenEventsByCity()
-}, [city_name])
+}, [])
 
 function Oslo() {
     city_name = "Oslo"
+    fetchTenEventsByCity()
     console.log("city:",city_name)
 }
 function Stockholm() {
     city_name = "Stockholm"
+    fetchTenEventsByCity()
     console.log("city:",city_name)
 }
 function Berlin() {
     city_name = "Berlin"
+    fetchTenEventsByCity()
     console.log("city:",city_name)
 }
 function London() {
     city_name = "London"
+    fetchTenEventsByCity()
     console.log("city:",city_name)
 }
 

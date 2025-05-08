@@ -106,6 +106,7 @@ export default function EventPage() {
                             ((artist) => 
                             <li key={artist?.id}>
                                 <ArtistCard artistName={artist?.name} artistImg={artist?.images}/>
+                                <p>{artist?.name/*Fjern <p> når ArtistCard er ferdig*/}</p>
                             </li>)
                         )
                     )}

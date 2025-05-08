@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "../assets/styles/cityEventCard.scss"
+
 
 export default function CityEventCard(){
 //const {city_name} = useParams()
@@ -46,18 +48,17 @@ function London() {
    
     return(
     <>
-        <ul>
+        <ul className="cityButton">
             <li><button onClick={Oslo}>Oslo</button></li>
             <li><button onClick={Stockholm}>Stockholm</button></li>
             <li><button onClick={Berlin}>Berlin</button></li>
             <li><button onClick={London}>London</button></li>
         </ul>
 
-       
+        <h3>Hva skjer i {test?.[0].city.name}</h3>
         {city?.map(cit => 
-            <>
-                <h3>Hva skjer i {test?.[0].city.name}</h3>
-                  <article key={cit.id}>
+            
+                  <article key={cit.id}> 
                   <h4>{cit.name}</h4>
                   <img src={
                     cit.images.find((img) => img.ratio === "16_9" && (img.width < 800 && img.width > 300)).url}
@@ -66,7 +67,7 @@ function London() {
                   <p>{test?.[0].city.name}</p>
                   <p>{cit.dates.start.localDate}</p>
               </article>
-            </>
+       
         )}
     </>
     )

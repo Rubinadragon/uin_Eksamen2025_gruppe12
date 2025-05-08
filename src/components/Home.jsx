@@ -34,7 +34,7 @@ export default function Home(){
             ))}
 
             </section>
-            <section> 
+            <section className="tenCitys"> 
                 <h2>Hva skjer i verdens storbyer?</h2>
                {<CityEventCard/>}
             </section>

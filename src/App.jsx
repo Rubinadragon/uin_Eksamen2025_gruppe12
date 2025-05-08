@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
 import EventPage from './components/EventPage'
+import CityEventCard from './components/CityEventCard'
 
 function App() {
   const [selectedClasses, setSelectedClasses] = useState([])
@@ -33,6 +34,7 @@ function App() {
           <Route path="event/:id" element={<EventPage/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} />} />
           <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="tencity/:city_name" element={<CityEventCard/>}/>
         </Routes>
      </Layout>
     </>

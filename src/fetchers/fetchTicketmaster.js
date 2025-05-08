@@ -34,3 +34,4 @@ export const fetchAttractionsById = async (attractionsId) => {
       return [];
     }
   };
+

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
 import EventCard from "./EventCard";
+import CityEventCard from "./CityEventCard";
 
 export default function Home(){
 
@@ -21,7 +22,7 @@ export default function Home(){
             console.error("Cannot fetch festivals!:", error)
         }
     };
-
+ 
     return (     
         <>
             <h1>De beste opplevelsene nær deg</h1>
@@ -35,18 +36,7 @@ export default function Home(){
             </section>
             <section> 
                 <h2>Hva skjer i verdens storbyer?</h2>
-                <ul>
-                    <li>Oslo</li>
-                    <li>Stockholm</li>
-                    <li>Berlin</li>
-                    <li>London</li>
-                </ul>
-                <h3>Hva skjer i <span>denne byen</span></h3>
-                <article>
-                    <h3>Navn på arrangmentet</h3>
-                    <img/>
-                    <p>Dato for arrangmentet</p>
-                </article>
+               {<CityEventCard/>}
             </section>
         </>
     )   

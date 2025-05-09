@@ -24,7 +24,7 @@ export default function Home(){
 
     return (     
         <>
-            <h1>De beste opplevelsene nær deg</h1>
+            <h1 id="frontHeader">De beste opplevelsene nær deg</h1>
             <section className="eventCards">
                 <h2>Utvalgte festivaler</h2>
             {

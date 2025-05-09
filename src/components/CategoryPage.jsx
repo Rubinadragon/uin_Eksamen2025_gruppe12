@@ -84,7 +84,7 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
           {
             !loadingResults && "venues" in categorySuggestions ?
               categorySuggestions.venues?.map((venue) => (
-              <EventCard key={`categoryVenue${venue.id}`} event={venue} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={false}/>
+                <EventCard key={`categoryVenue${venue.id}`} event={venue} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={false}/>
               ))
               :
               <p>Ingen lokasjoner funnet</p>

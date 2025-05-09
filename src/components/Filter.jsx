@@ -44,7 +44,7 @@ export default function Filter({setLoadingResults, setFilterQuery}) {
               <label htmlFor="filterCountries">
                 <span>Land</span>
                 <select name="countries" id="filterCountries" onChange={(e)=> handleChange(e.target.value)}>
-                  <option value="" disabled selected hidden>Norge</option>
+                  <option value="" disabled defaultValue hidden>Norge</option>
                 {
                     countries.map((country) => (
                     <option key={`select_${country.code}`}value={country.code}>{country.name}</option>
@@ -55,7 +55,7 @@ export default function Filter({setLoadingResults, setFilterQuery}) {
               <label htmlFor="filterCities">
                 <span>By</span>
                 <select name="cities" id="filterCities">
-                  <option value="" disabled selected hidden>Ingen by valgt</option>
+                  <option value="" defaultValue={null} >Ingen by valgt</option>
                     {
                     cities.filter((city) => city.code === filterCountry).map((city) =>(
                         <option key={`city_${city.name}`} value={city.lat + "," + city.long}>{city.name}</option>

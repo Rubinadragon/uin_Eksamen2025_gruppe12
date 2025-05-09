@@ -36,6 +36,8 @@ const handleWishlist = () => {
     handleWishlist();
   },[wishlist])
 
+  console.log(wishlist)
+
   return (
     <>
      <Layout selectedClasses={selectedClasses} setSelectedClasses={setSelectedClasses}>

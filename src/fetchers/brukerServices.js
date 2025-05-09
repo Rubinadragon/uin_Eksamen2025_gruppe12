@@ -22,3 +22,11 @@ export async function fetchUserName(username) {
     );
     return data;
 }
+
+export async function fetchWishList(){
+    const data = await client.fetch(
+        `*[_type == "bruker"]{_id,name,wishlist}`
+    )
+    return data
+    
+}

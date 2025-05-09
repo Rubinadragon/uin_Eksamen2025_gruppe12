@@ -109,3 +109,4 @@ export default function EventPage() {
         </section>
     ) 
 }//https://stackoverflow.com/questions/74442594/how-to-remove-data-with-same-id-in-an-array-of-object-using-javascript
+//https://www.geeksforgeeks.org/how-to-get-distinct-values-from-an-array-of-objects-in-javascript/

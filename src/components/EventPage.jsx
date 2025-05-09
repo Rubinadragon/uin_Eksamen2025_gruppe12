@@ -53,7 +53,7 @@ export default function EventPage() {
             <article>
                 <p>Sjanger:
                     {/*Filtrer ikke ut Undefined og får heller ikke med seg alle sjangere*/}
-                    {mapEvent?.[1].classifications?.reduce((acc, current) => {
+                    {/*mapEvent?.[1].classifications?.reduce((acc, current) => {
                         let undefinedName = acc.find(item => {return item?.genre?.name === "Undefined"})
                         let exists = acc.find( item => {return item?.genre?.id === current?.genre?.id
                         })
@@ -62,17 +62,23 @@ export default function EventPage() {
                         }
                         return acc
                     }, []
-                    ).map((events) => <span key={events?.genre?.id}>{events?.genre?.name}</span>)}
+                    ).map((events) => <span key={events?.genre?.id}>{events?.genre?.name}</span>)*/}
 
                     {/*Metoden under skal gi alle sjangere fra alle objekter, men får ikke filtrert ut den heller*/}
                     {/*mapEvent?.map((festival) => 
                         festival?.classifications?.reduce((acc, obj) => {
                             if(!acc.some(o => o?.genre?.id === obj?.genre?.id) || !acc.some(o => o?.genre?.name === "Undefined")){
                                 acc.push(obj)
+                                console.log(acc)
                             }
                             return acc
                     }, [])
-                    .map((genre) => <span key={genre?.genre.id}>{genre?.genre?.name}</span>))*/}</p>
+                    .map((genre) => <span key={genre?.genre?.id}>{genre?.genre?.name}</span>))*/}
+                    {/*mapEvent?.reduce((acc, obj) => {
+                        if(!acc.some(o => o?.classifications?.genre?.id)){
+
+                        }
+                    })*/}</p>
                 <h2>Festivalpass</h2>
                 <ul>
                     {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
@@ -87,14 +93,14 @@ export default function EventPage() {
                                     acc.push(obj)
                                     //console.log(attraction?.name)
                                     //console.log(obj?.name)
+                                    //console.log(acc)
                                 }
                                 //console.log(obj)
                             return acc}, 
                             []).map
                             ((artist) => 
                             <li key={artist?.id}>
-                                <ArtistCard artistName={artist?.name} artistImg={artist?.images}/>
-                                <p>{artist?.name/*Fjern <p> når ArtistCard er ferdig*/}</p>
+                                <ArtistCard artist={artist}/>
                             </li>)
                         )
                     )}

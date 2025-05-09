@@ -26,6 +26,26 @@ export const bruker = {
             type: 'number',
         },
         {
+            name: 'email',
+            title: 'E-post',
+            type: 'string',
+        },
+        {
+            name: 'image',
+            title: 'Profil bilde',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    description: 'beskrivelse av bildet'
+                },
+            ],
+        },
+        {
             name: 'previousPurchases',
             title: 'Liste over kjøpte events',
             type: 'array',

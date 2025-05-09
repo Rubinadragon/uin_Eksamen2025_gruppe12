@@ -5,7 +5,7 @@ import Filter from "./Filter";
 import "../assets/styles/categoryPage.scss";
 import EventCard from "./EventCard";
 
-export default function CategoryPage({ selectedClasses }) {
+export default function CategoryPage({ selectedClasses, wishlist, setWishlist }) {
     const { slug } = useParams();
 
     const [categorySuggestions, setCategorySuggestions] = useState([]);
@@ -61,7 +61,7 @@ export default function CategoryPage({ selectedClasses }) {
               }
               return acc
               }, []).map((attraction) => (
-                <EventCard key={`categoryAttraction_${attraction.id}`} event={attraction._embedded.attractions?.[0]} />
+                <EventCard key={`categoryAttraction_${attraction.id}`} event={attraction._embedded.attractions?.[0]} wishlist={wishlist} setWishlist={setWishlist}/>
             ))
             :
             <p>Ingen attraksjoner funnet</p>
@@ -73,7 +73,7 @@ export default function CategoryPage({ selectedClasses }) {
           {
             !loadingResults && "events" in categorySuggestions ?
               categorySuggestions.events?.map((event) => (
-                <EventCard key={`categoryEvent_${event.id}`} event={event} linkToDetails={false}/>
+                <EventCard key={`categoryEvent_${event.id}`} event={event} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={false}/>
               ))
               : <p>Ingen arrangementer funnet</p>
           }
@@ -84,7 +84,7 @@ export default function CategoryPage({ selectedClasses }) {
           {
             !loadingResults && "venues" in categorySuggestions ?
               categorySuggestions.venues?.map((venue) => (
-              <EventCard key={`categoryVenue${venue.id}`} event={venue} linkToDetails={false}/>
+              <EventCard key={`categoryVenue${venue.id}`} event={venue} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={false}/>
               ))
               :
               <p>Ingen lokasjoner funnet</p>

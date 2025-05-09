@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "../assets/styles/eventCard.scss"
 
-export default function EventCard({ event, linkToDetails = true }) {
+export default function EventCard({ event, wishlist, setWishlist, linkToDetails = true }) {
   const id = event.id;
   let date;
   let venue;
@@ -37,10 +37,20 @@ export default function EventCard({ event, linkToDetails = true }) {
     return value.split("-").reverse().join(".");
   }
 
+  const handleOnClick = (eventId, eventType) => {
+    if(wishlist.some((e) => e.id === eventId)) {
+      setWishlist(wishlist.filter((e) => e.id !== eventId))
+    }
+    else {
+      setWishlist([...wishlist, {id: eventId, type: eventType}])
+    }
+      
+  }
+
   const content = (
     <>
       <img src= {loadEventImg(event)} alt={`${event.name} banner`}/>
-      <span className="favouriteButton"><img src="../src/assets/gfx/heartOutline.svg" alt=""/></span>
+      <span className="favouriteButton" onClick={() => handleOnClick(id, event.type)}><img src="../src/assets/gfx/heartOutline.svg" alt=""/></span>
       
       <section className="evenCardInner">
         <h3>{event.name}</h3>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
 import EventCard from "./EventCard";
 
-export default function Home(){
+export default function Home({ wishlist, setWishlist }){
 
     const [selectedFestivals, setSelectedFestivals] = useState([]);
 
@@ -29,7 +29,7 @@ export default function Home(){
                 <h2>Utvalgte festivaler</h2>
             {
                 selectedFestivals?.map((festival, id) => (
-                <EventCard key={`festival_${id}`} event={festival} linkToDetails={true} />
+                <EventCard key={`festival_${id}`} event={festival} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={true}/>
             ))}
 
             </section>

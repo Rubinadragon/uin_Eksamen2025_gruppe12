@@ -53,7 +53,7 @@ export default function EventCard({ event, wishlist, setWishlist, linkToDetails 
   const content = (
     <>
       <img src= {loadEventImg(event)} alt={`${event.name} banner`}/>
-      <span className="favouriteButton" onClick={() => handleOnClick(id, event.type)}><img src={`../src/assets/gfx/${isWishlisted(id) ? "heartSolid" : "heartOutline"}.svg`} alt=""/></span>
+      {wishlist && <span className="favouriteButton" onClick={() => handleOnClick(id, event.type)}><img src={`../src/assets/gfx/${isWishlisted(id) ? "heartSolid" : "heartOutline"}.svg`} alt=""/></span> }
       
       <section className="evenCardInner">
         <h3>{event.name}</h3>

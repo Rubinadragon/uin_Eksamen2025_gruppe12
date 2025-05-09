@@ -3,6 +3,7 @@ import "../assets/styles/eventCard.scss"
 
 export default function EventCard({ event, linkToDetails = true }) {
   const id = event.id;
+  
   let date;
   let venue;
 

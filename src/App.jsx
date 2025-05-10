@@ -36,7 +36,7 @@ const handleWishlist = () => {
     handleWishlist();
   },[wishlist])
 
-  console.log(wishlist)
+  //console.log(wishlist)
 
   return (
     <>

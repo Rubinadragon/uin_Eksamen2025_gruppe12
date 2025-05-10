@@ -1,6 +1,48 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchSanityEvents , fetchSingleSanityEvent} from "../fetchers/eventServices";
+import { fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
+
 export default function SanityEventDetails(){
+    let { apiId } = useParams
+
+    const [sanityEvent, setSanityEvent] = useState({});
+    const [ApiEvent, setApiEvent] = useState({})
+
+    useEffect(() => {
+        //getEventFromSanityByApiId()
+        getSingleSanityEvent(apiId)
+        //getEventDetails()
+    }, [])
+
+    /*const getEventFromSanityByApiId = async () => {
+        const sanityData = await fetchSanityEvents()
+        console.log(sanityData)
+        setSanityEvent()
+    }*/
+
+    const getSingleSanityEvent = async (apiId) => {
+        const sanityData = await fetchSingleSanityEvent(apiId)
+        setSanityEvent(sanityData[0])
+        console.log(sanityData)
+    }
+
+    /*const getEventDetails = async (value) => {
+        try {
+                const response = await fetchSingleAttractionById(value);
+                console.log(response)
+                setAttraction(response);
+            }
+            catch(error) {
+                console.error("Cannot fetch requested attraction!:", error)
+        }
+    }*/
+
+    //console.log(fetchSanityEvents)
+    //const getEventDetails = async 
+
     return (<section className="SanityEventDetails">
-            <h1>Event name</h1>
+            <h1>{setSanityEvent.name}</h1>
             <article>
                 <h2>Dato og sted</h2>
                 <p>Dato: <span>test</span></p>

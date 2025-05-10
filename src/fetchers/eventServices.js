@@ -13,7 +13,7 @@ export async function fetchSanityEvents(){
 
 export async function fetchSingleSanityEvent(apiId){
     const data = await client.fetch(
-        `*[_type == "event" && name == $apiId][0]{
+        `*[_type == "event" && apiId == $apiId]{
             _id,
             tittel,
             apiId,
@@ -21,21 +21,3 @@ export async function fetchSingleSanityEvent(apiId){
             }`,{apiId})
     return data
 }
-/*
-*[_type == "bruker" && name == $username][0]{
-            _id,
-            name,
-            gender,
-            age,
-            email,
-            image {asset->{url}, alt},
-            "wishlist": wishlist[]->{
-                _id,
-                apiID
-            },
-            "previousPurchases": previousPurchases[]->{
-                _id,
-                apiID
-            }
-            }
-            */

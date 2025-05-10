@@ -22,11 +22,13 @@ export default function SanityEventDetails(){
     }*/
 
     const getSingleSanityEvent = async (apiId) => {
-        const sanityData = await fetchSingleSanityEvent(apiId)
-        setSanityEvent(sanityData[0])
-        console.log(sanityData)
+        const data = await fetchSingleSanityEvent(apiId)
+        setSanityEvent(data[0])
+        //console.log(apiId)
+        console.log(apiId)
     }
 
+    console.log(fetchSingleSanityEvent())
     /*const getEventDetails = async (value) => {
         try {
                 const response = await fetchSingleAttractionById(value);

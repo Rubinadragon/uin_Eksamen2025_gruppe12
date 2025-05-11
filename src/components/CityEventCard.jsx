@@ -56,6 +56,7 @@ function London() {
         </ul>
 
         <h3>Hva skjer i {test?.[0].city.name}</h3>
+        <div className="city-holder">
         {city?.map(cit => 
             
                   <article key={cit.id}> 
@@ -69,6 +70,7 @@ function London() {
               </article>
        
         )}
+        </div>
     </>
     )
 }

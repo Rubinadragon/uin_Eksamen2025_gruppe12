@@ -12,7 +12,8 @@ function App() {
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem("wishlist")) || []);
   
-  const apiKey = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+  //const apiKey = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+  const apiKey = "JF1iWmRvlI6x3AbIps1uDqKtG9njUcTx"
   const classification = "KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na&locale"
   const locale = "no"
 
@@ -24,7 +25,6 @@ function App() {
   }
 
 const handleWishlist = () => {
-
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
 
@@ -46,7 +46,7 @@ const handleWishlist = () => {
           <Route path="event/:id" element={<EventPage/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
           <Route path="dashboard" element={<Dashboard/>}/>
-          <Route path="sanity-event/:id" element={<SanityEventDetails/>}/>
+          <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
         </Routes>
      </Layout>
     </>

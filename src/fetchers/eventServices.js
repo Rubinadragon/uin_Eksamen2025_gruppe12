@@ -13,7 +13,7 @@ export async function fetchSanityEvents(){
 
 export async function fetchSingleSanityEvent(apiId){
     const data = await client.fetch(
-        `*[_type == "event" && apiId == $apiId]{
+        `*[_type == "event" && apiId == $apiId][0]{
             _id,
             tittel,
             apiId,

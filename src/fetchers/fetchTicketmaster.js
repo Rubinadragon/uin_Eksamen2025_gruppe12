@@ -1,6 +1,6 @@
-const BASE_URL = "https://app.ticketmaster.com/discovery";
-const API_VERSION = "v2";
-const API_KEY = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+export const BASE_URL = "https://app.ticketmaster.com/discovery";
+export const API_VERSION = "v2";
+export const API_KEY = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
 
 // Fetches attractions based on ID
 // param: String Ids separated with comma
@@ -34,4 +34,26 @@ export const fetchAttractionsById = async (attractionsId) => {
       return [];
     }
   };
+
+  // Fetches attractions, events and venues from suggest endpoint
+  // param: string of parameters such as segmentId, countryCode, geoPoint, keyword
+  export const fetchSuggestions = async (catFilter) => {
+    let apiresponse = null;
+    await fetch(`${BASE_URL}/${API_VERSION}/suggest?apikey=${API_KEY}&locale=*${catFilter}&resource=events,venues`)
+    .then((response) => response.json())
+    .then((data) => apiresponse = data._embedded)
+    
+    return apiresponse;
+  }
+
+  export const fetchEventSearchInfo = async (attracionId) => {
+    let apiresponse = null
+    await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*`)
+    .then((response) => response.json())
+    .then((data) => apiresponse = data._embedded)
+
+    return apiresponse
+  }
+//${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*
+//https://app.ticketmaster.com/discovery/v2/events?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&attractionId=K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf&locale=*
 

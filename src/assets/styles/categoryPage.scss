@@ -1,0 +1,58 @@
+@use "global";
+
+.categoryHeader {
+    @include global.flex-display(column, wrap, flex-start, center, 1rem);
+    background-color: global.$PalePink;
+    padding: global.$pad-top global.$pad-left global.$pad-bottom global.$pad-right;
+    position: relative;
+    max-width: 100%;
+
+    h1, .filterLayout {
+        margin: 0 auto;
+        width: 100%;
+        @include global.content-width();
+        z-index: 5;
+    }
+
+    h1 {
+        color: global.$White;
+    }
+
+    img, .bgDarkOverlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    img {
+        z-index: 1;
+    }
+
+    .bgDarkOverlay {
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.categorySection {
+    @include global.content-width();
+    @include global.flex-display(row, wrap, center, stretch, 1.6rem);
+    padding-top: global.$pad-top;
+    padding-bottom: global.$pad-bottom;
+
+    border-bottom: 1px solid #e4e4e4;
+
+    h2 {
+        width: 100%;
+        font-size: 2rem;
+    }
+     
+    > a, > article {
+        flex: 1 1;
+        max-width: 450px;
+        min-width: 350px;  
+    }
+}

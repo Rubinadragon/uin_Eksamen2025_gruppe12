@@ -4,7 +4,7 @@ import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
 import EventCard from "./EventCard";
 import CityEventCard from "./CityEventCard";
 
-export default function Home(){
+export default function Home({ wishlist, setWishlist }){
 
     const [selectedFestivals, setSelectedFestivals] = useState([]);
 
@@ -25,12 +25,12 @@ export default function Home(){
  
     return (     
         <>
-            <h1>De beste opplevelsene nær deg</h1>
+            <h1 id="frontHeader">De beste opplevelsene nær deg</h1>
             <section className="eventCards">
                 <h2>Utvalgte festivaler</h2>
             {
                 selectedFestivals?.map((festival, id) => (
-                <EventCard key={`festival_${id}`} event={festival} linkToDetails={true} />
+                <EventCard key={`festival_${id}`} event={festival} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={true}/>
             ))}
 
             </section>

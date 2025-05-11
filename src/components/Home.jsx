@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { fetchAttractionsById } from "../fetchers/fetchTicketmaster";
 import EventCard from "./EventCard";
+import CityEventCard from "./CityEventCard";
 
 export default function Home({ wishlist, setWishlist }){
 
@@ -21,7 +22,7 @@ export default function Home({ wishlist, setWishlist }){
             console.error("Cannot fetch festivals!:", error)
         }
     };
-
+ 
     return (     
         <>
             <h1 id="frontHeader">De beste opplevelsene nær deg</h1>
@@ -32,6 +33,10 @@ export default function Home({ wishlist, setWishlist }){
                 <EventCard key={`festival_${id}`} event={festival} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={true}/>
             ))}
 
+            </section>
+            <section className="tenCitys"> 
+                <h2>Hva skjer i verdens storbyer?</h2>
+               {<CityEventCard/>}
             </section>
         </>
     )   

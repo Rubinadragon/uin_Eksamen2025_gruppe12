@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { fetchUserName, fetchAllUsers } from "../fetchers/brukerServices";
 import { fetchAllEvents } from "../fetchers/eventServices";
+import { fetchSingleEventById } from "../fetchers/fetchTicketmaster";
+import EventCard from "../components/EventCard";
 
 export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
     const localUser = localStorage.getItem("loggedIn");
@@ -8,21 +10,58 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
     const [allUsers, setAllUsers] = useState([]);
     const [allEvents, setAllEvents] = useState([]);
 
+    const [userWishlist, setUserWishlist] = useState([]);
+    const [userPurchased, setUserPurchased] = useState([]);
+
     const handleLogin = async (x) => {
         x.preventDefault();
         const username = x.target.usernameInput.value;
 
         const user = await fetchUserName(username);
+
+        console.log("Fetched user object from Sanity:", user);
+
         if (user) {
             localStorage.setItem("loggedIn", JSON.stringify(user));
             setCurrentUser(user);
             setIsLoggedIn(true);
 
-            const users = await fetchAllUsers();
-            setAllUsers(users);
 
-            const events = await fetchAllEvents();
-            setAllEvents(events);
+            // B-KRAV 
+            //const users = await fetchAllUsers();
+            //setAllUsers(users);
+            //const events = await fetchAllEvents();
+            //setAllEvents(events);
+
+
+
+            const wishlistUser = await Promise.all(
+              user.wishlist
+                .filter((evnt) => evnt.apiId)
+                .map(async (evnt) => {const tmDetails = await fetchSingleEventById(evnt.apiId);
+                    if (!tmDetails) return null;
+                    tmDetails.type = "event";
+                    return { ...evnt, ticketmaster: tmDetails };
+                })
+            );
+
+            console.log("Wishlist fetched from Ticketmaster:", wishlistUser.filter(Boolean));
+            setUserWishlist(wishlistUser.filter(Boolean));            
+
+            const purchasedUser = await Promise.all(
+              user.previousPurchases
+                .filter((evnt) => evnt.apiId)
+                .map(async (evnt) => {
+                  const tmDetails = await fetchSingleEventById(evnt.apiId);
+                  if (!tmDetails) return null;
+                  tmDetails.type = "event";
+                  return { ...evnt, ticketmaster: tmDetails };
+                })
+            );
+
+          console.log("Purchases fetched from Ticketmaster:", purchasedUser.filter(Boolean));
+          setUserPurchased(purchasedUser.filter(Boolean));          
+
           } else {
             alert("Finner ikke bruker..");
         }
@@ -40,6 +79,34 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
                         <img src={currentUser.image.asset.url} alt={currentUser.image.alt} />
                     )}
 
+
+                    <h3>Min ønskeliste:</h3>
+                    {userWishlist.map((event, index) => (
+                      event.ticketmaster ? (
+                      <EventCard
+                        key={event.ticketmaster?.id || index}
+                        event={event.ticketmaster}
+                        wishlist={currentUser?.wishlist}
+                        linkToDetails={true}
+                      />
+                    ) : null
+                  ))}
+
+                    <h3>Mine kjøpte billetter:</h3>
+                    {userPurchased.map((event, index) => (
+                      event.ticketmaster ? (
+                      <EventCard
+                        key={event.ticketmaster?.id || index}
+                        event={event.ticketmaster}
+                        wishlist={currentUser?.wishlist}
+                        linkToDetails={true}
+                      />
+                    ) : null
+                  ))}
+
+
+
+                  {/*
                     <h3>Alle events i Sanity:</h3>
                     <ul>
                         {allEvents.map(evnt => 
@@ -67,6 +134,7 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
                             </ul>
                         </div>
                     ))}
+                        */}
                 </>
             ) : (
                 <>

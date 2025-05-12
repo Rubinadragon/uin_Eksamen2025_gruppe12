@@ -11,11 +11,15 @@ export async function fetchUserName(username) {
             image {asset->{url}, alt},
             "wishlist": wishlist[]->{
                 _id,
-                apiID
+                tittel,
+                apiId,
+                category
             },
             "previousPurchases": previousPurchases[]->{
                 _id,
-                apiID
+                tittel,
+                apiId,
+                category
             }
             }`,
             {username}

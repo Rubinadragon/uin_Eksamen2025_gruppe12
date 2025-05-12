@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
+import { fetchEventSearchInfo, fetchSingleAttractionById, fetchSingleEventById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
 import EventCard from "./EventCard";
@@ -9,12 +9,17 @@ export default function EventPage() {
     let { id } = useParams();
 
     const [attraction, setAttraction] = useState({});
-    const [eventSearch, setEventSearch] = useState([])
+    const [eventSearch, setEventSearch] = useState([]);
+    const [eventDetails, setEventDetails] = useState({});
 
     useEffect(()=>{
-        getEventSearchByAttractionId(id)
-        getAttractionById(id)
+        getEventSearchByAttractionId(id);
+        getAttractionById(id);        
     },[])
+
+    useEffect(() => {
+        getEventById(id); 
+    }, []);
 
     const getAttractionById = async (value) => {
         try {
@@ -39,6 +44,15 @@ export default function EventPage() {
     }
     //const test = city?.map(testy => testy?._embedded.venues)console.log("test",test)
 
+    const getEventById = async (value) => {
+        try {
+            const response = await fetchSingleEventById(value);
+            setEventDetails(response);
+        } catch(error) {
+            console.error("Kan ikke hente eventet:", error);
+        }
+        };
+
 
     const mapEvent = eventSearch?.events?.map((singleEvent) => singleEvent)
     //console.log(mapEvent)
@@ -49,7 +63,8 @@ export default function EventPage() {
     //console.log(attraction)
     return (
         <section className="eventPageInfo">
-            <h1>{attraction.name}</h1>
+            <h1>{eventDetails.name || attraction.name}</h1>
+            {eventDetails.info && <p>{eventDetails.info}</p>}
             <article>
                 <p>Sjanger:
                     {/*Filtrer ikke ut Undefined og får heller ikke med seg alle sjangere*/}

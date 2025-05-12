@@ -2,10 +2,9 @@ import { useState } from "react";
 import { fetchUserName, fetchAllUsers } from "../fetchers/brukerServices";
 import { fetchAllEvents } from "../fetchers/eventServices";
 
-export default function Dashboard(){
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null);
+export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
+    const localUser = localStorage.getItem("loggedIn");
+    const currentUser = localUser ? JSON.parse(localUser) : null;        
     const [allUsers, setAllUsers] = useState([]);
     const [allEvents, setAllEvents] = useState([]);
 
@@ -15,6 +14,7 @@ export default function Dashboard(){
 
         const user = await fetchUserName(username);
         if (user) {
+            localStorage.setItem("loggedIn", JSON.stringify(user));
             setCurrentUser(user);
             setIsLoggedIn(true);
 
@@ -23,15 +23,14 @@ export default function Dashboard(){
 
             const events = await fetchAllEvents();
             setAllEvents(events);
-
-        } else {
+          } else {
             alert("Finner ikke bruker..");
         }
     };
 
     return (
         <section>
-            {isLoggedIn && currentUser ? (
+            {currentUser ? (
                 <>
                     <h2>Min side</h2>
                     <p>Navn: {currentUser.name} </p>

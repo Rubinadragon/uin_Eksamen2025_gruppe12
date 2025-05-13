@@ -7,7 +7,7 @@ export default function SanityEventDetails(){
     let { apiId } = useParams() // Manglet paranteser
 
     const [sanityEvent, setSanityEvent] = useState({});
-    const [ApiEvent, setApiEvent] = useState({})
+    const [apiEvent, setApiEvent] = useState({})
 
     useEffect(() => {
         //getEventFromSanityByApiId()
@@ -32,25 +32,22 @@ export default function SanityEventDetails(){
     const getEventDetails = async (value) => {
         try {
                 const response = await fetchSingleEventsById(value); // Bytter til metode som fetcher eventer med id og ikke attractions
-                console.log(response)
-                //setAttraction(response);
+                //console.log(response)
+                setApiEvent(response);
             }
             catch(error) {
                 console.error("Cannot fetch requested attraction!:", error)
         }
     }
-
-    //console.log(fetchSanityEvents)
-    //const getEventDetails = async 
-
-    //console.log(sanityEvent)
-
+    console.log("ApiEvent: " + apiEvent + " " + setApiEvent?._embedded?.events?.dates?.start?.localDate)
+    //console.log("SanityEvent:" + sanityEvent)
     return (<section className="SanityEventDetails">
-            <h1>{setSanityEvent.name}</h1>
+            <img />{/*Legg inn funksjon til å legge inn bilde*/}
+            <h1>{apiEvent.name}</h1>
             <article>
                 <h2>Dato og sted</h2>
-                <p>Dato: <span>test</span></p>
-                <p>Sted: <span>test</span></p>
+                <p>Dato: <span>{apiEvent?._embedded?.events?.dates?.start?.localDate}</span></p>
+                <p>Sted: <span>{apiEvent?._embedded?.venues?.name}</span></p>
             </article>
             <article>
                 <h2>Sjanger</h2>

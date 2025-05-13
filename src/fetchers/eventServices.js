@@ -20,4 +20,5 @@ export async function fetchSingleSanityEvent(apiId){
             category
             }`,{apiId})
     return data
+    
 }

@@ -11,8 +11,8 @@ export default function SanityEventDetails(){
 
     useEffect(() => {
         //getEventFromSanityByApiId()
-        getSingleSanityEvent(apiId)
-        //getEventDetails()
+        getSingleSanityEvent()
+        getEventDetails()
     }, [])
 
     /*const getEventFromSanityByApiId = async () => {
@@ -21,15 +21,15 @@ export default function SanityEventDetails(){
         setSanityEvent()
     }*/
 
-    const getSingleSanityEvent = async (apiId) => {
-        const data = await fetchSingleSanityEvent(apiId)
+    const getSingleSanityEvent = async () => {
+        const data = await fetchSingleSanityEvent()
         setSanityEvent(data[0])
         //console.log(apiId)
-        console.log(apiId)
+        console.log()
     }
 
     console.log(fetchSingleSanityEvent())
-    /*const getEventDetails = async (value) => {
+    const getEventDetails = async (value) => {
         try {
                 const response = await fetchSingleAttractionById(value);
                 console.log(response)
@@ -38,7 +38,7 @@ export default function SanityEventDetails(){
             catch(error) {
                 console.error("Cannot fetch requested attraction!:", error)
         }
-    }*/
+    }
 
     //console.log(fetchSanityEvents)
     //const getEventDetails = async 

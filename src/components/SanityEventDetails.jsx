@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchSanityEvents , fetchSingleSanityEvent} from "../fetchers/eventServices";
-import { fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
+import { fetchSingleSanityEvent} from "../fetchers/eventServices";
+import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
 
 export default function SanityEventDetails(){
-    let { apiId } = useParams
+    let { apiId } = useParams() // Manglet paranteser
 
     const [sanityEvent, setSanityEvent] = useState({});
     const [ApiEvent, setApiEvent] = useState({})
 
     useEffect(() => {
         //getEventFromSanityByApiId()
-        getSingleSanityEvent()
-        getEventDetails()
+        getSingleSanityEvent(apiId)
+        getEventDetails(apiId)
     }, [])
 
     /*const getEventFromSanityByApiId = async () => {
@@ -21,19 +21,19 @@ export default function SanityEventDetails(){
         setSanityEvent()
     }*/
 
-    const getSingleSanityEvent = async () => {
-        const data = await fetchSingleSanityEvent()
-        setSanityEvent(data[0])
+    const getSingleSanityEvent = async (id) => {
+        const data = await fetchSingleSanityEvent(id) 
+        setSanityEvent(data) // Fjerne lookup på første index i array
         //console.log(apiId)
-        console.log()
+        //console.log()
     }
 
-    console.log(fetchSingleSanityEvent())
+    //console.log(fetchSingleSanityEvent())
     const getEventDetails = async (value) => {
         try {
-                const response = await fetchSingleAttractionById(value);
+                const response = await fetchSingleEventsById(value); // Bytter til metode som fetcher eventer med id og ikke attractions
                 console.log(response)
-                setAttraction(response);
+                //setAttraction(response);
             }
             catch(error) {
                 console.error("Cannot fetch requested attraction!:", error)
@@ -42,6 +42,8 @@ export default function SanityEventDetails(){
 
     //console.log(fetchSanityEvents)
     //const getEventDetails = async 
+
+    //console.log(sanityEvent)
 
     return (<section className="SanityEventDetails">
             <h1>{setSanityEvent.name}</h1>

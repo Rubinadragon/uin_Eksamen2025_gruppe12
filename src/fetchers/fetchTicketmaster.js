@@ -22,6 +22,16 @@ export const fetchAttractionsById = async (attractionsId) => {
     .then((data) => apiresponse = data);
     return apiresponse;
 }
+
+  // fetches single events by id
+  // param: string id
+  export const fetchSingleEventsById = async (eventId) => {
+    let apiresponse = null;
+    await fetch(`${BASE_URL}/${API_VERSION}/events/${eventId}?apikey=${API_KEY}&locale=*`)
+    .then((response) => response.json())
+    .then((data) => apiresponse = data);
+    return apiresponse;
+}
   
   export const fetchEventsByCategory = async (classificationId) => {
     try {

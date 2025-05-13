@@ -57,6 +57,9 @@ useEffect(() => {
       currentUser={currentUser}
       logout={() => {
           localStorage.removeItem("loggedIn");
+          localStorage.removeItem("userWishlist");
+          localStorage.removeItem("userPurchased");
+          localStorage.removeItem("wishlist");
           setIsLoggedIn(false);
           setCurrentUser(null);
       }}

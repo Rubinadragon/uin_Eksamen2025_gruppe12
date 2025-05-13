@@ -10,8 +10,16 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
     const [allUsers, setAllUsers] = useState([]);
     const [allEvents, setAllEvents] = useState([]);
 
-    const [userWishlist, setUserWishlist] = useState([]);
-    const [userPurchased, setUserPurchased] = useState([]);
+    const [userWishlist, setUserWishlist] = useState(() => {
+      const chached = localStorage.getItem("userWishlist");
+      return chached ? JSON.parse(chached) : [];
+    });
+
+
+    const [userPurchased, setUserPurchased] = useState(() => {
+      const chached = localStorage.getItem("userPurchased");
+      return chached ? JSON.parse(chached) : [];
+    });
 
     const handleLogin = async (x) => {
         x.preventDefault();
@@ -34,7 +42,8 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
             //setAllEvents(events);
 
 
-
+            //Promise.all venter til fetch-kallene er ferdige før den returnerer en samlet array med resultater.
+            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
             const wishlistUser = await Promise.all(
               user.wishlist
                 .filter((evnt) => evnt.apiId)
@@ -45,8 +54,14 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
                 })
             );
 
-            console.log("Wishlist fetched from Ticketmaster:", wishlistUser.filter(Boolean));
-            setUserWishlist(wishlistUser.filter(Boolean));            
+            const workingWishlist = wishlistUser.filter(
+            (item) => item !== null && item !== undefined);
+
+            console.log("Wishlist fetched from Ticketmaster:", workingWishlist);
+
+            setUserWishlist(workingWishlist);
+            localStorage.setItem("userWishlist", JSON.stringify(workingWishlist));            
+            
 
             const purchasedUser = await Promise.all(
               user.previousPurchases
@@ -59,8 +74,13 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
                 })
             );
 
-          console.log("Purchases fetched from Ticketmaster:", purchasedUser.filter(Boolean));
-          setUserPurchased(purchasedUser.filter(Boolean));          
+          const workingPurchased = purchasedUser.filter(
+          (item) => item !== null && item !== undefined);
+
+          console.log("Purchases fetched from Ticketmaster:", workingPurchased);
+
+          setUserPurchased(workingPurchased);
+          localStorage.setItem("userPurchased", JSON.stringify(workingPurchased));          
 
           } else {
             alert("Finner ikke bruker..");

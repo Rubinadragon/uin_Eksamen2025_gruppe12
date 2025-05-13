@@ -55,6 +55,9 @@ export const fetchAttractionsById = async (attractionsId) => {
     return apiresponse
   }
 
+
+  // Fetcher enkelt event med ID
+  // param: string eventId
   export const fetchSingleEventById = async (eventId) => {
     if (!eventId) {
       console.error("Mangler eventId");

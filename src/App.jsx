@@ -12,8 +12,8 @@ function App() {
   const [selectedClasses, setSelectedClasses] = useState([]);
   const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem("wishlist")) || []);
   
-  //const apiKey = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
-  const apiKey = "JF1iWmRvlI6x3AbIps1uDqKtG9njUcTx"
+  const apiKey = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+  //const apiKey = "JF1iWmRvlI6x3AbIps1uDqKtG9njUcTx"
   const classification = "KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na&locale"
   const locale = "no"
 

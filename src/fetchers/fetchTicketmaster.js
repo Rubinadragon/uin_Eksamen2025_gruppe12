@@ -1,7 +1,7 @@
 export const BASE_URL = "https://app.ticketmaster.com/discovery";
 export const API_VERSION = "v2";
-//export const API_KEY = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
-export const API_KEY = "JF1iWmRvlI6x3AbIps1uDqKtG9njUcTx" //Backup til når den over ikke fungerer.
+export const API_KEY = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+//export const API_KEY = "JF1iWmRvlI6x3AbIps1uDqKtG9njUcTx" //Backup til når den over ikke fungerer.
 
 // Fetches attractions based on ID
 // param: String Ids separated with comma

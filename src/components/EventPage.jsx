@@ -42,7 +42,7 @@ export default function EventPage({selectedFestivals}) {
     });
     
     const filteredArtist = eventSearch?.reduce((acc, obj) => {
-        obj._embedded.attractions.map((artist) => {
+        obj._embedded.attractions.slice(1).map((artist) => {
             if(!acc?.some(o => o?.id === artist?.id))
                 acc?.push(artist)
             

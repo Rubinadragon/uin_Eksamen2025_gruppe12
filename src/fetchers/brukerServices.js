@@ -23,6 +23,19 @@ export async function fetchUserName(username) {
     return data;
 }
 
+export async function fetchUsersByWishList(wishlisted){
+    const data = await client.fetch(`*[_type == "bruker" && apiID == $wishlisted]{
+            _id,
+            name,
+            image {asset->{url}, alt},
+            "wishlist": wishlist[]->{
+                _id,
+                apiID
+            },
+            }`,{wishlisted})
+    return data
+}
+
 export async function fetchWishList(){
     const data = await client.fetch(
         `*[_type == "bruker"]{_id,name,wishlist}`

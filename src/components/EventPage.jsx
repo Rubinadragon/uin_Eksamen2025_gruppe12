@@ -1,30 +1,14 @@
 import { useEffect, useState } from "react";
-import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
+import { fetchEventSearchInfo } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
 import EventCard from "./EventCard";
 import ArtistCard from "./ArtistCard";
 
-export default function EventPage() {
+export default function EventPage({selectedFestivals}) {
     let { id } = useParams();
 
-    const [attraction, setAttraction] = useState({});
     const [eventSearch, setEventSearch] = useState([])
-
-    useEffect(()=>{
-        //getEventSearchByAttractionId(id)
-        //getAttractionById(id)
-    },[])
-
-    const getAttractionById = async (value) => {
-        try {
-            const response = await fetchSingleAttractionById(value);
-            setAttraction(response);
-        }
-        catch(error) {
-            console.error("Cannot fetch requested attraction!:", error)
-        }
-    };
 
     const getEventSearchByAttractionId = async (value) =>
     {
@@ -47,9 +31,13 @@ export default function EventPage() {
     //console.log(eventSearch)
     //console.log(eventSearch?.events)
     //console.log(attraction)
+
+    const currentAttraction = selectedFestivals.find((e) => e.id === id);
+
+    console.log(currentAttraction)
     return (
         <section className="eventPageInfo">
-            <h1>{attraction.name}</h1>
+            <h1>{currentAttraction.name}</h1>
             <article>
                 <p>Sjanger:
                     {/*Filtrer ikke ut Undefined og får heller ikke med seg alle sjangere*/}

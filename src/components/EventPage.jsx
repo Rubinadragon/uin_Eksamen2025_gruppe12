@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchEventSearchInfo } from "../fetchers/fetchTicketmaster";
+import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
 import EventCard from "./EventCard";
@@ -19,28 +19,39 @@ export default function EventPage({selectedFestivals}) {
     ,[selectedFestivals])
 
     const getEventsByAttraction = async (value) => {
-        if(selectedFestivals[0]?.id)
+        if(selectedFestivals[0]?.id === id) // Fetch attraction HVIS den finnes
             setCurrentAttraction(selectedFestivals?.find((e) => e.id === id));
+        else {
+            try { // Fetcher attraction hvis den IKKE finens fra før
+                const data = await fetchSingleAttractionById(value);
+                setCurrentAttraction(data);
+            }
+            catch(error) {
+                console.error("Cannot fetch requested event search!:", error);
+            }
+        }
 
-        try {
+        try { // Fetcher alle eventer assosiert med attraction
             const response = await fetchEventSearchInfo(value)
             setEventSearch(response.sort((a, b) => { // Sortere array med objekter basert på dato: https://stackoverflow.com/questions/2466356/sorting-objects-by-property-values
                a.dates.start.localDate - b.dates.start.localDate;
             }))
         }
         catch(error){
-            console.error("Cannot fetch requested event search!:", error)
+            console.error("Cannot fetch requested event search!:", error);
         }
 
         setLoadingResults(false)
     }
 
-    const genres = currentAttraction.classifications?.[0];
+    // Filtrerer sjanger, sted og datoer fra eventer og attraction
+    const genres = currentAttraction?.classifications?.[0];
     const location = eventSearch?.[0]?._embedded.venues[0];
     const filterDates = eventSearch?.map((e) => {
         return e.dates.start.localDate;
     });
     
+    // Henter og fjerner duplikater av artister fra alle eventer
     const filteredArtist = eventSearch?.reduce((acc, obj) => {
         obj._embedded.attractions.slice(1).map((artist) => {
             if(!acc?.some(o => o?.id === artist?.id))
@@ -50,7 +61,6 @@ export default function EventPage({selectedFestivals}) {
         return acc}, []
     );
 
-        console.log(currentAttraction)
     return (
         !loadingResults && 
         <>

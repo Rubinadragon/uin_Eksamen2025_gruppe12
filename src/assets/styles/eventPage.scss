@@ -1,1 +1,49 @@
 @use "global";
+
+.eventPageInfo {
+    @include global.content-width();
+    @include global.flex-display(row, wrap, space-between);
+    gap: 1rem;
+    padding-top: global.$pad-top;
+    text-align: left;
+
+    p {
+        width: 100%;
+    }
+
+}
+
+.tags {
+    li {
+        list-style-type: none;
+        background-color: global.$Yellow;
+        color: global.$Black;
+        font-weight: global.$SemiBold;
+        border-radius: 5px;
+        padding: 1rem;
+        margin: 0 10px;
+        display: inline-block;
+    }
+}
+
+.socialLinks {
+    li {
+        list-style-type: none;
+        display: inline;
+        padding: 0.5rem;
+    }
+    img {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.artistCard {
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+        max-height: 250px;
+    }
+}

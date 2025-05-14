@@ -32,12 +32,12 @@ export default function EventPage({selectedFestivals}) {
     //console.log(eventSearch?.events)
     //console.log(attraction)
 
-    const currentAttraction = selectedFestivals.find((e) => e.id === id);
+    const currentAttraction = selectedFestivals?.find((e) => e.id === id);
 
     console.log(currentAttraction)
     return (
         <section className="eventPageInfo">
-            <h1>{currentAttraction.name}</h1>
+            <h1>{currentAttraction?.name}</h1>
             <article>
                 <p>Sjanger:
                     {/*Filtrer ikke ut Undefined og får heller ikke med seg alle sjangere*/}

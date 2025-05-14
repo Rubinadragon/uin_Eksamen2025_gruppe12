@@ -1,5 +1,5 @@
 export default function ArtistCard({artist}){
-    console.log(artist)
+    //console.log(artist)
 
     const loadArtistImg = (value) => {
     const allowedExstensions = ["jpg", "jpeg", "png", "webp"];

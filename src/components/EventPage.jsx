@@ -12,8 +12,8 @@ export default function EventPage() {
     const [eventSearch, setEventSearch] = useState([])
 
     useEffect(()=>{
-        getEventSearchByAttractionId(id)
-        getAttractionById(id)
+        //getEventSearchByAttractionId(id)
+        //getAttractionById(id)
     },[])
 
     const getAttractionById = async (value) => {
@@ -40,7 +40,7 @@ export default function EventPage() {
     //const test = city?.map(testy => testy?._embedded.venues)console.log("test",test)
 
 
-    const mapEvent = eventSearch?.events?.map((singleEvent) => singleEvent)
+    //const mapEvent = eventSearch?.events?.map((singleEvent) => singleEvent)
     //console.log(mapEvent)
     //console.log(mapEvent)
     //console.log(eventSearch?.events?.[2]._embedded)
@@ -81,12 +81,12 @@ export default function EventPage() {
                     })*/}</p>
                 <h2>Festivalpass</h2>
                 <ul>
-                    {eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)}
+                    {/*eventSearch?.events?.map((festival) => <li key={festival.id}><EventCard event={festival} linkToDetails={false} attraction={attraction}/></li>)*/}
                 </ul>
                 <h2>Artister</h2>
                 <ul>
                 {/*Filterer ikke ut festivalnavn slik jeg ønsker*/}
-                    {mapEvent?.map((events) => 
+                    {/*mapEvent?.map((events) => 
                         (events?._embedded?.attractions?.reduce(
                             (acc, obj) => {
                                 if(!acc.some(o => o?.id === obj?.id) || !acc.some(o => o?.name === attraction?.name)){
@@ -103,7 +103,7 @@ export default function EventPage() {
                                 <ArtistCard artist={artist}/>
                             </li>)
                         )
-                    )}
+                    )*/}
                 </ul>
             </article>
         </section>

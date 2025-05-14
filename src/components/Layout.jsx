@@ -1,10 +1,10 @@
 import Header from "./Header";
 import "../assets/styles/layout.scss"
 
-export default function Layout({children, selectedClasses, setSelectedClasses}){
+export default function Layout({children, selectedClasses}){
     return (
         <>
-            <Header selectedClasses={selectedClasses} setSelectedClasses={setSelectedClasses}/>
+            <Header selectedClasses={selectedClasses}/>
             <main>
                 {children}
             </main>

@@ -1,9 +1,20 @@
 export const BASE_URL = "https://app.ticketmaster.com/discovery";
 export const API_VERSION = "v2";
-export const API_KEY = "sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX";
+export const API_KEY = "JF1iWmRvlI6x3AbIps1uDqKtG9njUcTx";
+
+// Fetches multiple classifications based on IDS
+// param: String Ids separated with comma (in same string)
+export const fetchSelectedClassifications = async (classificationIDs) => {
+  let apiresponse = null;
+
+  await fetch(`${BASE_URL}/${API_VERSION}/classifications?apikey=${API_KEY}&id=${classificationIDs}&locale=no`)
+    .then((response) => response.json())
+    .then((data) => apiresponse = data._embedded.classifications)
+  return apiresponse || [];
+}
 
 // Fetches attractions based on ID
-// param: String Ids separated with comma
+// param: String Ids separated with comma (in same string)
 export const fetchAttractionsById = async (attractionsId) => {
     let apiresponse = null;
     await fetch(`${BASE_URL}/${API_VERSION}/attractions?apikey=${API_KEY}&id=${attractionsId}&locale=*`)

@@ -4,7 +4,7 @@ export const loadEventImg = (value, minWidth, maxWidth, ratio = "16_9") => {
     if(!("images" in value)) 
       return "https://placehold.co/600x400?text=Billetltyst"
 
-    const foundImg = value.images.find((img) => img.ratio === ratio && (img.width < maxWidth && img.width > minWidth))
+    const foundImg = value.images.find((img) => img.ratio === ratio && (img.width <= maxWidth && img.width >= minWidth))
       
     if(!foundImg || !("url" in foundImg))
       return "https://placehold.co/600x400?text=Billetltyst"

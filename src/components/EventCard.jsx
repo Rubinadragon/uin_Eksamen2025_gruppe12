@@ -3,6 +3,8 @@ import { loadEventImg, formatDateNO } from "../assets/js/utils";
 import "../assets/styles/eventCard.scss"
 
 export default function EventCard({ event, wishlist, setWishlist, linkToDetails = true }) {
+  if(!event) return null;
+  
   let date;
   let venue;
   const id = event.id;

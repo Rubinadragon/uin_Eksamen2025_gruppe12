@@ -1,92 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchUserName, fetchAllUsers } from "../fetchers/brukerServices";
 import { fetchAllEvents } from "../fetchers/eventServices";
-import { fetchSingleEventById } from "../fetchers/fetchTicketmaster";
+import { fetchMultipleEventsById } from "../fetchers/fetchTicketmaster";
 import EventCard from "../components/EventCard";
 
-export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
-    const localUser = localStorage.getItem("loggedIn");
-    const currentUser = localUser ? JSON.parse(localUser) : null;        
+export default function Dashboard({ setIsLoggedIn, setCurrentUser, currentUser, wishlist, setWishlist }) {
+    
     const [allUsers, setAllUsers] = useState([]);
-    const [allEvents, setAllEvents] = useState([]);
 
-    const [userWishlist, setUserWishlist] = useState(() => {
-      const chached = localStorage.getItem("userWishlist");
-      return chached ? JSON.parse(chached) : [];
-    });
+    const [wishlistData, setWishlistData] = useState([]);
+    const [purchasedData, setPurchasedData] = useState([]);
 
+    useEffect(() => {
+      getUserEvents(wishlist, "wishlist")
+    }, [wishlist])
 
-    const [userPurchased, setUserPurchased] = useState(() => {
-      const chached = localStorage.getItem("userPurchased");
-      return chached ? JSON.parse(chached) : [];
-    });
+    useEffect(() => {
+      getUserEvents(currentUser?.previousPurchases, "purchased")
+    }, [currentUser])
+
+    const getUserEvents = async (arr, dataType) => {
+      const tmpArr = arr?.map((e) => {
+        return e.id || e.apiId;
+      });
+    
+      try {
+        const data = await fetchMultipleEventsById(tmpArr);
+
+        if(dataType === "wishlist")
+          setWishlistData(data);
+        else if(dataType === "purchased")
+          setPurchasedData(data);
+      }
+      catch(error) {
+        console.log(error);
+        return [];
+      }
+    }
 
     const handleLogin = async (x) => {
-        x.preventDefault();
-        const username = x.target.usernameInput.value;
+      x.preventDefault();
+      const username = x.target.usernameInput.value;
 
-        const user = await fetchUserName(username);
+      const user = await fetchUserName(username);
 
-        console.log("Fetched user object from Sanity:", user);
+      if (user) {
+        localStorage.setItem("loggedIn", JSON.stringify(user));
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+          
+        setWishlist(user?.wishlist?.map((e) => {
+          return {id: e.apiId, type: "event"}
+        }))
 
-        if (user) {
-            localStorage.setItem("loggedIn", JSON.stringify(user));
-            setCurrentUser(user);
-            setIsLoggedIn(true);
-
-
-            // B-KRAV 
-            //const users = await fetchAllUsers();
-            //setAllUsers(users);
-            //const events = await fetchAllEvents();
-            //setAllEvents(events);
-
-
-            //Promise.all venter til fetch-kallene er ferdige før den returnerer en samlet array med resultater.
-            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
-            const wishlistUser = await Promise.all(
-              user.wishlist
-                .filter((evnt) => evnt.apiId)
-                .map(async (evnt) => {const tmDetails = await fetchSingleEventById(evnt.apiId);
-                    if (!tmDetails) return null;
-                    tmDetails.type = "event";
-                    return { ...evnt, ticketmaster: tmDetails };
-                })
-            );
-
-            const workingWishlist = wishlistUser.filter(
-            (item) => item !== null && item !== undefined);
-
-            console.log("Wishlist fetched from Ticketmaster:", workingWishlist);
-
-            setUserWishlist(workingWishlist);
-            localStorage.setItem("userWishlist", JSON.stringify(workingWishlist));            
-            
-
-            const purchasedUser = await Promise.all(
-              user.previousPurchases
-                .filter((evnt) => evnt.apiId)
-                .map(async (evnt) => {
-                  const tmDetails = await fetchSingleEventById(evnt.apiId);
-                  if (!tmDetails) return null;
-                  tmDetails.type = "event";
-                  return { ...evnt, ticketmaster: tmDetails };
-                })
-            );
-
-          const workingPurchased = purchasedUser.filter(
-          (item) => item !== null && item !== undefined);
-
-          console.log("Purchases fetched from Ticketmaster:", workingPurchased);
-
-          setUserPurchased(workingPurchased);
-          localStorage.setItem("userPurchased", JSON.stringify(workingPurchased));          
-
-          } else {
-            alert("Finner ikke bruker..");
-        }
+        } else {
+          alert("Finner ikke bruker..");
+      }
     };
-
+    
     return (
         <section>
             {currentUser ? (
@@ -101,28 +72,26 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
 
 
                     <h3>Min ønskeliste:</h3>
-                    {userWishlist.map((event, index) => (
-                      event.ticketmaster ? (
+                    {wishlistData?.map((wish, index) => 
                       <EventCard
-                        key={event.ticketmaster?.id || index}
-                        event={event.ticketmaster}
-                        wishlist={currentUser?.wishlist}
+                        key={`wish_${index}`}
+                        event={wish}
+                        wishlist={wishlist}
+                        setWishlist={setWishlist}
                         linkToDetails={true}
                       />
-                    ) : null
-                  ))}
+                  )}
 
                     <h3>Mine kjøpte billetter:</h3>
-                    {userPurchased.map((event, index) => (
-                      event.ticketmaster ? (
+                    {purchasedData?.map((purchased, index) =>
                       <EventCard
-                        key={event.ticketmaster?.id || index}
-                        event={event.ticketmaster}
-                        wishlist={currentUser?.wishlist}
+                        key={`purchased_${index}`}
+                        event={purchased}
+                        wishlist={wishlist}
+                        setWishlist={setWishlist}
                         linkToDetails={true}
                       />
-                    ) : null
-                  ))}
+                  )}
 
 
 

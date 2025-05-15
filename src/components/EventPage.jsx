@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
+import { fetchEventSearchInfo, fetchSingleAttractionById, fetchSingleEventById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
 import EventCard from "./EventCard";
@@ -43,7 +43,7 @@ export default function EventPage({selectedFestivals}) {
 
         setLoadingResults(false)
     }
-
+    
     // Filtrerer sjanger, sted og datoer fra eventer og attraction
     const genres = currentAttraction?.classifications?.[0];
     const location = eventSearch?.[0]?._embedded.venues[0];

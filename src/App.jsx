@@ -10,11 +10,16 @@ import CityEventCard from './components/CityEventCard'
 import { fetchSelectedClassifications, fetchAttractionsById } from './fetchers/fetchTicketmaster'
 import SanityEventDetails from './components/SanityEventDetails'
 
-
 function App() {
   const [selectedClasses, setSelectedClasses] = useState(JSON.parse(sessionStorage.getItem("classifications")) || []);
   const [selectedFestivals, setSelectedFestivals] = useState([]);
   const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem("wishlist")) || []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+const handleWishlist = () => {
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
 
   const CLASSIFICATIONS = "KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na";
 
@@ -46,10 +51,13 @@ function App() {
     sessionStorage.setItem("classifications", JSON.stringify(e))
   }
 
-  const handleWishlist = () => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }
-
+useEffect(() => {
+    const localUser = localStorage.getItem("loggedIn");
+    if (localUser) {
+      setCurrentUser(JSON.parse(localUser));
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   useEffect(()=>{
     if(selectedFestivals.length < 1)
@@ -65,16 +73,27 @@ function App() {
     handleWishlist();
   },[wishlist]);
 
-  //console.log(wishlist)
-
   return (
     <>
-     <Layout selectedClasses={selectedClasses}>
+     <Layout 
+      selectedClasses={selectedClasses} 
+      setSelectedClasses={setSelectedClasses}
+      isLoggedIn={isLoggedIn} 
+      currentUser={currentUser}
+      logout={() => {
+          localStorage.removeItem("loggedIn");
+          localStorage.removeItem("userWishlist");
+          localStorage.removeItem("userPurchased");
+          localStorage.removeItem("wishlist");
+          setIsLoggedIn(false);
+          setCurrentUser(null);
+      }}
+      >
         <Routes>
           <Route path='/' element={<Home selectedFestivals={selectedFestivals} wishlist={wishlist} setWishlist={setWishlist}/>}/>
           <Route path="event/:id" element={<EventPage selectedFestivals={selectedFestivals}/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
-          <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}/>
           <Route path="tencity/:city_name" element={<CityEventCard/>}/>
           <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
         </Routes>

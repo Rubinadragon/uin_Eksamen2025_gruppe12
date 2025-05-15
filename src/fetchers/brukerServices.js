@@ -11,11 +11,15 @@ export async function fetchUserName(username) {
             image {asset->{url}, alt},
             "wishlist": wishlist[]->{
                 _id,
-                apiID
+                tittel,
+                apiId,
+                category
             },
             "previousPurchases": previousPurchases[]->{
                 _id,
-                apiID
+                tittel,
+                apiId,
+                category
             }
             }`,
             {username}
@@ -23,18 +27,25 @@ export async function fetchUserName(username) {
     return data;
 }
 
-export async function fetchUsersByWishList(wishlisted){
-    const data = await client.fetch(`*[_type == "bruker" && apiID == $wishlisted]{
+export async function fetchAllUsers() {
+    const data = await client.fetch(
+        `*[_type == "bruker"] {
             _id,
             name,
-            image {asset->{url}, alt},
-            "wishlist": wishlist[]->{
+            email,
+            age,
+            image {asset -> {url}, alt},
+            "wishlist": wishlist[]-> {
                 _id,
-                apiID
-            },
-            }`,{wishlisted})
-    return data
-}
+                tittel,
+                apiId},
+            previousPurchases[]-> {
+                _id, 
+                tittel, 
+                apiId}
+        }`
+    );
+    return data;
 
 export async function fetchWishList(){
     const data = await client.fetch(

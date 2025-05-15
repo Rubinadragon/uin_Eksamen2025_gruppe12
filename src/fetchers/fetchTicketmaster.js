@@ -77,6 +77,35 @@ export const fetchAttractionsById = async (attractionsId) => {
 
     return apiresponse
   }
+
+
+  // Fetcher enkelt event med ID
+  // param: string eventId
+  export const fetchSingleEventById = async (eventId) => {
+    if (!eventId) {
+      console.error("Mangler eventId");
+      return null;
+    }
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/${API_VERSION}/events/${eventId}.json?apikey=${API_KEY}&locale=*`
+      );
+
+      if (!response.ok) {
+        console.error(`Feil ved henting av event ${eventId}`);
+        return null;
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Feil ved henting av enkelt event:", error);
+      return null;
+    }
+};
+
+
 //${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*
 //https://app.ticketmaster.com/discovery/v2/events?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&attractionId=K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf&locale=*
 

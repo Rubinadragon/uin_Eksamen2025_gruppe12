@@ -12,7 +12,7 @@ export const event = {
             name: 'apiId',
             title: 'API ID',
             type: 'string',
-            descrition: 'ID from Ticketmaster API',
+            description: 'ID from Ticketmaster API',
         },        
         {
             name: 'category',

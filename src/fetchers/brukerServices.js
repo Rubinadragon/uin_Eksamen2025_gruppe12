@@ -46,6 +46,7 @@ export async function fetchAllUsers() {
         }`
     );
     return data;
+}
 
 export async function fetchWishList(){
     const data = await client.fetch(

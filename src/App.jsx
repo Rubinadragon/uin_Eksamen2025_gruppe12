@@ -8,12 +8,14 @@ import CategoryPage from './components/CategoryPage'
 import EventPage from './components/EventPage'
 import CityEventCard from './components/CityEventCard'
 import { fetchSelectedClassifications, fetchAttractionsById } from './fetchers/fetchTicketmaster'
+import SanityEventDetails from './components/SanityEventDetails'
+
 
 function App() {
   const [selectedClasses, setSelectedClasses] = useState(JSON.parse(sessionStorage.getItem("classifications")) || []);
   const [selectedFestivals, setSelectedFestivals] = useState([]);
   const [wishlist, setWishlist] = useState(JSON.parse(localStorage.getItem("wishlist")) || []);
-  
+
   const CLASSIFICATIONS = "KZFzniwnSyZfZ7v7nJ,KZFzniwnSyZfZ7v7nE,KZFzniwnSyZfZ7v7na";
 
   const getSelectedClasses = async (classIds) => {
@@ -48,6 +50,7 @@ function App() {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }
 
+
   useEffect(()=>{
     if(selectedFestivals.length < 1)
       getSelectedFestivals("K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf");
@@ -62,6 +65,8 @@ function App() {
     handleWishlist();
   },[wishlist]);
 
+  //console.log(wishlist)
+
   return (
     <>
      <Layout selectedClasses={selectedClasses}>
@@ -71,6 +76,7 @@ function App() {
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
           <Route path="dashboard" element={<Dashboard/>}/>
           <Route path="tencity/:city_name" element={<CityEventCard/>}/>
+          <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
         </Routes>
      </Layout>
     </>

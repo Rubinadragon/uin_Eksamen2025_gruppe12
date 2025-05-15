@@ -30,9 +30,9 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
       }
     }
     
-    const currentCategory = selectedClasses.find(cls => cls.segment.id === slug)?.segment;
+    const currentCategory = selectedClasses.find(cls => cls.id === slug)?.name;
 
-    const setBgImg = (value) => {
+    const setBgImg = () => {
       if("Sport" === currentCategory?.name)
         return "sportBg.jpg"
       else if("Kultur & Teater" === currentCategory?.name)
@@ -47,7 +47,7 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
           <h1>Kategori: {currentCategory?.name}</h1>
 
           <Filter setLoadingResults={setLoadingResults} setFilterQuery={setFilterQuery}/>
-          <img src={`../src/assets/img/${setBgImg(slug)}`} alt="" />
+          <img src={`../src/assets/img/${setBgImg()}`} alt="" />
           <div className="bgDarkOverlay"></div>
         </section>
 

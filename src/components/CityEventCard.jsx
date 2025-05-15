@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import "../assets/styles/cityEventCard.scss"
 
 
-export default function CityEventCard(){
+export default function CityEventCard({city_name}){
 //const {city_name} = useParams()
 const [city, setCity] = useState()
 
-let city_name = "Oslo"
+
    
 //Fetch for 10 events for diffrent citys
 const fetchTenEventsByCity = async()=> {
@@ -25,35 +25,11 @@ useEffect(()=> {
     fetchTenEventsByCity()
 }, [])
 
-function Oslo() {
-    city_name = "Oslo"
-    fetchTenEventsByCity()
-    console.log("city:",city_name)
-}
-function Stockholm() {
-    city_name = "Stockholm"
-    fetchTenEventsByCity()
-    console.log("city:",city_name)
-}
-function Berlin() {
-    city_name = "Berlin"
-    fetchTenEventsByCity()
-    console.log("city:",city_name)
-}
-function London() {
-    city_name = "London"
-    fetchTenEventsByCity()
-    console.log("city:",city_name)
-}
+
    
     return(
     <>
-        <ul className="cityButton">
-            <li><button onClick={Oslo}>Oslo</button></li>
-            <li><button onClick={Stockholm}>Stockholm</button></li>
-            <li><button onClick={Berlin}>Berlin</button></li>
-            <li><button onClick={London}>London</button></li>
-        </ul>
+
 
         <h3>Hva skjer i {test?.[0].city.name}</h3>
         <div className="city-holder">

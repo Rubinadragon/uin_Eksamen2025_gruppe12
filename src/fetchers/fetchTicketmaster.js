@@ -106,6 +106,19 @@ export const fetchAttractionsById = async (attractionsId) => {
 };
 
 
+//Fetch for 10 events for diffrent citys
+export const fetchTenEventsByCity = async(city_name)=> {
+  await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}=*&size=10&city==${city_name}`)
+  .then((response) => response.json())
+  .then((data)=> setCity(data._embedded.events))
+  .catch((error) => console.error("Feil ved henting av byer", error))
+
+  return setCity
+}
+
+
 //${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*
 //https://app.ticketmaster.com/discovery/v2/events?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&attractionId=K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf&locale=*
+
+
 

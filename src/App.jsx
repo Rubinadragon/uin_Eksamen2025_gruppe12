@@ -6,7 +6,6 @@ import Dashboard from "./components/Dashboard"
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
 import EventPage from './components/EventPage'
-import CityEventCard from './components/CityEventCard'
 import { fetchSelectedClassifications, fetchAttractionsById } from './fetchers/fetchTicketmaster'
 import SanityEventDetails from './components/SanityEventDetails'
 
@@ -94,7 +93,6 @@ useEffect(() => {
           <Route path="event/:id" element={<EventPage selectedFestivals={selectedFestivals}/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
           <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}/>
-          <Route path="tencity/:city_name" element={<CityEventCard/>}/>
           <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
         </Routes>
      </Layout>

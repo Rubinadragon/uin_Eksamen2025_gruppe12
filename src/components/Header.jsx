@@ -2,8 +2,6 @@ import { Link, NavLink } from "react-router-dom";
 import "../assets/styles/header.scss";
 import LinkButton from "./LinkButton";
 
-
-
 export default function Header({
     selectedClasses, 
     setSelectedClasses, 
@@ -23,8 +21,8 @@ export default function Header({
                     <nav>
                         <ul>
                             {selectedClasses?.map((classification) => (
-                                <li key={classification.segment.id} className="classLink">
-                                <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
+                                <li key={classification.id} className="classLink">
+                                <NavLink to={`category/${classification.id}`}>{classification.name}
                                 </NavLink>
                                 </li>
                             ))}                                                        

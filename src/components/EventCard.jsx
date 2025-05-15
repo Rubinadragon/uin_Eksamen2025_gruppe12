@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { loadEventImg, formatDateNO } from "../assets/js/utils";
 import "../assets/styles/eventCard.scss"
 
 export default function EventCard({ event, wishlist, setWishlist, linkToDetails = true }) {
+  if(!event) return null;
+  
   let date;
   let venue;
   const id = event.id;
@@ -12,29 +15,6 @@ export default function EventCard({ event, wishlist, setWishlist, linkToDetails 
   }
   if(event?.type == "venue") {
     venue = event;
-  }
-
-  const loadEventImg = (value) => {
-    const allowedExstensions = ["jpg", "jpeg", "png", "webp"];
-
-    if(!("images" in value)) 
-      return "https://placehold.co/600x400?text=Billetltyst"
-
-    const foundImg = value.images.find((img) => img.ratio === "16_9" && (img.width < 800 && img.width > 300))
-      
-    if(!foundImg || !("url" in foundImg))
-      return "https://placehold.co/600x400?text=Billetltyst"
-      
-    const imgSplit = foundImg.url.split(".");
-
-    if(!allowedExstensions.includes(imgSplit.pop())) {
-      return "https://placehold.co/600x400?text=Billetltyst"
-    }
-    return foundImg.url;
-  }
-
-  const formatDateNO = (value) => {
-    return value.split("-").reverse().join(".");
   }
 
   const isWishlisted = (value) => {
@@ -52,8 +32,8 @@ export default function EventCard({ event, wishlist, setWishlist, linkToDetails 
 
   const content = (
     <>
-      <img src= {loadEventImg(event)} alt={`${event.name} banner`}/>
-      <span className="favouriteButton" onClick={() => handleOnClick(id, event.type)}><img src={`../src/assets/gfx/${isWishlisted(id) ? "heartSolid" : "heartOutline"}.svg`} alt=""/></span>
+      <img src= {loadEventImg(event, 300, 800)} alt={`${event.name} banner`}/>
+      {wishlist && <span className="favouriteButton" onClick={() => handleOnClick(id, event.type)}><img src={`../src/assets/gfx/${isWishlisted(id) ? "heartSolid" : "heartOutline"}.svg`} alt=""/></span> }
       
       <section className="evenCardInner">
         <h3>{event.name}</h3>

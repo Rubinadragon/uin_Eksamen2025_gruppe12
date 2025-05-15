@@ -12,3 +12,14 @@ export async function fetchAllEvents() {
     );
     return data;
 }
+
+export async function fetchSingleSanityEvent(apiId){
+    const data = await client.fetch(
+        `*[_type == "event" && apiId == $apiId][0]{
+            _id,
+            tittel,
+            apiId,
+            category
+            }`,{apiId})
+    return data
+}

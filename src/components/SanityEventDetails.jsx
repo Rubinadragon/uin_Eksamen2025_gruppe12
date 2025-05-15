@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchSingleSanityEvent} from "../fetchers/eventServices";
+import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
-import { fetchUserName } from "../fetchers/brukerServices";
 
 export default function SanityEventDetails(){
     let { apiId } = useParams() // Manglet paranteser
 
     const [sanityEvent, setSanityEvent] = useState({});
     const [apiEvent, setApiEvent] = useState({})
+    const [wishlistPerson, setWishlistPerson] = useState({})
 
     useEffect(() => {
         getSingleSanityEvent(apiId)
         getEventDetails(apiId)
+        getWishlistPeople(apiId)
     }, [])
-
-
 
     const getSingleSanityEvent = async (id) => {
         const data = await fetchSingleSanityEvent(id) 
@@ -33,10 +32,13 @@ export default function SanityEventDetails(){
         }
     }
 
-    const getSanityPeople = async () => {
-
+    const getWishlistPeople = async (id) => {
+        const data = await fetchUserByWishList(id)
+        setWishlistPerson(data)
+        console.log(data + " " + id)
     }
 
+    //console.log(wishlistPerson?.name)
     return (<section className="SanityEventDetails">
             <img />{/*Legg inn funksjon til å legge inn bilde*/}
             <h1>{apiEvent.name}</h1>

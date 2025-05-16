@@ -32,7 +32,9 @@ export async function fetchUserByWishList(wishlisted){
             "wishlisted": *[_type=="bruker" && ^._id in wishlist[]._ref]{
                 _id,
                 name,
+                image
             }
         }`, {wishlisted}
     )
+    return data
 }

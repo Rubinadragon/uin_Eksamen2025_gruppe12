@@ -34,7 +34,7 @@ export async function fetchUserByWishList(wishlisted){
             "wishlisted": *[_type=="bruker" && ^._id in wishlist[]._ref]{
                 _id,
                 name,
-                image
+                image {asset->{url}, alt}
             }
         }`, {wishlisted}
     )

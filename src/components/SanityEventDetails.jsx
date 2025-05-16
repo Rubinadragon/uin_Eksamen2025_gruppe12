@@ -37,9 +37,7 @@ export default function SanityEventDetails(){
         }
     }
 
-    
-
-    console.log(wishlistPeople)
+    //console.log(wishlistPeople)
     return (<section className="SanityEventDetails">
             <img />{/*Legg inn funksjon til å legge inn bilde*/}
             <h1>{apiEvent.name}</h1>
@@ -54,7 +52,7 @@ export default function SanityEventDetails(){
             </article>
             <article>
                 <h2>Hvem har dette i ønskelisten</h2>
-                {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person}/>)}
+                {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
             </article>
         </section>)
 }

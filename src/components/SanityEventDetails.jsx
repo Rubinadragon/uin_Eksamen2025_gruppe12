@@ -40,7 +40,7 @@ export default function SanityEventDetails(){
 
     console.log(apiEvent)
     return (<section className="SanityEventDetails">
-            <img src={loadEventImg(apiEvent, 900, 2500)} alt={`${apiEvent?.name} banner`}/>
+            <img src={loadEventImg(apiEvent, 600, 2500)} alt={`${apiEvent?.name} banner`}/>
             <h1>{apiEvent.name}</h1>
             <article>
                 <h2>Dato og sted</h2>

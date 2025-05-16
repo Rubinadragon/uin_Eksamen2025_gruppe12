@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
+import { loadEventImg } from "../assets/js/utils";
 import ArtistCard from "./ArtistCard";
 
 export default function SanityEventDetails(){
@@ -37,9 +38,9 @@ export default function SanityEventDetails(){
         }
     }
 
-    //console.log(wishlistPeople)
+    console.log(apiEvent)
     return (<section className="SanityEventDetails">
-            <img />{/*Legg inn funksjon til å legge inn bilde*/}
+            <img src={loadEventImg(apiEvent, 900, 2500)} alt={`${apiEvent?.name} banner`}/>
             <h1>{apiEvent.name}</h1>
             <article>
                 <h2>Dato og sted</h2>

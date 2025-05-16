@@ -1,173 +1,126 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchUserName, fetchAllUsers } from "../fetchers/brukerServices";
 import { fetchAllEvents } from "../fetchers/eventServices";
-import { fetchSingleEventById } from "../fetchers/fetchTicketmaster";
+import { fetchMultipleEventsById } from "../fetchers/fetchTicketmaster";
 import EventCard from "../components/EventCard";
+import "../assets/styles/dashboard.scss";
 
-export default function Dashboard({ setIsLoggedIn, setCurrentUser }) {
-    const localUser = localStorage.getItem("loggedIn");
-    const currentUser = localUser ? JSON.parse(localUser) : null;        
-    const [allUsers, setAllUsers] = useState([]);
-    const [allEvents, setAllEvents] = useState([]);
+export default function Dashboard({ setIsLoggedIn, setCurrentUser, currentUser, wishlist, setWishlist }) {
 
-    const [userWishlist, setUserWishlist] = useState(() => {
-      const chached = localStorage.getItem("userWishlist");
-      return chached ? JSON.parse(chached) : [];
+  const [wishlistData, setWishlistData] = useState([]);
+  const [purchasedData, setPurchasedData] = useState([]);
+
+  useEffect(() => {
+    getUserEvents(wishlist, "wishlist")
+  }, [wishlist])
+
+  useEffect(() => {
+    getUserEvents(currentUser?.previousPurchases, "purchased")
+  }, [currentUser])
+
+  const getUserEvents = async (arr, dataType) => {
+    const tmpArr = arr?.map((e) => {
+      return e.id || e.apiId;
     });
+  
+    try {
+      const data = await fetchMultipleEventsById(tmpArr);
 
+      if(dataType === "wishlist")
+        setWishlistData(data);
+      else if(dataType === "purchased")
+        setPurchasedData(data);
+    }
+    catch(error) {
+      console.log(error);
+      return [];
+    }
+  }
 
-    const [userPurchased, setUserPurchased] = useState(() => {
-      const chached = localStorage.getItem("userPurchased");
-      return chached ? JSON.parse(chached) : [];
-    });
+  const handleLogin = async (x) => {
+    x.preventDefault();
+    const username = x.target.usernameInput.value;
 
-    const handleLogin = async (x) => {
-        x.preventDefault();
-        const username = x.target.usernameInput.value;
+    const user = await fetchUserName(username);
 
-        const user = await fetchUserName(username);
+    if (user) {
+      localStorage.setItem("loggedIn", JSON.stringify(user));
+      setCurrentUser(user);
+      setIsLoggedIn(true);
+        
+      setWishlist(user?.wishlist?.map((e) => {
+        return {id: e.apiId, type: "event"}
+      }))
 
-        console.log("Fetched user object from Sanity:", user);
+      } else {
+        alert("Finner ikke bruker..");
+    }
+  };
+    
+  return (
+    currentUser ?
+    <>
+      <section className="profileOverview">
+        <h1>Min side</h1>
+        <article className="profileCard">
+          {currentUser.image && (
+            <img src={currentUser.image.asset.url} alt={currentUser.image.alt} />
+          )}
+          <h2>{currentUser.name} </h2>
+          <p>E-post: {currentUser.email} </p>
+          <p>Alder: {currentUser.age} </p>
+        </article>
+        <ul id="friendsList">
+          <h2>Mine venner</h2>
+          {currentUser.friends.map((friend, index) => (
+            <li key={`friend_${index}`} className="friendCard">
+              <img src={friend.image.asset.url} alt={friend.image.alt} />
+              <article>
+                <h3>{friend.name}</h3>
+                {friend.friendWishlist.some((e) => e.id === wishlist.id) ? (
+                  <p>Dere har samme event i ønskelisten, hva med å dra sammen på {friend.friendWishlist[0].tittel}?</p>
+                ) : <p>something</p>}
+              </article>
+            </li>
+          ))}
+        </ul>
 
-        if (user) {
-            localStorage.setItem("loggedIn", JSON.stringify(user));
-            setCurrentUser(user);
-            setIsLoggedIn(true);
-
-
-            // B-KRAV 
-            //const users = await fetchAllUsers();
-            //setAllUsers(users);
-            //const events = await fetchAllEvents();
-            //setAllEvents(events);
-
-
-            //Promise.all venter til fetch-kallene er ferdige før den returnerer en samlet array med resultater.
-            //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
-            const wishlistUser = await Promise.all(
-              user.wishlist
-                .filter((evnt) => evnt.apiId)
-                .map(async (evnt) => {const tmDetails = await fetchSingleEventById(evnt.apiId);
-                    if (!tmDetails) return null;
-                    tmDetails.type = "event";
-                    return { ...evnt, ticketmaster: tmDetails };
-                })
-            );
-
-            const workingWishlist = wishlistUser.filter(
-            (item) => item !== null && item !== undefined);
-
-            console.log("Wishlist fetched from Ticketmaster:", workingWishlist);
-
-            setUserWishlist(workingWishlist);
-            localStorage.setItem("userWishlist", JSON.stringify(workingWishlist));            
-            
-
-            const purchasedUser = await Promise.all(
-              user.previousPurchases
-                .filter((evnt) => evnt.apiId)
-                .map(async (evnt) => {
-                  const tmDetails = await fetchSingleEventById(evnt.apiId);
-                  if (!tmDetails) return null;
-                  tmDetails.type = "event";
-                  return { ...evnt, ticketmaster: tmDetails };
-                })
-            );
-
-          const workingPurchased = purchasedUser.filter(
-          (item) => item !== null && item !== undefined);
-
-          console.log("Purchases fetched from Ticketmaster:", workingPurchased);
-
-          setUserPurchased(workingPurchased);
-          localStorage.setItem("userPurchased", JSON.stringify(workingPurchased));          
-
-          } else {
-            alert("Finner ikke bruker..");
-        }
-    };
-
-    return (
-        <section>
-            {currentUser ? (
-                <>
-                    <h2>Min side</h2>
-                    <p>Navn: {currentUser.name} </p>
-                    <p>E-post: {currentUser.email} </p>
-                    <p>Alder: {currentUser.age} </p>
-                    {currentUser.image && (
-                        <img src={currentUser.image.asset.url} alt={currentUser.image.alt} />
-                    )}
-
-
-                    <h3>Min ønskeliste:</h3>
-                    {userWishlist.map((event, index) => (
-                      event.ticketmaster ? (
-                      <EventCard
-                        key={event.ticketmaster?.id || index}
-                        event={event.ticketmaster}
-                        wishlist={currentUser?.wishlist}
-                        linkToDetails={true}
-                      />
-                    ) : null
-                  ))}
-
-                    <h3>Mine kjøpte billetter:</h3>
-                    {userPurchased.map((event, index) => (
-                      event.ticketmaster ? (
-                      <EventCard
-                        key={event.ticketmaster?.id || index}
-                        event={event.ticketmaster}
-                        wishlist={currentUser?.wishlist}
-                        linkToDetails={true}
-                      />
-                    ) : null
-                  ))}
-
-
-
-                  {/*
-                    <h3>Alle events i Sanity:</h3>
-                    <ul>
-                        {allEvents.map(evnt => 
-                            (
-                            <li key={evnt.id}> {evnt.tittel} ({evnt.category}) </li>
-                            ))
-                        }
-                    </ul>
-
-                    <h3>Alle brukere i Sanity:</h3>
-                    {allUsers.map(user => 
-                    (
-                        <div key={user._id}>
-                            <p>{user.name}</p>
-                            <img src={user.image.asset.url} alt={user.image.alt} />
-                            <p>Wishlist: {user.wishlist.length} events </p>
-                            <p>Purchases: {user.previousPurchases.length} events </p>
-                            <ul>
-                                {user.wishlist.map(wish => (
-                                    <li key={wish._id}>Wishlist: {wish.tittel} </li>
-                                ))}
-                                {user.previousPurchases.map(purchase => (
-                                    <li key={purchase._id}>Purchased: {purchase.tittel} </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                        */}
-                </>
-            ) : (
-                <>
-                    <h2>Logg inn</h2>
-                    <form onSubmit = {handleLogin}>
-                        <label htmlFor="usernameInput">Brukernavn</label>
-                        <input type="text" id="usernameInput" />
-                        <label htmlFor="passwordInput">Passord</label>
-                        <input type="text" id="passwordInput" />
-                        <button>Logg inn</button>
-                    </form>
-                </>
-            )}        
-        </section>
-    );
+      </section>
+      <section className="eventGrid">
+        <h2>Min ønskeliste:</h2>
+        {wishlistData?.map((wish, index) => 
+          <EventCard
+            key={`wish_${index}`}
+            event={wish}
+            wishlist={wishlist}
+            setWishlist={setWishlist}
+            linkToDetails={true}
+          />
+            )}
+      </section>
+      <section className="eventGrid">
+        <h2>Mine kjøpte billetter:</h2>
+        {purchasedData?.map((purchased, index) =>
+          <EventCard
+            key={`purchased_${index}`}
+            event={purchased}
+            wishlist={wishlist}
+            setWishlist={setWishlist}
+            linkToDetails={true}
+          />
+        )}
+      </section>
+      </>
+      : (
+          <section>
+            <h2>Logg inn</h2>
+            <form onSubmit = {handleLogin}>
+                <label htmlFor="usernameInput">Brukernavn</label>
+                <input type="text" id="usernameInput" />
+                <label htmlFor="passwordInput">Passord</label>
+                <input type="text" id="passwordInput" />
+                <button>Logg inn</button>
+            </form>           
+          </section>
+  ))
 }

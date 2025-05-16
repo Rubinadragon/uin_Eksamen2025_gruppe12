@@ -46,6 +46,17 @@ export const bruker = {
             ],
         },
         {
+            name: 'friends',
+            title: 'Venner',
+            type: 'array',
+            of: [
+                {
+                    type: 'reference',
+                    to: [{type: 'bruker'}]
+                },
+            ],
+        },
+        {
             name: 'previousPurchases',
             title: 'Liste over kjøpte events',
             type: 'array',

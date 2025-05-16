@@ -93,9 +93,9 @@ useEffect(() => {
           <Route path='/' element={<Home selectedFestivals={selectedFestivals} wishlist={wishlist} setWishlist={setWishlist}/>}/>
           <Route path="event/:id" element={<EventPage selectedFestivals={selectedFestivals}/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
-          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}/>
+          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} currentUser={currentUser} wishlist={wishlist} setWishlist={setWishlist}/>}/>
           <Route path="tencity/:city_name" element={<CityEventCard/>}/>
-          <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
+          <Route path="sanity-event/:apiId" element={<SanityEventDetails />}/>
         </Routes>
      </Layout>
     </>

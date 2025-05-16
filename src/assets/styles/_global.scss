@@ -37,6 +37,7 @@ $pad-bottom: 3rem;
 }
 
 @mixin content-width ($left: $pad-left, $right: $pad-right, $max-width: $page-width) {
+    margin: 0 auto;
     padding-left: $left;
     padding-right: $right;
     max-width: $max-width;

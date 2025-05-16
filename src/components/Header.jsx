@@ -1,9 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
-import "../assets/styles/header.scss"
-
+import "../assets/styles/header.scss";
 import LinkButton from "./LinkButton";
 
-export default function Header({selectedClasses, setSelectedClass}){
+export default function Header({
+    selectedClasses, 
+    setSelectedClasses, 
+    isLoggedIn,
+    currentUser,
+    logout    
+}) {
     //Get classification details
     //segment, _embedded,
     //Musikk: KZFzniwnSyZfZ7v7nJ
@@ -16,12 +21,21 @@ export default function Header({selectedClasses, setSelectedClass}){
                     <nav>
                         <ul>
                             {selectedClasses?.map((classification) => (
-                                <li key={classification.segment.id} className="classLink">
-                                <NavLink to={`category/${classification.segment.id}`}>{classification.segment.name}
+                                <li key={classification.id} className="classLink">
+                                <NavLink to={`category/${classification.id}`}>{classification.name}
                                 </NavLink>
-                                </li>))}                                                        
+                                </li>
+                            ))}                                                        
                             <li>
-                                <LinkButton/>
+                                <>
+                                    <LinkButton isLoggedIn={isLoggedIn}/>
+                                    {isLoggedIn && currentUser && (
+                                <>
+                                    <span>{currentUser.name}</span>
+                                    <button onClick={logout}>Logg ut</button>
+                                </>
+                                    )}
+                                </>
                             </li>
                             
                         </ul>

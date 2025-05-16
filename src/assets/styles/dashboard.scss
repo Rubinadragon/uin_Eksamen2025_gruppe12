@@ -40,3 +40,56 @@
         object-fit: cover;
     }
 }
+
+
+//Når brukeren ikke er logget inn
+.notLoggedIn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    min-height: 80vh;
+    padding: 1rem 3rem;
+    font-weight: global.$SemiBold;
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        background-color: global.$PalePink;
+        color: global.$DarkBurgundy;
+        padding: 0 2rem 2rem 1rem;
+        border-radius: 0 0 8px 8px;
+        align-items: flex-start;
+    }
+    h2{
+        font-size: 2rem;
+        background-color: global.$PalePink;
+        padding: 2rem 2.44rem 1rem;
+        border-radius: 8px 8px 0 0;
+    }
+    button{
+        background-color: global.$Yellow;
+        color: global.$Burgundy;
+        font-weight: global.$SemiBold;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+    }
+    input{
+        border-radius: 8px;
+        border-style: none;
+        min-height: 1.5rem;
+    }
+    input[type=text]:focus{
+        outline: 2px solid global.$DarkMagenta;
+    }
+}
+
+//Mobil
+@media only screen and (min-width: 809px){
+    .notLoggedIn{
+        button:hover{
+            background-color: global.$PaleYellow;
+        }
+    }
+}

@@ -1,1 +1,42 @@
 @use "global";
+
+.profileOverview {
+    @include global.content-width();
+    @include global.flex-display(row, wrap, space-between);
+
+    h1 {
+        width: 100%;
+    }
+}
+
+.profileCard {
+    background-color: global.$Yellow;
+    border-radius: 15px;
+    padding: 1.5rem;
+
+    img {
+        width: 100%;
+        height: 100%;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 7px;
+    }
+}
+
+#friendsList {
+    @include global.flex-display(column, wrap);
+}
+
+.friendCard {
+    @include global.flex-display(row, wrap);
+    gap: 1rem;
+    background-color: global.$PalePink;
+    border-radius: 10px;
+    padding: 1rem;
+    
+    img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+}

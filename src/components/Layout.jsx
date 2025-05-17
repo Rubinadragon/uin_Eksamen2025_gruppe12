@@ -25,7 +25,7 @@ export default function Layout({
                 {children}
             </main>
             <footer>
-                <Link to={"https://github.com/Rubinadragon?tab=repositories"}>GitHub Repository</Link>
+                <Link to={"https://github.com/Rubinadragon/uin_Eksamen2025_gruppe12"}>GitHub Repository</Link>
                 <Link to={"https://developer.ticketmaster.com/"}>Discovery API: ©Ticketmaster Developer</Link>
             </footer>
         </>

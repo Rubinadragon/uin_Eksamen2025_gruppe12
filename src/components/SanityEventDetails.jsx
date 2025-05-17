@@ -48,8 +48,9 @@ export default function SanityEventDetails(){
                 <p className="sanityDate">{apiEvent?.dates?.start?.localDate}</p>
                 <p className="sanityVenue">{apiEvent?._embedded?.venues[0]?.name}</p>
             </article>
+            <h2>Hvem har dette i ønskelisten</h2>
             <section className="sanityWishlist">
-                <h2>Hvem har dette i ønskelisten</h2>
+                
                 {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
             </section>
         </section>)

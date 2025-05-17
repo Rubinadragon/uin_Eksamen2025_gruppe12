@@ -3,12 +3,11 @@
 .artistCard{
     background-color: global.$Burgundy;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
+    padding-bottom: 1rem;
     p{
         color: global.$Yellow;
         font-weight: global.$SemiBold;
-        padding: 1rem;
+        padding-left: 1rem;
     }
     img{
         border-radius: 8px 8px 0 0;

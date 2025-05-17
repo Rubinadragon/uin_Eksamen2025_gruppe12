@@ -45,8 +45,8 @@ export default function SanityEventDetails(){
             <h1>{apiEvent.name}</h1>
             <article className="sanityEventInfo">
                 <p className="sanityGenre">{apiEvent?.classifications?.[0]?.genre?.name}</p>
-                <p className="sanityDate">{apiEvent?.dates?.start?.localDate}</p>
-                <p className="sanityVenue">{apiEvent?._embedded?.venues[0]?.name}</p>
+                <p>{apiEvent?.dates?.start?.localDate}</p>
+                <p>{apiEvent?._embedded?.venues[0]?.name}</p>
             </article>
             <h2>Hvem har dette i ønskelisten</h2>
             <section className="sanityWishlist">

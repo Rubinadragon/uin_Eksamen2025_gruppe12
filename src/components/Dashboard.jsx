@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchUserName } from "../fetchers/brukerServices";
-import { fetchMultipleEventsById } from "../fetchers/fetchTicketmaster";
-import EventCard from "../components/EventCard";
+import { fetchUserName } from "../fetchers/brukerServices";import EventCard from "../components/EventCard";
 import "../assets/styles/dashboard.scss";
 import UserDashboardView from "./UserDashboardView";
 
@@ -14,7 +12,7 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser, currentUser, 
     const user = await fetchUserName(username);
 
     if (user) {
-      localStorage.setItem("loggedIn", JSON.stringify(user));
+      localStorage.setItem("loggedIn", user.name);
       setCurrentUser(user);
       setIsLoggedIn(true);
         

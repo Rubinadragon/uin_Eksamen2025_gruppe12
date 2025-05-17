@@ -4,7 +4,6 @@ import LinkButton from "./LinkButton";
 
 export default function Header({
     selectedClasses, 
-    setSelectedClasses, 
     isLoggedIn,
     currentUser,
     logout    

@@ -8,6 +8,7 @@ import CategoryPage from './components/CategoryPage'
 import EventPage from './components/EventPage'
 import CityEventCard from './components/CityEventCard'
 import { fetchSelectedClassifications, fetchAttractionsById } from './fetchers/fetchTicketmaster'
+import { fetchUserName } from './fetchers/brukerServices'
 import SanityEventDetails from './components/SanityEventDetails'
 
 function App() {
@@ -52,11 +53,22 @@ const handleWishlist = () => {
   }
 
 useEffect(() => {
+      const getUser = async (username) => {
+      try {
+        const data  = await fetchUserName(username);
+        setCurrentUser(data);
+        setIsLoggedIn(true);
+      }
+      catch(error) {
+        console.log("Feil med henting av innlogget bruker.");
+      }
+    }
+      
     const localUser = localStorage.getItem("loggedIn");
     if (localUser) {
-      setCurrentUser(JSON.parse(localUser));
-      setIsLoggedIn(true);
+      getUser(localUser);
     }
+
   }, []);
 
   useEffect(()=>{
@@ -82,8 +94,6 @@ useEffect(() => {
       currentUser={currentUser}
       logout={() => {
           localStorage.removeItem("loggedIn");
-          localStorage.removeItem("userWishlist");
-          localStorage.removeItem("userPurchased");
           localStorage.removeItem("wishlist");
           setIsLoggedIn(false);
           setCurrentUser(null);

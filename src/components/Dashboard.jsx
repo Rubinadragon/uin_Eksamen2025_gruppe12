@@ -112,7 +112,7 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser, currentUser, 
       </section>
       </>
       : (
-          <section>
+          <section className="notLoggedIn">
             <h2>Logg inn</h2>
             <form onSubmit = {handleLogin}>
                 <label htmlFor="usernameInput">Brukernavn</label>

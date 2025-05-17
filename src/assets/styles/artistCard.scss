@@ -1,0 +1,15 @@
+@use "global";
+
+.artistCard{
+    background-color: global.$Burgundy;
+    border-radius: 8px;
+    padding-bottom: 1rem;
+    p{
+        color: global.$Yellow;
+        font-weight: global.$SemiBold;
+        padding-left: 1rem;
+    }
+    img{
+        border-radius: 8px 8px 0 0;
+    }
+}

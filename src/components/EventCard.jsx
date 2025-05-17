@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { loadEventImg, formatDateNO } from "../assets/js/utils";
 import "../assets/styles/eventCard.scss"
 
-export default function EventCard({ event, wishlist, setWishlist, linkToDetails = true }) {
+export default function EventCard({ event, wishlist, setWishlist, linkToDetails }) {
   if(!event) return null;
   
   let date;
@@ -51,7 +51,7 @@ export default function EventCard({ event, wishlist, setWishlist, linkToDetails 
           </p>
         }
 
-        {linkToDetails && <Link to={`/event/${id}`} className="eventBtn"><span>Les mer</span></Link>}
+        {linkToDetails && <Link to={`/${linkToDetails}/${id}`} className="eventBtn"><span>Les mer</span></Link>}
       </section>
     </>  
     );

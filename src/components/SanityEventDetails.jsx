@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
-import { loadEventImg, formatDateNO } from "../assets/js/utils";
+import { loadEventImg } from "../assets/js/utils";
 import ArtistCard from "./ArtistCard";
 import "../assets/styles/sanityEventDetails.scss"
 
-export default function SanityEventDetails(){
+export default function SanityEventDetails({isLoggedIn}){
     let { apiId } = useParams() // Manglet paranteser
+    const navigate = useNavigate();
 
     const [sanityEvent, setSanityEvent] = useState({});
     const [apiEvent, setApiEvent] = useState({})
     const [wishlistPeople, setWishlistPeople] = useState({})
 
+    const localUser = localStorage.getItem("loggedIn");
+
     useEffect(() => {
-        getSingleSanityEvent(apiId)
-        getEventDetails(apiId)
-        getWishlistPeople(apiId)
-    }, [])
+        if(!localUser) {
+            navigate("/", {replace: true});
+        }
+        else {
+            getSingleSanityEvent(apiId);
+            getEventDetails(apiId);
+            getWishlistPeople(apiId);
+        }
+    }, [isLoggedIn])
 
     const getSingleSanityEvent = async (id) => {
         const data = await fetchSingleSanityEvent(id) 
@@ -39,8 +47,8 @@ export default function SanityEventDetails(){
         }
     }
 
-    console.log(apiEvent)
-    return (<section className="sanityEventDetails">
+    return (
+        <section className="sanityEventDetails">
             <img src={loadEventImg(apiEvent, 600, 2500)} alt={`${apiEvent?.name} banner`}/>
             <h1>{apiEvent.name}</h1>
             <article className="sanityEventInfo">
@@ -53,5 +61,6 @@ export default function SanityEventDetails(){
                 
                 {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
             </section>
-        </section>)
+        </section>
+    )
 }

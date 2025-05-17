@@ -107,7 +107,7 @@ export default function EventPage({selectedFestivals}) {
         <section className="eventGrid">
             <h2>Festivalpass</h2>
             {eventSearch?.map((festival) => 
-                <EventCard key={festival.id} event={festival} linkToDetails={false}/>
+                <EventCard key={festival.id} event={festival}/>
             )}
         </section>
         

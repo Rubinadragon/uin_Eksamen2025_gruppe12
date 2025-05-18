@@ -41,3 +41,12 @@
         cursor: pointer;
     }
 }
+
+@media only screen and (max-width: 1118px){
+    form{
+        border-bottom: 1px;
+        border-color: #afafaf;
+        border-style: none none solid none;
+        padding-bottom: 1rem;
+    }
+}

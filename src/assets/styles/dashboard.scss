@@ -45,51 +45,63 @@
 //Når brukeren ikke er logget inn
 .notLoggedIn{
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
+    gap: 1rem;
     align-items: center;
-    flex-direction: column;
-    min-height: 80vh;
     padding: 1rem 3rem;
     font-weight: global.$SemiBold;
+    background-color: global.$PalePink;
+    max-width: min-content;
+    margin: 5rem auto;
+    border-radius: 8px;
     form{
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        background-color: global.$PalePink;
         color: global.$DarkBurgundy;
-        padding: 0 2rem 2rem 1rem;
-        border-radius: 0 0 8px 8px;
         align-items: flex-start;
+        border: none;
     }
-    h2{
-        font-size: 2rem;
-        background-color: global.$PalePink;
-        padding: 2rem 2.44rem 1rem;
-        border-radius: 8px 8px 0 0;
+    h1{
+        font-size: 1.7rem;
+        min-width: 100%;
     }
     button{
         background-color: global.$Yellow;
         color: global.$Burgundy;
         font-weight: global.$SemiBold;
         border: none;
-        padding: 0.5rem 1rem;
+        padding: 1rem 2rem;
         border-radius: 8px;
+        font-size: 1.1rem;
     }
     input{
         border-radius: 8px;
         border-style: none;
-        min-height: 1.5rem;
+        min-height: 2rem;
     }
     input[type=text]:focus{
         outline: 2px solid global.$DarkMagenta;
     }
 }
 
-//Mobil
+//PC
 @media only screen and (min-width: 809px){
     .notLoggedIn{
         button:hover{
             background-color: global.$PaleYellow;
+        }
+        input{
+            min-width: 30rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 808px){
+    .notLoggedIn{
+        input{
+            min-width: 15rem;
         }
     }
 }

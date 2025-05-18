@@ -20,12 +20,19 @@ h1{
     h2 {
         width: 100%;
         font-size: 2rem;
+        padding-left: 2rem;
     }
      
     > a, > article {
         flex: 1 1;
         max-width: 450px;
         min-width: 350px;  
+    }
+    button{
+        border: none;
+    }
+    button:hover{
+        background-color: global.$PaleYellow;
     }
 }
 

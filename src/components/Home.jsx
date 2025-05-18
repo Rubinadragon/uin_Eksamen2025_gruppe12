@@ -28,8 +28,9 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
             ))}
 
             </section>
-            <section className="tenCitys"> 
-                <h2>Hva skjer i verdens storbyer?</h2>
+
+        <section className="eventGrid">
+             <h2>Hva skjer i verdens storbyer?</h2>
                 <ul className="citybuttons">
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Oslo")}>Oslo</button></li>
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Stockholm")}>Stockholm</button></li>
@@ -38,14 +39,10 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Edinburgh ")}>Edinburgh</button></li>
                 </ul>
                   <h2>Hva skjer i {city?.[0]._embedded.venues[0].city.name}</h2>
-        
-        <div className="eventGrid">
             {city?.map((cit,index) => (
             <CityEventCard city={cit} key={`city_${index}`}/>
                 ))}
-        </div>
-               
-            </section>
+        </section>
         </>
     )   
 }

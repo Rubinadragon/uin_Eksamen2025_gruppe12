@@ -82,6 +82,7 @@
     flex-direction: row;
     list-style: none;
     flex-wrap: wrap;
+    width: 100%;
 
         .cityBtn{
         background-color: global.$Yellow;
@@ -94,16 +95,4 @@
         margin: 0.5rem;
     }
 
-}
-
-.tenCitys{
-    h2{
-        padding-left: 2rem;
-    }
-    button{
-        border: none;
-    }
-    button:hover{
-        background-color: global.$PaleYellow;
-    }
 }

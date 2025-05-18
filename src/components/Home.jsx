@@ -29,10 +29,13 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
 
             </section>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
         <section className="eventGrid">
              <h2>Hva skjer i verdens storbyer?</h2>
 =======
+=======
+>>>>>>> Stashed changes
             <section className="eventGrid"> 
                 <h2>Hva skjer i verdens storbyer?</h2>
 >>>>>>> Stashed changes

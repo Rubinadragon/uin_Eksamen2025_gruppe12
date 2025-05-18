@@ -3,7 +3,8 @@
 .eventCards{
     @include global.content-width();
     @include global.flex-display(row, wrap);
-    
+    gap: 1.6rem;
+    justify-content: center;
     h2 {
         width: 100%;
     }
@@ -81,6 +82,7 @@
     flex-direction: row;
     list-style: none;
     flex-wrap: wrap;
+    width: 100%;
 
         .cityBtn{
         background-color: global.$Yellow;

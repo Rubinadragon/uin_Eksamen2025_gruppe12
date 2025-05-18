@@ -6,7 +6,6 @@ import Dashboard from "./components/Dashboard"
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
 import EventPage from './components/EventPage'
-import CityEventCard from './components/CityEventCard'
 import { fetchSelectedClassifications, fetchAttractionsById } from './fetchers/fetchTicketmaster'
 import { fetchUserName } from './fetchers/brukerServices'
 import SanityEventDetails from './components/SanityEventDetails'
@@ -103,9 +102,10 @@ function App() {
           <Route path='/' element={<Home selectedFestivals={selectedFestivals} wishlist={wishlist} setWishlist={setWishlist}/>}/>
           <Route path="event/:id" element={<EventPage selectedFestivals={selectedFestivals}/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
-          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} currentUser={currentUser} wishlist={wishlist} setWishlist={setWishlist}/>}/>
-          <Route path="tencity/:city_name" element={<CityEventCard/>}/>
-          <Route path="sanity-event/:apiId" element={<SanityEventDetails isLoggedIn={isLoggedIn}/>}/>
+Home-10-arrangementer-storby
+          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}/>
+          <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
+ Develop
         </Routes>
      </Layout>
     </>

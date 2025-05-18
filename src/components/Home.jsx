@@ -1,8 +1,22 @@
 import EventCard from "./EventCard";
 import CityEventCard from "./CityEventCard";
+import {useState, useEffect} from "react";
+import {fetchTenEventsByCity} from "../fetchers/fetchTicketmaster";
+
 
 export default function Home({ selectedFestivals, wishlist, setWishlist }){
- 
+    const [city, setCity] = useState() 
+
+    
+    const getTenEventsByCity = async (name)=> {
+    const data =  await fetchTenEventsByCity(name)
+    setCity(data)
+    }   
+
+    useEffect(()=> {
+    getTenEventsByCity("Oslo")
+}, [])
+    
     return (     
         <>
             <h1 id="frontHeader">De beste opplevelsene nær deg</h1>
@@ -16,7 +30,21 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
             </section>
             <section className="tenCitys"> 
                 <h2>Hva skjer i verdens storbyer?</h2>
-               {<CityEventCard/>}
+                <ul className="citybuttons">
+                    <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Oslo")}>Oslo</button></li>
+                    <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Stockholm")}>Stockholm</button></li>
+                    <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Berlin")}>Berlin</button></li>
+                    <li><button className="cityBtn" onClick={()=> getTenEventsByCity("London")}>London</button></li>
+                    <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Edinburgh ")}>Edinburgh</button></li>
+                </ul>
+                  <h2>Hva skjer i {city?.[0]._embedded.venues[0].city.name}</h2>
+        
+        <div className="eventGrid">
+            {city?.map((cit,index) => (
+            <CityEventCard city={cit} key={`city_${index}`}/>
+                ))}
+        </div>
+               
             </section>
         </>
     )   

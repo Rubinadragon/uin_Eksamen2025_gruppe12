@@ -28,9 +28,14 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
             ))}
 
             </section>
+<<<<<<< Updated upstream
 
         <section className="eventGrid">
              <h2>Hva skjer i verdens storbyer?</h2>
+=======
+            <section className="eventGrid"> 
+                <h2>Hva skjer i verdens storbyer?</h2>
+>>>>>>> Stashed changes
                 <ul className="citybuttons">
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Oslo")}>Oslo</button></li>
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Stockholm")}>Stockholm</button></li>

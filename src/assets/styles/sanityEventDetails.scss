@@ -1,18 +1,7 @@
 @use "global";
 
 .sanityEventDetails{
-<<<<<<< HEAD
-    display: flex;
-    flex-wrap: wrap;
-    img{
-        min-width: 100%;
-        max-height: 35rem;
-        object-fit: cover;
-        object-position: 100% 20%;
-    }
-=======
     @include global.content-width();
->>>>>>> 9790086bb420e1133d7c013769453ed3a63d626f
     h1, h2{
         padding: 3rem 2rem 0;
         width: 100%;

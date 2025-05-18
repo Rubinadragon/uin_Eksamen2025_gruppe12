@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
 import { formatDateNO, loadEventImg } from "../assets/js/utils";
-import { formatDateNO } from "../assets/js/utils";
+
 import ArtistCard from "./ArtistCard";
 import EventHeader from "./EventHeader";
 import "../assets/styles/sanityEventDetails.scss"

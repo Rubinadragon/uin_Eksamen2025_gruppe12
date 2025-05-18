@@ -22,23 +22,14 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
             <h1 id="frontHeader">De beste opplevelsene nær deg</h1>
             <section className="eventCards">
                 <h2>Utvalgte festivaler</h2>
-            {
-                selectedFestivals?.map((festival, id) => (
+            {selectedFestivals?.map((festival, id) => (
                 <EventCard key={`festival_${id}`} event={festival} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={"event"}/>
             ))}
-
             </section>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 
         <section className="eventGrid">
              <h2>Hva skjer i verdens storbyer?</h2>
-=======
-=======
->>>>>>> Stashed changes
-            <section className="eventGrid"> 
-                <h2>Hva skjer i verdens storbyer?</h2>
->>>>>>> Stashed changes
+
                 <ul className="citybuttons">
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Oslo")}>Oslo</button></li>
                     <li><button className="cityBtn" onClick={()=> getTenEventsByCity("Stockholm")}>Stockholm</button></li>

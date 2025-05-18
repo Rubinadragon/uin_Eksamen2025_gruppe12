@@ -7,7 +7,7 @@ Billettlyst er en webapplikasjon for å hente ut og filtrerere ulike arrangement
 ## Live demo
 Kommer snart!
 
-## Prosjekt medlemmer
+## Prosjektmedlemmer
 | Profilbilde                                                                           | Navn                 | GitHub brukernavn                                      |
 |-------------------------------------------------------------------------------------------|----------------------|------------------------------------------------------|
 | <img src="https://github.com/Rubinadragon.png" width="50" height="50"> | Cecilie Sellevold Vegstein      | [@Rubinadragon](https://github.com/Rubinadragon) |

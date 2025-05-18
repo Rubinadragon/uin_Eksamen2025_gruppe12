@@ -1,6 +1,7 @@
 @use "global";
 
 .sanityEventDetails{
+<<<<<<< HEAD
     display: flex;
     flex-wrap: wrap;
     img{
@@ -9,41 +10,43 @@
         object-fit: cover;
         object-position: 100% 20%;
     }
+=======
+    @include global.content-width();
+>>>>>>> 9790086bb420e1133d7c013769453ed3a63d626f
     h1, h2{
         padding: 3rem 2rem 0;
-        min-width: 100%;
+        width: 100%;
     }
-    .artistCard{
-        max-width: 15rem;
-        min-width: 15rem;
-        max-height: 15rem;
-        padding-bottom: 3rem;
+
+    article{
+        @include global.flex-display(column, wrap);
+        gap: 1rem;
+        padding: 2rem 2rem;
+        font-weight: global.$SemiBold;
     }
 }
-.sanityEventInfo{
-    padding: 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-weight: global.$SemiBold;
-}
+
 .sanityGenre{
     background-color: global.$Yellow;
     padding: 0.5rem 1rem;
     border-radius: 8px;
 }
 
-.sanityWishlist{
-    margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    max-width: 1380px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    gap: 1.6rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+.sanityWishlist {
+    @include global.flex-display(row, wrap, flex-start, stretch, 1.6rem);
+    @include global.content-width();
+
+    margin-bottom: 3rem;
+
+    h1, h2{
+        padding: 2rem 0;
+        width: 100%;
+    }
+
+    .artistCard{
+        max-width: 15rem;
+        min-width: 15rem;
+        max-height: 15rem;
+        padding-bottom: 3rem;
+    }
 }

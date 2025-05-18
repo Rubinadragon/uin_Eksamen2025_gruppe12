@@ -1,3 +1,4 @@
+// Prompts utført med DeepSeek AI. Skjermbilder av prompts kan sees i rapporten.
 export const cities = [
     {"code": "NO", "name": "Oslo", "lat": 59.9139, "long": 10.7522},
     {"code": "NO", "name": "Bergen", "lat": 60.3913, "long": 5.3221},

@@ -14,7 +14,6 @@ export const fetchSelectedClassifications = async (classificationIDs) => {
   return apiresponse || [];
 }
 
-
 // Fetches attractions based on ID
 // param: String Ids separated with comma (in same string)
 export const fetchAttractionsById = async (attractionsId) => {
@@ -46,7 +45,7 @@ export const fetchAttractionsById = async (attractionsId) => {
 }
 
   // fetches multiple events by id
-  // param: string ids
+  // param: string ids, separated by comma in the same string.
   export const fetchMultipleEventsById = async (eventIds) => {
     let apiresponse = null;
     await fetch(`${BASE_URL}/${API_VERSION}/events/?apikey=${API_KEY}&id=${eventIds}&locale=*`)
@@ -54,19 +53,6 @@ export const fetchAttractionsById = async (attractionsId) => {
     .then((data) => apiresponse = data._embedded.events);
     return apiresponse;
 }
-  
-  export const fetchEventsByCategory = async (classificationId) => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&classificationId=${classificationId}&locale=*`
-      );
-      const data = await response.json();
-      return data._embedded?.events || [];
-    } catch (error) {
-      console.error("Kunne ikke finne events med ID:", error);
-      return [];
-    }
-  };
 
   // Fetches attractions, events and venues from suggest endpoint
   // param: string of parameters such as segmentId, countryCode, geoPoint, keyword
@@ -79,6 +65,8 @@ export const fetchAttractionsById = async (attractionsId) => {
     return apiresponse;
   }
 
+  // Fetch events by attraction ID
+  // param: string, attraction ID to fetch events from
   export const fetchEventSearchInfo = async (attracionId) => {
     let apiresponse = null
     await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*`)
@@ -115,8 +103,8 @@ export const fetchAttractionsById = async (attractionsId) => {
     }
 };
 
-
 //Fetch for 10 events for diffrent citys
+// param: string, name of city to fetch related events
 export const fetchTenEventsByCity = async(city_name)=> {
   let apiresponse = null
   await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&locale=*&size=10&city=${city_name}`)
@@ -126,7 +114,6 @@ export const fetchTenEventsByCity = async(city_name)=> {
 
   return apiresponse
 }
-
 
 //${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&attractionId=${attracionId}&locale=*
 //https://app.ticketmaster.com/discovery/v2/events?apikey=sV6gYIGVOW7z9DLVElsxVgGUyC5Ox3EX&attractionId=K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf&locale=*

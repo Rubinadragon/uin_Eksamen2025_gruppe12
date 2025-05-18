@@ -2,10 +2,59 @@
 
 h1{
     font-size: 3rem;
-    min-width: 100%;
 }
 
-section{
+#frontHeader {
+  @include global.content-width();
+  margin: 0 auto;
+}
+
+.categorySection, .eventGrid {
+    @include global.content-width();
+    @include global.flex-display(row, wrap, center, stretch, 1.6rem);
+    padding-top: global.$pad-top;
+    padding-bottom: global.$pad-bottom;
+
+    border-bottom: 1px solid #e4e4e4;
+
+    h2 {
+        width: 100%;
+        font-size: 2rem;
+        padding-left: 2rem;
+    }
+     
+    > a, > article {
+        flex: 1 1;
+        max-width: 450px;
+        min-width: 350px;  
+    }
+    button{
+        border: none;
+    }
+    button:hover{
+        background-color: global.$PaleYellow;
+    }
+}
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 3rem;
+    background-color: global.$DarkMagenta;
+
+    a{
+        padding: 1rem;
+        color: global.$Yellow;
+        text-decoration: none;
+    }
+    a:hover{
+        color: global.$PaleYellow
+    }
+}
+
+/*section{
     display: flex;
   flex-wrap: wrap;
-}
+} */

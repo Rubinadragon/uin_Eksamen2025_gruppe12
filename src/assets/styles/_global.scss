@@ -6,7 +6,7 @@ $Magenta: #c381e0;
 $DarkMagenta: #7c4992;
 $Burgundy: #65314a;
 $DarkBurgundy: #331624;
-$PaleYellow: #f3f0e8;
+$PaleYellow: #ffedc1;
 $Yellow: #eed686;
 $Orange: #95560a;
 $White: #ffffff;
@@ -15,6 +15,7 @@ $Black: #000000;
 //Font
 $Exo2: "Exo 2", sans-serif;
 $Bold: 700;
+$SemiBold: 600;
 $Regular: 400;
 $Light: 300;
 $text-m: 1.2rem;
@@ -36,6 +37,7 @@ $pad-bottom: 3rem;
 }
 
 @mixin content-width ($left: $pad-left, $right: $pad-right, $max-width: $page-width) {
+    margin: 0 auto;
     padding-left: $left;
     padding-right: $right;
     max-width: $max-width;

@@ -54,8 +54,8 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
         <section className="categorySection">
           <h2>Attractions</h2>
           {
-            !loadingResults && "events" in categorySuggestions ?
-            categorySuggestions.events.reduce((acc, obj) => {
+            !loadingResults && "events" in categorySuggestions ? // https://stackoverflow.com/questions/68091417/display-no-results-component-when-there-are-no-results
+            categorySuggestions.events.reduce((acc, obj) => {  // https://www.geeksforgeeks.org/how-to-get-distinct-values-from-an-array-of-objects-in-javascript/
               if(!acc.some(o => o._embedded?.attractions?.[0].id === obj._embedded?.attractions?.[0].id)) {
                 acc.push(obj)
               }

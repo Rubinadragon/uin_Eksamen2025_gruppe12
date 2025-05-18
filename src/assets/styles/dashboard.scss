@@ -13,6 +13,7 @@
     background-color: global.$Yellow;
     border-radius: 15px;
     padding: 1.5rem;
+    margin: 1rem;
 
     img {
         width: 100%;
@@ -24,7 +25,7 @@
 }
 
 #friendsList {
-    @include global.flex-display(column, wrap);
+    @include global.flex-display(column, wrap);   
 }
 
 .friendCard {
@@ -32,12 +33,14 @@
     gap: 1rem;
     background-color: global.$PalePink;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 1.8rem;
+    max-width: 70%;    
+    margin: 2rem 0 0 1rem;
     
     img {
         width: 100px;
         height: 100px;
-        object-fit: cover;
+        object-fit: cover;        
     }
 }
 

@@ -24,7 +24,7 @@ export default function Home({ selectedFestivals, wishlist, setWishlist }){
                 <h2>Utvalgte festivaler</h2>
             {
                 selectedFestivals?.map((festival, id) => (
-                <EventCard key={`festival_${id}`} event={festival} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={true}/>
+                <EventCard key={`festival_${id}`} event={festival} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={"event"}/>
             ))}
 
             </section>

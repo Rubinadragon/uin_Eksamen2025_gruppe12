@@ -23,3 +23,20 @@ export async function fetchSingleSanityEvent(apiId){
             }`,{apiId})
     return data
 }
+
+//FetchUserByWishList
+export async function fetchUserByWishList(wishlisted){
+    const data = await client.fetch(
+        `*[_type == "event" && apiId == $wishlisted]{
+            _id,
+            tittel,
+            apiId,
+            "wishlisted": *[_type=="bruker" && ^._id in wishlist[]._ref]{
+                _id,
+                name,
+                image {asset->{url}, alt}
+            }
+        }`, {wishlisted}
+    )
+    return data
+}

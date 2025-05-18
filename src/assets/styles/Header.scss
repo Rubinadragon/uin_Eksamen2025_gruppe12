@@ -18,8 +18,16 @@ header {
     
     padding-top: 1rem;
     padding-bottom: 1rem;
+    .classLink{
+         a.active{
+            background-color: global.$Yellow;
+            color: global.$DarkBurgundy;
+            border-radius: 50px;
+        }
+    }
     ul{
         display: flex;
+        align-items: center;
     }
     li{
         list-style: none;
@@ -30,7 +38,7 @@ header {
         color: global.$Yellow;
         padding: 1rem;
     }
-    .classLink, .linkButton{
+    .classLink, .linkButton, span, button{
         font-size: 1.5rem;
     }
     .linkButton{
@@ -38,13 +46,23 @@ header {
         color: global.$Burgundy;
         border-radius: 40px;
     }
+    button{
+        background-color: #ffffff00;
+        border: none;
+        color: global.$PalePink;
+    }
+    span{
+        padding: 1rem;
+        color: global.$Yellow;
+    }
 }
 
 //Mobil
 @media only screen and (max-width: 808px){
     .headerSection{
         flex-direction: column;
-
+        display: flex;
+        flex-wrap: wrap;
     }
     header{
         ul{
@@ -56,6 +74,9 @@ header {
         .logo {
             margin-bottom: 1rem;
         }
+        li{
+            padding: 0.5rem;
+        }
     }
 }
 
@@ -63,14 +84,15 @@ header {
 @media only screen and (min-width: 809px){
     .headerSection{
         .classLink{
-        a.active{
-            background-color: global.$Yellow;
-            color: global.$DarkBurgundy;
-            border-radius: 50px;
+        a:hover{
+            text-decoration: underline;
         }
     }
     .linkButton{
             margin: 1rem;
+        }
+        button:hover{
+            text-decoration: underline;
         }
     }
     

@@ -73,7 +73,7 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
           {
             !loadingResults && "events" in categorySuggestions ?
               categorySuggestions.events?.map((event) => (
-                <EventCard key={`categoryEvent_${event.id}`} event={event} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={false}/>
+                <EventCard key={`categoryEvent_${event.id}`} event={event} wishlist={wishlist} setWishlist={setWishlist}/>
               ))
               : <p>Ingen arrangementer funnet</p>
           }
@@ -84,7 +84,7 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
           {
             !loadingResults && "venues" in categorySuggestions ?
               categorySuggestions.venues?.map((venue) => (
-                <EventCard key={`categoryVenue${venue.id}`} event={venue} wishlist={wishlist} setWishlist={setWishlist} linkToDetails={false}/>
+                <EventCard key={`categoryVenue${venue.id}`} event={venue} wishlist={wishlist} setWishlist={setWishlist}/>
               ))
               :
               <p>Ingen lokasjoner funnet</p>

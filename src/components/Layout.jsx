@@ -24,7 +24,10 @@ export default function Layout({
             <main>
                 {children}
             </main>
-            <footer><Link to={"https://developer.ticketmaster.com/"}>Discovery API: ©Ticketmaster Developer</Link></footer>
+            <footer>
+                <Link to={"https://github.com/Rubinadragon/uin_Eksamen2025_gruppe12"}>GitHub Repository</Link>
+                <Link to={"https://developer.ticketmaster.com/"}>Discovery API: ©Ticketmaster Developer</Link>
+            </footer>
         </>
     );
 }

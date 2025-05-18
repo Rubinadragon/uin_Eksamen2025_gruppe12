@@ -20,7 +20,17 @@ export async function fetchUserName(username) {
                 tittel,
                 apiId,
                 category
-            }
+            },
+            "friends": friends[]->{
+                _id,
+                name,
+                image {asset->{url}, alt},
+                "friendWishlist": wishlist[]-> {
+                _id,
+                apiId,
+                tittel,
+                },
+            },
             }`,
             {username}
     );

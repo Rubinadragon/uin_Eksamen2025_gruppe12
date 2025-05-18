@@ -1,57 +1,66 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { fetchSingleSanityEvent} from "../fetchers/eventServices";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
-import { fetchUserName } from "../fetchers/brukerServices";
+import { loadEventImg } from "../assets/js/utils";
+import ArtistCard from "./ArtistCard";
+import "../assets/styles/sanityEventDetails.scss"
 
-export default function SanityEventDetails(){
+export default function SanityEventDetails({isLoggedIn}){
     let { apiId } = useParams() // Manglet paranteser
+    const navigate = useNavigate();
 
     const [sanityEvent, setSanityEvent] = useState({});
     const [apiEvent, setApiEvent] = useState({})
+    const [wishlistPeople, setWishlistPeople] = useState({})
+
+    const localUser = localStorage.getItem("loggedIn");
 
     useEffect(() => {
-        getSingleSanityEvent(apiId)
-        getEventDetails(apiId)
-    }, [])
-
-
+        if(!localUser) {
+            navigate("/", {replace: true});
+        }
+        else {
+            getSingleSanityEvent(apiId);
+            getEventDetails(apiId);
+            getWishlistPeople(apiId);
+        }
+    }, [isLoggedIn])
 
     const getSingleSanityEvent = async (id) => {
         const data = await fetchSingleSanityEvent(id) 
         setSanityEvent(data) // Fjerne lookup på første index i array
     }
 
-    //console.log(fetchSingleSanityEvent())
+    const getWishlistPeople = async (id) => {
+            const data = await fetchUserByWishList(id)
+            setWishlistPeople(data)
+        }
+
     const getEventDetails = async (value) => {
         try {
                 const response = await fetchSingleEventsById(value); // Bytter til metode som fetcher eventer med id og ikke attractions
                 setApiEvent(response);
             }
             catch(error) {
-                console.error("Cannot fetch requested attraction!:", error)
+                console.error("Cannot fetch requested event!: ", error)
         }
     }
 
-    const getSanityPeople = async () => {
-
-    }
-
-    return (<section className="SanityEventDetails">
-            <img />{/*Legg inn funksjon til å legge inn bilde*/}
+    return (
+        <section className="sanityEventDetails">
+            <img src={loadEventImg(apiEvent, 600, 2500)} alt={`${apiEvent?.name} banner`}/>
             <h1>{apiEvent.name}</h1>
-            <article>
-                <h2>Dato og sted</h2>
-                <p>Dato: <span>{apiEvent?.dates?.start?.localDate}</span></p>
-                <p>Sted: <span>{apiEvent?._embedded?.venues[0]?.name}</span></p>
+            <article className="sanityEventInfo">
+                <p className="sanityGenre">{apiEvent?.classifications?.[0]?.genre?.name}</p>
+                <p>{apiEvent?.dates?.start?.localDate}</p>
+                <p>{apiEvent?._embedded?.venues[0]?.name}</p>
             </article>
-            <article>
-                <h2>Sjanger</h2>
-                <p>{apiEvent?.classifications?.[0]?.genre?.name}</p>
-            </article>
-            <article>
-                <h2>Hvem har dette i ønskelisten</h2>
-                <p>Sett inn profil her</p>
-            </article>
-        </section>)
+            <h2>Hvem har dette i ønskelisten</h2>
+            <section className="sanityWishlist">
+                
+                {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
+            </section>
+        </section>
+    )
 }

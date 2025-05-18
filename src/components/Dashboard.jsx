@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { fetchUserName } from "../fetchers/brukerServices";import EventCard from "../components/EventCard";
 import "../assets/styles/dashboard.scss";
 import UserDashboardView from "./UserDashboardView";

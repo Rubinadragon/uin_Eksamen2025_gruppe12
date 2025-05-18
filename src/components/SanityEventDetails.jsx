@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
-import { loadEventImg } from "../assets/js/utils";
+import { formatDateNO } from "../assets/js/utils";
 import ArtistCard from "./ArtistCard";
 import EventHeader from "./EventHeader";
 import "../assets/styles/sanityEventDetails.scss"
@@ -50,12 +50,11 @@ export default function SanityEventDetails({isLoggedIn}){
 
     return (
         <>
-        <EventHeader attraction={apiEvent} />
+        <EventHeader attraction={apiEvent} location={apiEvent?._embedded?.venues[0]} />
         <section className="sanityEventDetails">
-            <article className="sanityEventInfo">
+            <article>
                 <p className="sanityGenre">{apiEvent?.classifications?.[0]?.genre?.name}</p>
-                <p>{apiEvent?.dates?.start?.localDate}</p>
-                <p>{apiEvent?._embedded?.venues[0]?.name}</p>
+                <p>Dato: {formatDateNO(apiEvent?.dates?.start?.localDate)}</p>
             </article>
         </section>
         <section className="sanityWishlist">

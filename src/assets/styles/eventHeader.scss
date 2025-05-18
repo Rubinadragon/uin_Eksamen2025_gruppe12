@@ -5,7 +5,7 @@
     padding: global.$pad-top global.$pad-left;
     position: relative;
     overflow: hidden;
-    height: 500px;
+    min-height: 500px;
 
     h1, p {
         margin: 0 auto;

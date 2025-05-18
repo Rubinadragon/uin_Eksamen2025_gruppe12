@@ -1,5 +1,20 @@
 @use "global";
 
+.skip-link {
+    position: absolute;
+    top: auto;
+    left: -100rem;
+    background-color: global.$DarkBurgundy;
+    color: global.$White;
+    padding: 1rem;
+    font-size: 1.5rem;
+
+    &:focus {
+        left: auto;
+        top: auto;
+    }
+}
+
 h1{
     font-size: 3rem;
 }
@@ -15,12 +30,11 @@ h1{
     padding-top: global.$pad-top;
     padding-bottom: global.$pad-bottom;
 
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;    
 
     h2 {
         width: 100%;
         font-size: 2rem;
-        padding-left: 2rem;
     }
      
     > a, > article {
@@ -36,9 +50,13 @@ h1{
     }
 }
 
+main{
+    min-height: 100vh;
+}
+
 footer{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     min-height: 3rem;

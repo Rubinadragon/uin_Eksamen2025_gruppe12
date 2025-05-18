@@ -21,8 +21,9 @@ function App() {
       const getUser = async (username) => {
       try {
         const data  = await fetchUserName(username);
-        setIsLoggedIn(true);
         setCurrentUser(data);
+        setIsLoggedIn(true);
+        
       }
       catch(error) {
         console.log("Feil med henting av innlogget bruker.");
@@ -102,10 +103,8 @@ function App() {
           <Route path='/' element={<Home selectedFestivals={selectedFestivals} wishlist={wishlist} setWishlist={setWishlist}/>}/>
           <Route path="event/:id" element={<EventPage selectedFestivals={selectedFestivals}/>}/>
           <Route path="category/:slug" element={<CategoryPage selectedClasses={selectedClasses} wishlist={wishlist} setWishlist={setWishlist}/>} />
-Home-10-arrangementer-storby
-          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}/>
-          <Route path="sanity-event/:apiId" element={<SanityEventDetails/>}/>
- Develop
+          <Route path="dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} wishlist={wishlist} setWishlist={setWishlist} />}/>
+          <Route path="sanity-event/:apiId" element={<SanityEventDetails isLoggedIn={isLoggedIn}/>}/>
         </Routes>
      </Layout>
     </>

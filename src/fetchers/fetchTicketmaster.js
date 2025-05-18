@@ -108,12 +108,13 @@ export const fetchAttractionsById = async (attractionsId) => {
 
 //Fetch for 10 events for diffrent citys
 export const fetchTenEventsByCity = async(city_name)=> {
-  await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}=*&size=10&city==${city_name}`)
+  let apiresponse = null
+  await fetch(`${BASE_URL}/${API_VERSION}/events?apikey=${API_KEY}&locale=*&size=10&city=${city_name}`)
   .then((response) => response.json())
-  .then((data)=> setCity(data._embedded.events))
+  .then((data)=> apiresponse = data._embedded.events)
   .catch((error) => console.error("Feil ved henting av byer", error))
 
-  return setCity
+  return apiresponse
 }
 
 

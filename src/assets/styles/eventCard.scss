@@ -75,3 +75,22 @@
         font-weight: 600;
     }
 }
+
+.citybuttons{
+    display:flex;
+    flex-direction: row;
+    list-style: none;
+    flex-wrap: wrap;
+
+        .cityBtn{
+        background-color: global.$Yellow;
+        font-size: 1.2rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 30px;
+        font-weight: 600;
+        text-decoration: none;
+        color: global.$DarkBurgundy;
+        margin: 0.5rem;
+    }
+
+}

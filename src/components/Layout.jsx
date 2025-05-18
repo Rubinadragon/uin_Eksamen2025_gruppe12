@@ -13,7 +13,7 @@ export default function Layout({
     
   return (
         <>
-            <a href="#main" class="skip-link">Gå til hovedinnhold</a>
+            <a href="#main" className="skip-link">Gå til hovedinnhold</a>
             <Header 
             selectedClasses={selectedClasses} 
             setSelectedClasses={setSelectedClasses} 

@@ -25,16 +25,17 @@
 }
 
 #friendsList {
-    @include global.flex-display(column, wrap);   
+    @include global.flex-display(column, wrap);
+    max-width: 35rem;
 }
 
 .friendCard {
-    @include global.flex-display(row, wrap);
+    @include global.flex-display(row, nowrap);
     gap: 1rem;
     background-color: global.$PalePink;
     border-radius: 10px;
     padding: 1.8rem;
-    max-width: 70%;    
+      
     margin: 2rem 0 0 1rem;
     
     img {
@@ -47,11 +48,7 @@
 
 //Når brukeren ikke er logget inn
 .notLoggedIn{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 1rem;
-    align-items: center;
+    @include global.flex-display(row, wrap, flex-start, center, 1rem);
     padding: 1rem 3rem;
     font-weight: global.$SemiBold;
     background-color: global.$PalePink;
@@ -102,6 +99,14 @@
 }
 
 @media only screen and (max-width: 808px){
+    #friendsList {
+        max-width: 100%;
+    }
+
+    .friendCard {
+        flex-direction: column;
+    }
+
     .notLoggedIn{
         input{
             min-width: 15rem;

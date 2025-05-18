@@ -41,7 +41,7 @@ export default function EventCard({ event, wishlist, setWishlist, linkToDetails 
         {venue && <p className="eventDetail">
           <img src="../src/assets/gfx/markerOutline.svg" alt="" />
           {event.type === "event" ? <span className="bold">{venue?.name}, </span>: ""}
-          <span>{venue?.city.name}</span>
+          <span>{venue?.city?.name}</span>
           </p>
         }
 

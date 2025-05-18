@@ -35,10 +35,7 @@ h1{
     h2 {
         width: 100%;
         font-size: 2rem;
-        padding-left: 2rem;
-    }    
-
-    
+    }
      
     > a, > article {
         flex: 1 1;
@@ -53,10 +50,13 @@ h1{
     }
 }
 
+main{
+    min-height: 100vh;
+}
 
 footer{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     min-height: 3rem;

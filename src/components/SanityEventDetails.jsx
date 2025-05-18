@@ -4,6 +4,7 @@ import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventSer
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
 import { loadEventImg } from "../assets/js/utils";
 import ArtistCard from "./ArtistCard";
+import EventHeader from "./EventHeader";
 import "../assets/styles/sanityEventDetails.scss"
 
 export default function SanityEventDetails({isLoggedIn}){
@@ -48,19 +49,19 @@ export default function SanityEventDetails({isLoggedIn}){
     }
 
     return (
+        <>
+        <EventHeader attraction={apiEvent} />
         <section className="sanityEventDetails">
-            <img src={loadEventImg(apiEvent, 600, 2500)} alt={`${apiEvent?.name} banner`}/>
-            <h1>{apiEvent.name}</h1>
             <article className="sanityEventInfo">
                 <p className="sanityGenre">{apiEvent?.classifications?.[0]?.genre?.name}</p>
                 <p>{apiEvent?.dates?.start?.localDate}</p>
                 <p>{apiEvent?._embedded?.venues[0]?.name}</p>
             </article>
-            <h2>Hvem har dette i ønskelisten</h2>
-            <section className="sanityWishlist">
-                
-                {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
-            </section>
         </section>
+        <section className="sanityWishlist">
+            <h2>Hvem har dette i ønskelisten</h2>
+            {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
+        </section>
+        </>
     )
 }

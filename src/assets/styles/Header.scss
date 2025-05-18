@@ -58,7 +58,7 @@ header {
 }
 
 //Mobil
-@media only screen and (max-width: 808px){
+@media only screen and (max-width: 950px){
     .headerSection{
         flex-direction: column;
         display: flex;
@@ -81,7 +81,7 @@ header {
 }
 
 //PC
-@media only screen and (min-width: 809px){
+@media only screen and (min-width: 951px){
     .headerSection{
         .classLink{
         a:hover{

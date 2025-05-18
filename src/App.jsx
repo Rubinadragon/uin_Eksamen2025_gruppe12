@@ -17,26 +17,28 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  // Fetcher inlogget bruker fra localStorage
   useEffect(() => {
-      const getUser = async (username) => {
-      try {
-        const data  = await fetchUserName(username);
-        setCurrentUser(data);
-        setIsLoggedIn(true);
-        
-      }
-      catch(error) {
-        console.log("Feil med henting av innlogget bruker.");
-      }
+      const getUser = async () => {
+        const localUser = JSON.parse(localStorage.getItem("loggedIn"));
+
+        if(localUser) {
+          try {
+            const data  = await fetchUserName(localUser.username);
+            setCurrentUser(data);
+            setIsLoggedIn(true);
+            
+          }
+          catch(error) {
+            console.log("Feil med henting av innlogget bruker.");
+          }
+        }
     }
       
-    const localUser = localStorage.getItem("loggedIn");
-    if (localUser) {
-      getUser(localUser);
-    }
-
+    getUser();
   }, []);
 
+  // Fetch kategorier (meny knapper) og cache de i en state
   useEffect(()=>{
     if(selectedFestivals.length < 1)
       getSelectedFestivals("K8vZ917oWOV,K8vZ917K7fV,K8vZ917bJC7,K8vZ917_YJf");
@@ -47,6 +49,7 @@ function App() {
 
   },[selectedClasses]);
 
+  // Oppdater wishlist localstorage når det er endringer i wishlist state
   useEffect(()=>{
     handleWishlist();
   },[wishlist]);

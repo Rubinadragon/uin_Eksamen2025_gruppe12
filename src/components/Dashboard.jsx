@@ -27,7 +27,7 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser, currentUser, 
     const user = await fetchUserName(username);
 
     if (user) {
-      localStorage.setItem("loggedIn", user.name);
+      localStorage.setItem("loggedIn", JSON.stringify({isLoggedIn: true, username: user.name}));
       setCurrentUser(user);
       setIsLoggedIn(true);
         

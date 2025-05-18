@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
+import { fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
 import { formatDateNO } from "../assets/js/utils";
 import ArtistCard from "./ArtistCard";
@@ -11,7 +11,6 @@ export default function SanityEventDetails({isLoggedIn}){
     let { apiId } = useParams() // Manglet paranteser
     const navigate = useNavigate();
 
-    const [sanityEvent, setSanityEvent] = useState({});
     const [apiEvent, setApiEvent] = useState({})
     const [wishlistPeople, setWishlistPeople] = useState({})
 
@@ -22,16 +21,10 @@ export default function SanityEventDetails({isLoggedIn}){
             navigate("/", {replace: true});
         }
         else {
-            getSingleSanityEvent(apiId);
             getEventDetails(apiId);
             getWishlistPeople(apiId);
         }
     }, [isLoggedIn])
-
-    const getSingleSanityEvent = async (id) => {
-        const data = await fetchSingleSanityEvent(id) 
-        setSanityEvent(data) // Fjerne lookup på første index i array
-    }
 
     const getWishlistPeople = async (id) => {
             const data = await fetchUserByWishList(id)

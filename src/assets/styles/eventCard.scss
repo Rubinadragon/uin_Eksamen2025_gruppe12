@@ -3,7 +3,8 @@
 .eventCards{
     @include global.content-width();
     @include global.flex-display(row, wrap);
-    
+    gap: 1.6rem;
+    justify-content: center;
     h2 {
         width: 100%;
     }
@@ -93,4 +94,16 @@
         margin: 0.5rem;
     }
 
+}
+
+.tenCitys{
+    h2{
+        padding-left: 2rem;
+    }
+    button{
+        border: none;
+    }
+    button:hover{
+        background-color: global.$PaleYellow;
+    }
 }

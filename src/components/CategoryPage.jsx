@@ -29,13 +29,13 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
         console.log(error);
       }
     }
-    
-    const currentCategory = selectedClasses.find(cls => cls.id === slug)?.name;
 
-    const setBgImg = () => {
-      if("Sport" === currentCategory?.name)
+    const currentCat = selectedClasses?.find(cls => cls.id === slug).name;
+
+    const setBgImg = (value) => {
+      if("Sport" === value)
         return "sportBg.jpg"
-      else if("Kultur & Teater" === currentCategory?.name)
+      else if("Kultur & Teater" === value)
         return "theatreBg.jpg"
       else
         return "musicBg.jpg"
@@ -44,10 +44,10 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
     return (
       <>
         <section className="categoryHeader">
-          <h1>Kategori: {currentCategory?.name}</h1>
+          <h1>Kategori: {currentCat}</h1>
 
           <Filter setLoadingResults={setLoadingResults} setFilterQuery={setFilterQuery}/>
-          <img src={`../src/assets/img/${setBgImg()}`} alt="" />
+          <img src={`../src/assets/img/${setBgImg(currentCat)}`} alt="" />
           <div className="bgDarkOverlay"></div>
         </section>
 

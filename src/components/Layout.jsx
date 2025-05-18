@@ -13,6 +13,7 @@ export default function Layout({
     
   return (
         <>
+            <a href="#main" class="skip-link">Gå til hovedinnhold</a>
             <Header 
             selectedClasses={selectedClasses} 
             setSelectedClasses={setSelectedClasses} 
@@ -21,7 +22,7 @@ export default function Layout({
             logout={logout}
             />
               
-            <main>
+            <main id="main">
                 {children}
             </main>
             <footer>

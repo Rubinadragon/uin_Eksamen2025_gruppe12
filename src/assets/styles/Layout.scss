@@ -1,5 +1,20 @@
 @use "global";
 
+.skip-link {
+    position: absolute;
+    top: auto;
+    left: -100rem;
+    background-color: global.$DarkBurgundy;
+    color: global.$White;
+    padding: 1rem;
+    font-size: 1.5rem;
+
+    &:focus {
+        left: auto;
+        top: auto;
+    }
+}
+
 h1{
     font-size: 3rem;
 }

@@ -4,6 +4,7 @@ import LinkButton from "./LinkButton";
 
 export default function Header({
     selectedClasses, 
+    setSelectedClasses, 
     isLoggedIn,
     currentUser,
     logout    
@@ -27,10 +28,9 @@ export default function Header({
                             ))}                                                        
                             <li>
                                 <>
-                                    <LinkButton isLoggedIn={isLoggedIn}/>
+                                    <LinkButton isLoggedIn={isLoggedIn} currentUser={currentUser}/>
                                     {isLoggedIn && currentUser && (
                                 <>
-                                    <span>{currentUser.name}</span>
                                     <button onClick={logout}>Logg ut</button>
                                 </>
                                     )}

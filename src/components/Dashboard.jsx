@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { fetchUserName } from "../fetchers/brukerServices";import EventCard from "../components/EventCard";
 import "../assets/styles/dashboard.scss";
 import UserDashboardView from "./UserDashboardView";
@@ -73,7 +72,7 @@ export default function Dashboard({ setIsLoggedIn, setCurrentUser, currentUser, 
     */
       : (
           <section className="notLoggedIn">
-            <h2>Logg inn</h2>
+            <h1>Logg inn</h1>
             <form onSubmit = {handleLogin}>
                 <label htmlFor="usernameInput">Brukernavn</label>
                 <input type="text" id="usernameInput" />

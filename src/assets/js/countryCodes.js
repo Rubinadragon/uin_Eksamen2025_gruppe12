@@ -1,3 +1,4 @@
+// Link til prompts: https://chatgpt.com/share/6817c6b7-c7b0-800d-a076-8d1dcfdf43a5
 export const countries = [
   { code: "NO", name: "Norge" },
   { code: "SE", name: "Sverige" },

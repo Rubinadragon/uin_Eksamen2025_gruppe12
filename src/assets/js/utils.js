@@ -18,5 +18,5 @@ export const loadEventImg = (value, minWidth, maxWidth, ratio = "16_9") => {
   }
 
 export const formatDateNO = (value) => {
-    return value.split("-").reverse().join(".");
+    return value?.split("-").reverse().join(".");
   }

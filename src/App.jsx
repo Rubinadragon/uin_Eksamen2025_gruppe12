@@ -89,7 +89,6 @@ function App() {
     <>
      <Layout 
       selectedClasses={selectedClasses} 
-      setSelectedClasses={setSelectedClasses}
       isLoggedIn={isLoggedIn} 
       currentUser={currentUser}
       logout={() => {

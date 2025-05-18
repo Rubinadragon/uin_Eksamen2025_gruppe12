@@ -13,6 +13,7 @@
     background-color: global.$Yellow;
     border-radius: 15px;
     padding: 1.5rem;
+    margin: 1rem;
 
     img {
         width: 100%;
@@ -25,71 +26,91 @@
 
 #friendsList {
     @include global.flex-display(column, wrap);
+    max-width: 35rem;
 }
 
 .friendCard {
-    @include global.flex-display(row, wrap);
+    @include global.flex-display(row, nowrap);
     gap: 1rem;
     background-color: global.$PalePink;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 1.8rem;
+      
+    margin: 2rem 0 0 1rem;
     
     img {
         width: 100px;
         height: 100px;
-        object-fit: cover;
+        object-fit: cover;        
     }
 }
 
 
 //Når brukeren ikke er logget inn
 .notLoggedIn{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    min-height: 80vh;
+    @include global.flex-display(row, wrap, flex-start, center, 1rem);
     padding: 1rem 3rem;
     font-weight: global.$SemiBold;
+    background-color: global.$PalePink;
+    max-width: min-content;
+    margin: 5rem auto;
+    border-radius: 8px;
     form{
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        background-color: global.$PalePink;
         color: global.$DarkBurgundy;
-        padding: 0 2rem 2rem 1rem;
-        border-radius: 0 0 8px 8px;
         align-items: flex-start;
+        border: none;
     }
-    h2{
-        font-size: 2rem;
-        background-color: global.$PalePink;
-        padding: 2rem 2.44rem 1rem;
-        border-radius: 8px 8px 0 0;
+    h1{
+        font-size: 1.7rem;
+        min-width: 100%;
     }
     button{
         background-color: global.$Yellow;
         color: global.$Burgundy;
         font-weight: global.$SemiBold;
         border: none;
-        padding: 0.5rem 1rem;
+        padding: 1rem 2rem;
         border-radius: 8px;
+        font-size: 1.1rem;
     }
     input{
         border-radius: 8px;
         border-style: none;
-        min-height: 1.5rem;
+        min-height: 2rem;
     }
     input[type=text]:focus{
         outline: 2px solid global.$DarkMagenta;
     }
 }
 
-//Mobil
+//PC
 @media only screen and (min-width: 809px){
     .notLoggedIn{
         button:hover{
             background-color: global.$PaleYellow;
+            cursor: pointer;
+        }
+        input{
+            min-width: 30rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 808px){
+    #friendsList {
+        max-width: 100%;
+    }
+
+    .friendCard {
+        flex-direction: column;
+    }
+
+    .notLoggedIn{
+        input{
+            min-width: 15rem;
         }
     }
 }

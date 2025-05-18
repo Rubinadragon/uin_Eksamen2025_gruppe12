@@ -29,13 +29,13 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
         console.log(error);
       }
     }
-    
-    const currentCategory = selectedClasses.find(cls => cls.id === slug)?.name;
 
-    const setBgImg = () => {
-      if("Sport" === currentCategory?.name)
+    const currentCat = selectedClasses?.find(cls => cls.id === slug).name;
+
+    const setBgImg = (value) => {
+      if("Sport" === value)
         return "sportBg.jpg"
-      else if("Kultur & Teater" === currentCategory?.name)
+      else if("Kultur & Teater" === value)
         return "theatreBg.jpg"
       else
         return "musicBg.jpg"
@@ -44,18 +44,18 @@ export default function CategoryPage({ selectedClasses, wishlist, setWishlist })
     return (
       <>
         <section className="categoryHeader">
-          <h1>Kategori: {currentCategory?.name}</h1>
+          <h1>Kategori: {currentCat}</h1>
 
           <Filter setLoadingResults={setLoadingResults} setFilterQuery={setFilterQuery}/>
-          <img src={`../src/assets/img/${setBgImg()}`} alt="" />
+          <img src={`../src/assets/img/${setBgImg(currentCat)}`} alt="" />
           <div className="bgDarkOverlay"></div>
         </section>
 
         <section className="categorySection">
           <h2>Attractions</h2>
           {
-            !loadingResults && "events" in categorySuggestions ?
-            categorySuggestions.events.reduce((acc, obj) => {
+            !loadingResults && "events" in categorySuggestions ? // https://stackoverflow.com/questions/68091417/display-no-results-component-when-there-are-no-results
+            categorySuggestions.events.reduce((acc, obj) => {  // https://www.geeksforgeeks.org/how-to-get-distinct-values-from-an-array-of-objects-in-javascript/
               if(!acc.some(o => o._embedded?.attractions?.[0].id === obj._embedded?.attractions?.[0].id)) {
                 acc.push(obj)
               }

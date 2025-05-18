@@ -94,6 +94,7 @@
     .notLoggedIn{
         button:hover{
             background-color: global.$PaleYellow;
+            cursor: pointer;
         }
         input{
             min-width: 30rem;

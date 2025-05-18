@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchEventSearchInfo, fetchSingleAttractionById, fetchSingleEventById } from "../fetchers/fetchTicketmaster";
+import { fetchEventSearchInfo, fetchSingleAttractionById } from "../fetchers/fetchTicketmaster";
 import { useParams } from "react-router-dom";
 import "../assets/styles/eventPage.scss"
 import EventCard from "./EventCard";

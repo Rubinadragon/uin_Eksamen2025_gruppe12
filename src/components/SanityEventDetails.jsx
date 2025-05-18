@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSingleSanityEvent, fetchUserByWishList} from "../fetchers/eventServices";
 import { fetchSingleEventsById } from "../fetchers/fetchTicketmaster";
-import { loadEventImg } from "../assets/js/utils";
+import { formatDateNO, loadEventImg } from "../assets/js/utils";
 import ArtistCard from "./ArtistCard";
 import "../assets/styles/sanityEventDetails.scss"
+import "../assets/styles/Layout.scss"
 
 export default function SanityEventDetails({isLoggedIn}){
     let { apiId } = useParams() // Manglet paranteser
@@ -50,17 +51,18 @@ export default function SanityEventDetails({isLoggedIn}){
     return (
         <section className="sanityEventDetails">
             <img src={loadEventImg(apiEvent, 600, 2500)} alt={`${apiEvent?.name} banner`}/>
+            <div className="eventGrid">
             <h1>{apiEvent.name}</h1>
             <article className="sanityEventInfo">
                 <p className="sanityGenre">{apiEvent?.classifications?.[0]?.genre?.name}</p>
-                <p>{apiEvent?.dates?.start?.localDate}</p>
+                <p>{formatDateNO(apiEvent?.dates?.start?.localDate)}</p>
                 <p>{apiEvent?._embedded?.venues[0]?.name}</p>
             </article>
             <h2>Hvem har dette i ønskelisten</h2>
             <section className="sanityWishlist">
-                
                 {wishlistPeople?.[0]?.wishlisted?.map((person) => <ArtistCard key={person._id} artist={person} isProfile={true}/>)}
             </section>
+            </div>
         </section>
     )
 }

@@ -5,7 +5,7 @@ Eksamensprosjekt i faget utvikling av interaktive nettsteder ved Høgskolen i Ø
 Billettlyst er en webapplikasjon for å hente ut og filtrerere ulike arrangementer fra Ticketmaster ved hjelp av deres API. Applikasjonen bruker Sanity til å lagre data om brukere og sammenligne arrangementer.
 
 ## Live demo
-Kommer snart!
+Demo på ekstern side: [Billettlyst](https://uin-g12-eksamen-billettlyst.web.app/)
 
 ## Prosjektmedlemmer
 | Profilbilde                                                                           | Navn                 | GitHub brukernavn                                      |

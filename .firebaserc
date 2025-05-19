@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "uin-g12-eksamen-billettlyst"
+  },
+  "targets": {
+    "uin-g12-eksamen-billettlyst": {
+      "hosting": {
+        "react": [
+          "react-site"
+        ],
+        "sanity": [
+          "sanity-site"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
